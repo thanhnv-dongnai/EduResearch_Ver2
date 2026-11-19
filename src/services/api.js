@@ -377,7 +377,13 @@ export const documentsAPI = {
       })
       .select()
       .single();
-    if (error) throw new Error(error.message);
+    if (error) {
+      const { error: cleanupError } = await supabase.storage.from('documents').remove([storagePath]);
+      if (cleanupError) {
+        console.error('Failed to clean up orphaned storage object after insert failure:', cleanupError);
+      }
+      throw new Error(error.message);
+    }
     return data;
   },
 
@@ -386,7 +392,10 @@ export const documentsAPI = {
     const { error } = await supabase.from('documents').delete().eq('id', id);
     if (error) throw new Error(error.message);
     if (doc?.file_path) {
-      await supabase.storage.from('documents').remove([doc.file_path]);
+      const { error: storageError } = await supabase.storage.from('documents').remove([doc.file_path]);
+      if (storageError) {
+        console.error('Failed to remove storage object for deleted document:', storageError);
+      }
     }
   },
 
