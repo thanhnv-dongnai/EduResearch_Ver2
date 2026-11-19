@@ -502,7 +502,7 @@ export const usersAPI = {
   getAll: async () => {
     const { data, error } = await supabase
       .from('profiles')
-      .select('id, name, role, unit, created_at')
+      .select('id, name, role, unit, email, created_at')
       .order('created_at', { ascending: false });
     if (error) throw new Error(error.message);
     return data;
