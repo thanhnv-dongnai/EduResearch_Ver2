@@ -202,5 +202,95 @@ export const responsesAPI = {
     const { error } = await supabase.from('responses').insert(row);
     if (error) throw new Error(error.message);
     return row;
+  },
+
+  getBySurvey: async (surveyId) => {
+    let query = supabase.from('responses').select('*').order('id', { ascending: false });
+    if (surveyId && surveyId !== 'all') {
+      query = query.eq('survey_id', surveyId);
+    }
+    const { data: rows, error } = await query;
+    if (error) throw new Error(error.message);
+
+    const total = rows.length;
+    const valid = rows.filter((r) => r.status === 'valid').length;
+    const invalid = total - valid;
+
+    const groupCount = (key) => {
+      const counts = rows.reduce((acc, r) => {
+        acc[r[key]] = (acc[r[key]] || 0) + 1;
+        return acc;
+      }, {});
+      return Object.keys(counts).map((k) => ({ name: k, value: counts[k] }));
+    };
+
+    const textComments = [];
+    rows.forEach((r) => {
+      const answers = r.answers || {};
+      Object.keys(answers).forEach((key) => {
+        const val = answers[key];
+        if (typeof val === 'string' && val.length > 5 && isNaN(Number(val))) {
+          textComments.push({
+            id: r.id,
+            role: r.role,
+            unit: r.unit,
+            institution: r.institution,
+            questionKey: key,
+            content: val,
+            date: r.date
+          });
+        }
+      });
+    });
+
+    return {
+      list: rows,
+      stats: { total, valid, invalid },
+      charts: {
+        roleData: groupCount('role'),
+        genderData: groupCount('gender'),
+        institutionData: groupCount('institution')
+      },
+      textComments
+    };
+  },
+
+  getAll: async (surveyId) => responsesAPI.getBySurvey(surveyId),
+
+  delete: async (id) => {
+    const { error } = await supabase.from('responses').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+  },
+
+  bulkStatus: async (ids, status) => {
+    if (!['valid', 'invalid'].includes(status)) throw new Error('Trạng thái không hợp lệ (valid hoặc invalid).');
+    const { error, count } = await supabase.from('responses').update({ status }).in('id', ids).select('id', { count: 'exact' });
+    if (error) throw new Error(error.message);
+    return { message: `Đã cập nhật trạng thái ${status} cho ${ids.length} phản hồi.`, updatedCount: count ?? ids.length };
+  },
+
+  bulkDelete: async (ids) => {
+    const { error } = await supabase.from('responses').delete().in('id', ids);
+    if (error) throw new Error(error.message);
+    return { message: `Đã xóa thành công ${ids.length} phản hồi.`, deletedCount: ids.length };
+  },
+
+  import: async (surveyIdOrData, items) => {
+    const survey_id = typeof surveyIdOrData === 'object' ? surveyIdOrData.survey_id : surveyIdOrData;
+    const list = typeof surveyIdOrData === 'object' ? surveyIdOrData.items : items;
+    const rows = list.map((item) => ({
+      survey_id,
+      role: item.role || 'Người tham gia',
+      unit: item.unit || 'Khoa / Đơn vị',
+      institution: item.institution || 'Cơ sở giáo dục đại học',
+      gender: item.gender || 'Không nêu',
+      time_taken: item.time_taken || '3 phút',
+      status: item.status || 'valid',
+      answers: typeof item.answers === 'object' ? item.answers : JSON.parse(item.answers || '{}'),
+      date: item.date || formatDateVN()
+    }));
+    const { error } = await supabase.from('responses').insert(rows);
+    if (error) throw new Error(error.message);
+    return { message: `Đã nhập thành công ${rows.length} phản hồi vào khảo sát.`, count: rows.length };
   }
 };
