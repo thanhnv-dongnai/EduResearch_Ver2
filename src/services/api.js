@@ -177,3 +177,30 @@ export const surveysAPI = {
     if (error) throw new Error(error.message);
   }
 };
+
+function formatDateVN(d = new Date()) {
+  return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+}
+
+export const responsesAPI = {
+  create: async (payload) => {
+    const row = {
+      survey_id: payload.survey_id,
+      role: payload.role,
+      unit: payload.unit,
+      institution: payload.institution,
+      gender: payload.gender,
+      time_taken: payload.time_taken,
+      status: payload.status || 'valid',
+      answers: payload.answers || {},
+      date: formatDateVN()
+    };
+    // Khong dung .select().single(): RLS chi cho phep SELECT voi vai tro
+    // admin/researcher (Task 2), nen Postgres se tu choi ca INSERT khi
+    // PostgREST yeu cau RETURNING (tuong duong kiem tra SELECT) cho khach an danh.
+    // Insert "tran" (khong RETURNING) duoc WITH CHECK (true) cho phep binh thuong.
+    const { error } = await supabase.from('responses').insert(row);
+    if (error) throw new Error(error.message);
+    return row;
+  }
+};
