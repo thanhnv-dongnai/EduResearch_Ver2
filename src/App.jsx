@@ -7,6 +7,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Profile from './pages/Profile';
+import Surveys from './pages/Surveys';
 import { useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
@@ -37,6 +38,7 @@ function App() {
         }>
           <Route index element={<div>Dashboard — sẽ làm ở Task 10</div>} />
           <Route path="profile" element={<Profile />} />
+          <Route path="surveys" element={<Surveys />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
