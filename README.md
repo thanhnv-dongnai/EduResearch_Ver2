@@ -10,10 +10,11 @@ người dùng) — không có server Node riêng.
    (xem `.env.example`).
 2. `npm install`
 3. `npm run dev` → mở `http://localhost:5173`
-4. Tài khoản admin có sẵn: `sdd.task4.test2@gmail.com` / `password123`
-   (hoặc tự đăng ký ở `/register` rồi chạy SQL
+4. Tài khoản admin: tự đăng ký ở `/register`, rồi chạy SQL
    `UPDATE profiles SET role='admin' WHERE id='<uuid>';` trong Supabase SQL
-   Editor để trở thành Super Admin — xem spec, Phần 4).
+   Editor để trở thành Super Admin (xem spec, Phần 4). (Một tài khoản admin
+   test đã tồn tại trên project — xem Supabase Dashboard > Authentication
+   để biết email, không ghi mật khẩu vào README.)
 
 ## Khảo sát đã seed sẵn
 
