@@ -782,9 +782,9 @@ function runDescriptivePearsonAndProfiling(cleanResponses, likertQuestions, vari
   const avgDRI_C3 = mean(cluster3.map(c => c.dri));
 
   const clustersPie = [
-    { name: 'Cụm 1: Tiên phong (Digital Leaders)', value: parseFloat(((cluster1.length / N) * 100).toFixed(1)), color: '#10B981', count: `${cluster1.length} phiếu (${((cluster1.length / N) * 100).toFixed(1)}%)` },
-    { name: 'Cụm 2: Trung bình (Digital Challengers)', value: parseFloat(((cluster2.length / N) * 100).toFixed(1)), color: '#3B82F6', count: `${cluster2.length} phiếu (${((cluster2.length / N) * 100).toFixed(1)}%)` },
-    { name: 'Cụm 3: Cần cải thiện (Digital Laggards)', value: parseFloat(((cluster3.length / N) * 100).toFixed(1)), color: '#EF4444', count: `${cluster3.length} phiếu (${((cluster3.length / N) * 100).toFixed(1)}%)` },
+    { name: 'Cụm 1: Tiên phong (Đơn vị Dẫn đầu)', value: parseFloat(((cluster1.length / N) * 100).toFixed(1)), color: '#10B981', count: `${cluster1.length} phiếu (${((cluster1.length / N) * 100).toFixed(1)}%)` },
+    { name: 'Cụm 2: Trung bình (Đơn vị Đang chuyển mình)', value: parseFloat(((cluster2.length / N) * 100).toFixed(1)), color: '#3B82F6', count: `${cluster2.length} phiếu (${((cluster2.length / N) * 100).toFixed(1)}%)` },
+    { name: 'Cụm 3: Cần cải thiện (Đơn vị Cần đồng hành)', value: parseFloat(((cluster3.length / N) * 100).toFixed(1)), color: '#EF4444', count: `${cluster3.length} phiếu (${((cluster3.length / N) * 100).toFixed(1)}%)` },
   ];
 
   const clustersBarData = variablesList.map(v => {
@@ -820,7 +820,7 @@ function runDescriptivePearsonAndProfiling(cleanResponses, likertQuestions, vari
       color: '#3B82F6',
       strengths: 'Ghi nhận tích cực về chương trình đào tạo, sự tâm huyết của giảng viên và tính ứng dụng thực tiễn.',
       bottlenecks: `Còn băn khoăn về ${lowestPillar.name} (${lowestPillar.code}) và thời gian xử lý thủ tục hành chính/học vụ.`,
-      action: `Tối ưu hóa quy trình một cửa số hóa, nâng cao tốc độ phản hồi thắc mắc và hiện đại hóa học liệu số.`
+      action: `Tối ưu hóa quy trình một cửa, nâng cao tốc độ phản hồi thắc mắc và hiện đại hóa học liệu giảng dạy.`
     },
     {
       title: 'Cụm 3: Nhóm Cần Hỗ trợ Cấp bách (Need Support)',

@@ -14,8 +14,8 @@ const ROLE_QUESTIONNAIRES = {
     badgeColor: '#1E3A8A',
     badgeBg: '#DBEAFE',
     icon: Building2,
-    defaultTitle: 'Bộ 1: Ban Giám hiệu & Hội đồng trường — Chiến lược, thể chế và quản trị số vĩ mô',
-    subtitle: 'Đánh giá ở tầm vĩ mô: Thể chế, chiến lược, quản trị số, phân bổ nguồn lực và lợi thế cạnh tranh tổng thể',
+    defaultTitle: 'Bộ 1: Ban Giám hiệu & Hội đồng trường — Chiến lược, thể chế và quản trị vĩ mô',
+    subtitle: 'Đánh giá ở tầm vĩ mô: Thể chế, chiến lược, quản trị, phân bổ nguồn lực và lợi thế cạnh tranh tổng thể',
     variables: 'STR, LEA, CAP, RES, SER, REA',
     defaultTarget: 50,
     questions: [
@@ -731,7 +731,7 @@ const Surveys = () => {
                         <Link 
                           to={`/analytics?surveyId=${survey.id}`}
                           className="btn-outline" 
-                          style={{ padding: '0.35rem', borderRadius: 'var(--radius-md)', color: '#4338CA', backgroundColor: '#EEF2FF', borderColor: '#C7D2FE', display: 'inline-flex', alignItems: 'center' }} 
+                          style={{ padding: '0.35rem', borderRadius: 'var(--radius-md)', color: '#047857', backgroundColor: 'var(--primary-tint)', borderColor: 'var(--primary-tint-border)', display: 'inline-flex', alignItems: 'center' }} 
                           title="Phân tích thống kê 5 khâu chuẩn APA 7 cho khảo sát này"
                         >
                           <BarChart2 size={16} />
@@ -740,7 +740,7 @@ const Surveys = () => {
                         {/* NÚT THIẾT KẾ CÂU HỎI & GIẢ THUYẾT */}
                         <button 
                           className="btn-outline" 
-                          style={{ padding: '0.35rem', borderRadius: 'var(--radius-md)', color: 'var(--primary)', backgroundColor: '#EEF2FF', borderColor: '#C7D2FE' }} 
+                          style={{ padding: '0.35rem', borderRadius: 'var(--radius-md)', color: 'var(--primary)', backgroundColor: 'var(--primary-tint)', borderColor: 'var(--primary-tint-border)' }} 
                           title="Thiết kế bộ câu hỏi & Khai báo giả thuyết"
                           onClick={() => handleOpenQuestionBuilder(survey)}
                         >
@@ -1320,12 +1320,12 @@ const Surveys = () => {
                         const typeLabel = q.type === 'textarea' ? 'Tự luận' : (q.type === 'text' ? 'Text ngắn' : (q.type === 'choice' ? 'Trắc nghiệm' : 'Likert'));
                         const typeBadgeStyle = isText
                           ? { backgroundColor: '#FEF3C7', color: '#92400E', border: '1px solid #FDE68A' }
-                          : (q.type === 'choice' ? { backgroundColor: '#F3E8FF', color: '#6B21A8' } : { backgroundColor: '#EEF2FF', color: '#3730A3' });
+                          : (q.type === 'choice' ? { backgroundColor: '#F3E8FF', color: '#6B21A8' } : { backgroundColor: 'var(--primary-tint)', color: '#065F46' });
 
                         return (
                           <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', backgroundColor: 'white', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1 }}>
-                              <span style={{ fontWeight: '700', fontSize: '0.8rem', padding: '0.2rem 0.5rem', backgroundColor: '#EEF2FF', color: 'var(--primary)', borderRadius: '4px', minWidth: '50px', textAlign: 'center' }}>
+                              <span style={{ fontWeight: '700', fontSize: '0.8rem', padding: '0.2rem 0.5rem', backgroundColor: 'var(--primary-tint)', color: 'var(--primary)', borderRadius: '4px', minWidth: '50px', textAlign: 'center' }}>
                                 {q.code}
                               </span>
                               <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '0.15rem 0.5rem', borderRadius: '4px', ...typeBadgeStyle }}>

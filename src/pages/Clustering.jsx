@@ -101,13 +101,13 @@ const Clustering = () => {
     const atScore100 = parseFloat((at * 20).toFixed(1));
 
     let cluster = 2;
-    let clusterName = 'Cụm Tiềm năng (Digital Challengers)';
+    let clusterName = 'Cụm Tiềm năng (Đơn vị Đang chuyển mình)';
     if (atScore100 >= 80) {
       cluster = 1;
-      clusterName = 'Cụm Tiên phong (Digital Leaders)';
+      clusterName = 'Cụm Tiên phong (Đơn vị Dẫn đầu)';
     } else if (atScore100 < 65) {
       cluster = 3;
-      clusterName = 'Cụm Cần hỗ trợ (Digital Laggards)';
+      clusterName = 'Cụm Cần hỗ trợ (Đơn vị Cần đồng hành)';
     }
 
     return {
@@ -265,7 +265,7 @@ const Clustering = () => {
               Biểu Đồ Phân Tán Không Gian Cạnh Tranh 2D (Scatter Plot)
             </h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-              Trục X: Năng lực số hóa &amp; Nguồn lực (DX &amp; RO) • Trục Y: Kế hoạch Chiến lược &amp; Lãnh đạo số (SP &amp; LD)
+              Trục X: Năng lực đổi mới &amp; Nguồn lực (DX &amp; RO) • Trục Y: Kế hoạch Chiến lược &amp; Năng lực Lãnh đạo (SP &amp; LD)
             </p>
           </div>
           
@@ -294,14 +294,14 @@ const Clustering = () => {
                 dataKey="x" 
                 name="Năng lực & Nguồn lực (DX & RO)" 
                 domain={[1.5, 5.0]} 
-                label={{ value: 'Năng lực số hóa & Nguồn lực (DX & RO)', position: 'insideBottom', offset: -15, fill: '#64748B', fontSize: 12, fontWeight: 600 }}
+                label={{ value: 'Năng lực đổi mới & Nguồn lực (DX & RO)', position: 'insideBottom', offset: -15, fill: '#64748B', fontSize: 12, fontWeight: 600 }}
               />
               <YAxis 
                 type="number" 
                 dataKey="y" 
                 name="Chiến lược & Lãnh đạo (SP & LD)" 
                 domain={[1.5, 5.0]} 
-                label={{ value: 'Chiến lược & Lãnh đạo số (SP & LD)', angle: -90, position: 'insideLeft', offset: 10, fill: '#64748B', fontSize: 12, fontWeight: 600 }}
+                label={{ value: 'Chiến lược & Năng lực Lãnh đạo (SP & LD)', angle: -90, position: 'insideLeft', offset: 10, fill: '#64748B', fontSize: 12, fontWeight: 600 }}
               />
               <ZAxis type="number" dataKey="z" range={[50, 220]} name="Điểm Sẵn sàng AT" />
               <Tooltip 
@@ -362,7 +362,7 @@ const Clustering = () => {
                 <td>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontWeight: 'bold', color: '#059669' }}>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981' }} />
-                    Cụm 1: Tiên phong (Digital Leaders)
+                    Cụm 1: Tiên phong (Đơn vị Dẫn đầu)
                   </span>
                 </td>
                 <td style={{ textAlign: 'center', fontWeight: '600' }}>
@@ -372,10 +372,10 @@ const Clustering = () => {
                   {(c1Points.reduce((acc, p) => acc + p.z, 0) / Math.max(1, c1Points.length)).toFixed(1)} / 100
                 </td>
                 <td style={{ fontSize: '0.825rem', color: '#334155' }}>
-                  Điểm 5 trụ cột đồng đều ở mức cao (&ge; 4.2/5). Ban Giám hiệu quyết liệt, hạ tầng số phủ rộng, dịch vụ người học trực tuyến 100%.
+                  Điểm 5 trụ cột đồng đều ở mức cao (&ge; 4.2/5). Ban Giám hiệu quyết liệt, hạ tầng và nguồn lực đồng bộ, dịch vụ hỗ trợ người học toàn diện.
                 </td>
                 <td style={{ fontSize: '0.825rem', color: '#166534', backgroundColor: '#F0FDF4', borderRadius: '6px', padding: '0.6rem' }}>
-                  <b>Đầu tàu mạng lưới:</b> Chia sẻ mô hình quản trị số, chuyển giao học liệu mở số hóa và tiên phong thử nghiệm AI thế hệ mới.
+                  <b>Đầu tàu mạng lưới:</b> Chia sẻ mô hình quản trị hiệu quả, chuyển giao học liệu mở và tiên phong thử nghiệm phương pháp giảng dạy mới.
                 </td>
               </tr>
 
@@ -383,7 +383,7 @@ const Clustering = () => {
                 <td>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontWeight: 'bold', color: '#2563EB' }}>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#3B82F6' }} />
-                    Cụm 2: Tiềm năng (Digital Challengers)
+                    Cụm 2: Tiềm năng (Đơn vị Đang chuyển mình)
                   </span>
                 </td>
                 <td style={{ textAlign: 'center', fontWeight: '600' }}>
@@ -393,10 +393,10 @@ const Clustering = () => {
                   {(c2Points.reduce((acc, p) => acc + p.z, 0) / Math.max(1, c2Points.length)).toFixed(1)} / 100
                 </td>
                 <td style={{ fontSize: '0.825rem', color: '#334155' }}>
-                  Điểm dao động 3.4 - 3.9/5. Ý thức chuyển đổi số cao nhưng cơ sở dữ liệu chưa liên thông, kinh phí đầu tư còn dàn trải.
+                  Điểm dao động 3.4 - 3.9/5. Ý thức đổi mới cao nhưng các nguồn lực chưa liên thông, kinh phí đầu tư còn dàn trải.
                 </td>
                 <td style={{ fontSize: '0.825rem', color: '#1E40AF', backgroundColor: '#EFF6FF', borderRadius: '6px', padding: '0.6rem' }}>
-                  <b>Chuẩn hóa liên thông:</b> Tập trung tích hợp API giữa E-Office, LMS và Quản lý đào tạo; đào tạo kỹ năng sư phạm số định kỳ.
+                  <b>Chuẩn hóa liên thông:</b> Tập trung tích hợp quy trình giữa các bộ phận quản lý, đào tạo; nâng cao kỹ năng sư phạm và quản trị định kỳ.
                 </td>
               </tr>
 
@@ -404,7 +404,7 @@ const Clustering = () => {
                 <td>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontWeight: 'bold', color: '#DC2626' }}>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#EF4444' }} />
-                    Cụm 3: Cần hỗ trợ (Digital Laggards)
+                    Cụm 3: Cần hỗ trợ (Đơn vị Cần đồng hành)
                   </span>
                 </td>
                 <td style={{ textAlign: 'center', fontWeight: '600' }}>
@@ -414,10 +414,10 @@ const Clustering = () => {
                   {(c3Points.reduce((acc, p) => acc + p.z, 0) / Math.max(1, c3Points.length)).toFixed(1)} / 100
                 </td>
                 <td style={{ fontSize: '0.825rem', color: '#334155' }}>
-                  Điểm &lt; 3.2/5. Hạ tầng mạng và thiết bị còn yếu, sức ỳ tâm lý lớn, thiếu cơ chế khen thưởng và phân quyền linh hoạt.
+                  Điểm &lt; 3.2/5. Hạ tầng và nguồn lực còn yếu, sức ỳ tâm lý lớn, thiếu cơ chế khen thưởng và phân quyền linh hoạt.
                 </td>
                 <td style={{ fontSize: '0.825rem', color: '#991B1B', backgroundColor: '#FEF2F2', borderRadius: '6px', padding: '0.6rem' }}>
-                  <b>Can thiệp cấp bách:</b> Gói hỗ trợ kỹ thuật trọng tâm, đào tạo 1-1, tái cấu trúc quy trình hành chính và ban hành chính sách số.
+                  <b>Can thiệp cấp bách:</b> Gói hỗ trợ trọng tâm, đào tạo 1-1, tái cấu trúc quy trình hành chính và hoàn thiện chính sách nội bộ.
                 </td>
               </tr>
             </tbody>

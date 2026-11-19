@@ -397,7 +397,7 @@ const PublicSurvey = () => {
                 <label className="form-label" style={{ fontWeight: '600' }}>{q.text} *</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {(q.options || []).map((opt) => (
-                    <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', padding: '0.65rem 0.85rem', backgroundColor: answers[q.code] === opt ? '#EEF2FF' : '#F9FAFB', borderRadius: '8px', border: answers[q.code] === opt ? '2px solid var(--primary)' : '1px solid var(--border-color)', cursor: 'pointer' }}>
+                    <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', padding: '0.65rem 0.85rem', backgroundColor: answers[q.code] === opt ? 'var(--primary-tint)' : '#F9FAFB', borderRadius: '8px', border: answers[q.code] === opt ? '2px solid var(--primary)' : '1px solid var(--border-color)', cursor: 'pointer' }}>
                       <input
                         type="radio"
                         name={q.code}
@@ -482,7 +482,7 @@ const PublicSurvey = () => {
 
                   <div style={{ padding: '1.25rem', backgroundColor: '#F9FAFB', borderRadius: 'var(--radius-lg)', border: selectedVal ? '1px solid #BFDBFE' : '1px solid var(--border-color)', transition: 'border 0.2s ease' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '0.2rem 0.5rem', backgroundColor: '#EEF2FF', color: 'var(--primary)', borderRadius: '4px' }}>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '0.2rem 0.5rem', backgroundColor: 'var(--primary-tint)', color: 'var(--primary)', borderRadius: '4px' }}>
                         {q.code || `Câu ${idx + 1}`}
                       </span>
                       {q.variable && (

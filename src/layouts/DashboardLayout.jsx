@@ -108,14 +108,14 @@ const DashboardLayout = () => {
                 width: '38px',
                 height: '38px',
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, #4F46E5, #3B82F6)',
+                background: 'linear-gradient(135deg, #065F46, #10B981)',
                 color: 'white',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 'bold',
                 fontSize: '1rem',
-                boxShadow: '0 2px 4px rgba(79, 70, 229, 0.25)'
+                boxShadow: '0 2px 4px rgba(6, 95, 70, 0.25)'
               }}>
                 {initialLetter}
               </div>

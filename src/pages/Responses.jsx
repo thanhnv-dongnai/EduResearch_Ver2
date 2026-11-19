@@ -520,8 +520,8 @@ const Responses = () => {
               {/* THANH THAO TÁC HÀNG LOẠT KHI CÓ CHỌN PHIẾU */}
               {selectedIds.length > 0 && (
                 <div style={{
-                  backgroundColor: '#EEF2FF',
-                  borderBottom: '1px solid #C7D2FE',
+                  backgroundColor: 'var(--primary-tint)',
+                  borderBottom: '1px solid #A7F3D0',
                   padding: '0.75rem 1.25rem',
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -719,10 +719,10 @@ const Responses = () => {
                               style={{ 
                                 fontSize: '0.75rem', 
                                 padding: '0.2rem 0.5rem', 
-                                backgroundColor: '#EEF2FF', 
+                                backgroundColor: 'var(--primary-tint)', 
                                 color: 'var(--primary)', 
                                 borderRadius: '4px',
-                                border: '1px solid #C7D2FE',
+                                border: '1px solid #A7F3D0',
                                 fontWeight: '600'
                               }}
                             >

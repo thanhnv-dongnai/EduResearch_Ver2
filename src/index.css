@@ -1,6 +1,8 @@
 :root {
-  --primary: #4F46E5;
-  --primary-hover: #4338CA;
+  --primary: #065F46;
+  --primary-hover: #064E3B;
+  --primary-tint: #ECFDF5;
+  --primary-tint-border: #A7F3D0;
   --secondary: #10B981;
   --secondary-hover: #059669;
   --danger: #EF4444;
@@ -138,7 +140,7 @@ button {
 .input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.12);
 }
 
 .table-container {
@@ -271,7 +273,7 @@ button {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #EEF2FF;
+  background-color: var(--primary-tint);
   color: var(--primary);
   display: flex;
   align-items: center;

@@ -53,7 +53,7 @@ const Sidebar = () => {
                     style={({ isActive }) => ({
                       display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem', borderRadius: 'var(--radius-md)',
                       color: isActive ? 'var(--primary)' : 'var(--text-main)',
-                      backgroundColor: isActive ? 'rgba(79, 70, 229, 0.1)' : 'transparent',
+                      backgroundColor: isActive ? 'rgba(6, 95, 70, 0.1)' : 'transparent',
                       fontWeight: isActive ? '600' : '500',
                       textDecoration: 'none',
                       transition: 'all 0.2s'
@@ -77,7 +77,7 @@ const Sidebar = () => {
                     style={({ isActive }) => ({
                       display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem', borderRadius: 'var(--radius-md)',
                       color: isActive ? 'var(--primary)' : 'var(--text-main)',
-                      backgroundColor: isActive ? 'rgba(79, 70, 229, 0.1)' : 'transparent',
+                      backgroundColor: isActive ? 'rgba(6, 95, 70, 0.1)' : 'transparent',
                       fontWeight: isActive ? '600' : '500',
                       textDecoration: 'none',
                       transition: 'all 0.2s'
@@ -97,7 +97,7 @@ const Sidebar = () => {
               style={({ isActive }) => ({
                 display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem', borderRadius: 'var(--radius-md)',
                 color: isActive ? 'var(--primary)' : 'var(--text-main)',
-                backgroundColor: isActive ? 'rgba(79, 70, 229, 0.1)' : 'transparent',
+                backgroundColor: isActive ? 'rgba(6, 95, 70, 0.1)' : 'transparent',
                 fontWeight: isActive ? '600' : '500',
                 textDecoration: 'none',
                 transition: 'all 0.2s'

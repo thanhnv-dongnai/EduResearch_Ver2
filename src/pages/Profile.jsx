@@ -131,14 +131,14 @@ const Profile = () => {
             width: '84px',
             height: '84px',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #4F46E5, #3B82F6)',
+            background: 'linear-gradient(135deg, #065F46, #10B981)',
             color: 'white',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '2.25rem',
             fontWeight: 'bold',
-            boxShadow: '0 4px 12px rgba(79, 70, 229, 0.3)'
+            boxShadow: '0 4px 12px rgba(6, 95, 70, 0.3)'
           }}>
             {(formData.name || 'U').charAt(0).toUpperCase()}
           </div>

@@ -17,20 +17,20 @@ const GaugeMeter = ({ score = 78.5, size = 260, title = 'Chỉ số Sẵn sàng 
   let levelName = 'Cấp độ 2 — Sẵn sàng Trung bình';
   let levelColor = '#D97706'; // Amber
   let levelBg = '#FEF3C7';
-  let levelDesc = 'Đơn vị đang triển khai tích cực, đã số hóa quy trình nhưng còn vướng rào cản kỹ năng số hoặc hạ tầng liên thông.';
+  let levelDesc = 'Đơn vị đang triển khai tích cực các giải pháp đổi mới, tuy nhiên một số yếu tố then chốt (năng lực nhân sự, nguồn lực hoặc cơ chế vận hành) vẫn còn khoảng cách cần thu hẹp.';
 
   if (boundedScore >= 80) {
     level = 1;
     levelName = 'Cấp độ 1 — Sẵn sàng Cao (Tiên phong)';
     levelColor = '#059669'; // Emerald
     levelBg = '#D1FAE5';
-    levelDesc = 'Đơn vị tiên phong dẫn đầu, có hạ tầng công nghệ hiện đại và năng lực thích ứng số hóa toàn diện.';
+    levelDesc = 'Đơn vị tiên phong dẫn đầu, có đủ nguồn lực, nhân sự và cơ chế vận hành để chủ động thích ứng toàn diện với yêu cầu đổi mới giáo dục.';
   } else if (boundedScore < 60) {
     level = 3;
     levelName = 'Cấp độ 3 — Cần Cải thiện Cấp bách';
     levelColor = '#DC2626'; // Red
     levelBg = '#FEE2E2';
-    levelDesc = 'Mức độ sẵn sàng thấp, hạ tầng thiếu đồng bộ, sức ỳ tâm lý và kỹ năng số chưa đáp ứng chuẩn mực mới.';
+    levelDesc = 'Mức độ sẵn sàng thấp, nguồn lực và cơ chế vận hành thiếu đồng bộ, sức ỳ nội tại còn lớn; năng lực đổi mới chưa đáp ứng yêu cầu chuyển đổi.';
   }
 
   // Góc kim: từ -90 độ (score 0) đến +90 độ (score 100)

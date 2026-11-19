@@ -211,7 +211,7 @@ tr:last-child td { border-bottom: 2pt solid #000; }
 <body>
 
 <div class="header-box">
-  <div class="sub-inst">BỘ GIÁO DỤC VÀ ĐÀO TẠO — HỆ THỐNG EDURESEARCH ACADEMIC</div>
+  <div class="sub-inst">HỆ THỐNG EDURESEARCH ACADEMIC</div>
   <div class="main-title">BÁO CÁO KẾT QUẢ PHÂN TÍCH ĐẦU RA TOÀN DIỆN (${primaryOutcome})</div>
   <div class="caption">Đề tài: ${surveyTitle} — ${institutionName}</div>
   <div class="meta-info">Tiêu chuẩn học thuật: APA 7th Edition • Mẫu thô: N = ${khau1_cleaning.rawCount} • Mẫu sạch hợp lệ: N = ${khau1_cleaning.cleanCount} • Ngày xuất bản: ${dateStr}</div>
@@ -223,15 +223,15 @@ tr:last-child td { border-bottom: 2pt solid #000; }
 <!-- SẢN PHẨM 1 -->
 <!-- ========================================== -->
 <h2>SẢN PHẨM 1. CHỈ SỐ ĐÁNH GIÁ TỔNG HỢP (${primaryOutcome}) &amp; ĐỒNG HỒ ĐO (GAUGE METER)</h2>
-<p>Chỉ số Đánh giá Tổng hợp (${primaryOutcome}) là điểm số tổng hợp quy đổi từ vector các chiều cạnh nghiên cứu của toàn bộ các đối tượng tham gia khảo sát sang thang điểm chuẩn hóa 100 (tương đương thang 10). Kết quả tính toán thực nghiệm cho thấy:</p>
+<p>Chỉ số đánh giá tổng hợp (${primaryOutcome}) là điểm số tổng hợp quy đổi từ vector các chiều cạnh nghiên cứu của toàn bộ các đối tượng tham gia khảo sát sang thang điểm chuẩn hóa 100 (tương đương thang 10). Kết quả tính toán thực nghiệm cho thấy:</p>
 
 <div class="card-box">
-  <p class="no-indent" style="font-size: 13pt; margin-bottom: 4pt;"><b>Điểm Chỉ số Đánh giá Tổng hợp (${primaryOutcome}):</b> <span style="font-size: 16pt; font-weight: bold; color: ${tierColor};">${driAvg} / 100 điểm</span> (Thang 10: <b>${dri10} / 10</b>)</p>
+  <p class="no-indent" style="font-size: 13pt; margin-bottom: 4pt;"><b>Điểm chỉ số đánh giá tổng hợp (${primaryOutcome}):</b> <span style="font-size: 16pt; font-weight: bold; color: ${tierColor};">${driAvg} / 100 điểm</span> (Thang 10: <b>${dri10} / 10</b>)</p>
   <p class="no-indent" style="margin-bottom: 4pt;"><b>Phân cấp Đồng hồ đo (Gauge Meter):</b> <span style="font-weight: bold; color: ${tierColor};">${readinessTier}</span></p>
   <p class="no-indent" style="font-size: 11pt; color: #475569; margin: 0;"><i>Mô tả năng lực thực tế:</i> ${readinessTierDesc}</p>
 </div>
 
-<p class="no-indent" style="font-weight: bold;">Bảng 1. Khung phân cấp Mức độ Đánh giá Tổng hợp (${primaryOutcome}) (Gauge Meter Standards)</p>
+<p class="no-indent" style="font-weight: bold;">Bảng 1. Khung phân cấp mức độ đánh giá tổng hợp (${primaryOutcome}) (Gauge Meter Standards)</p>
 <table>
   <thead>
     <tr>
@@ -246,19 +246,19 @@ tr:last-child td { border-bottom: 2pt solid #000; }
       <td><b>Cấp độ 1 — Sẵn sàng Cao</b></td>
       <td style="text-align: center;">&ge; 80 / 100</td>
       <td style="text-align: center;">&ge; 8.0 / 10</td>
-      <td>Đơn vị tiên phong, có hạ tầng và năng lực thích ứng số hóa toàn diện. Giữ vai trò dẫn dắt mạng lưới.</td>
+      <td>Đơn vị tiên phong, có đủ nguồn lực, nhân sự và cơ chế vận hành để chủ động thích ứng toàn diện. Giữ vai trò dẫn dắt mạng lưới.</td>
     </tr>
     <tr style="background-color: ${driAvg >= 60 && driAvg < 80 ? '#fffbeb' : 'transparent'};">
       <td><b>Cấp độ 2 — Sẵn sàng Trung bình</b></td>
       <td style="text-align: center;">60 – 79 / 100</td>
       <td style="text-align: center;">6.0 – 7.9 / 10</td>
-      <td>Đơn vị đang triển khai, đã số hóa quy trình nhưng còn vướng rào cản kỹ năng số hoặc hạ tầng chưa liên thông.</td>
+      <td>Đơn vị đang triển khai tích cực các giải pháp đổi mới, nhưng một số yếu tố then chốt (năng lực nhân sự, nguồn lực hoặc cơ chế vận hành) vẫn còn khoảng cách cần thu hẹp.</td>
     </tr>
     <tr style="background-color: ${driAvg < 60 ? '#fef2f2' : 'transparent'};">
       <td><b>Cấp độ 3 — Cần cải thiện</b></td>
       <td style="text-align: center;">&lt; 60 / 100</td>
       <td style="text-align: center;">&lt; 6.0 / 10</td>
-      <td>Mức độ sẵn sàng thấp, hạ tầng thiếu đồng bộ, sức ỳ tâm lý lớn; lãnh đạo và văn hóa số chưa đáp ứng yêu cầu mới.</td>
+      <td>Mức độ sẵn sàng thấp, nguồn lực và cơ chế vận hành thiếu đồng bộ, sức ỳ nội tại lớn; lãnh đạo và năng lực đổi mới chưa đáp ứng yêu cầu mới.</td>
     </tr>
   </tbody>
 </table>
@@ -267,7 +267,7 @@ tr:last-child td { border-bottom: 2pt solid #000; }
 <!-- SẢN PHẨM 2 -->
 <!-- ========================================== -->
 <h2>SẢN PHẨM 2. BẢN ĐỒ PHÂN CỤM HỒ SƠ PHÁT TRIỂN (CLUSTER PROFILING - /clustering)</h2>
-<p>Thuật toán học máy K-Means định vị từng đơn vị khảo sát trên không gian cạnh tranh 2D: Trục hoành X biểu diễn <i>Năng lực số hóa &amp; Nguồn lực sở hữu (DX &amp; RO)</i>, trục tung Y biểu diễn <i>Lập kế hoạch chiến lược &amp; Lãnh đạo số (SP &amp; LD)</i>. Toàn bộ mẫu khảo sát được phân tách thành 3 cụm hồ sơ phát triển điển hình:</p>
+<p>Thuật toán học máy K-Means định vị từng đơn vị khảo sát trên không gian cạnh tranh 2D: Trục hoành X biểu diễn <i>năng lực đổi mới &amp; nguồn lực sở hữu (DX &amp; RO)</i>, trục tung Y biểu diễn <i>lập kế hoạch chiến lược &amp; năng lực lãnh đạo (SP &amp; LD)</i>. Toàn bộ mẫu khảo sát được phân tách thành 3 cụm hồ sơ phát triển điển hình:</p>
 
 <p class="no-indent" style="font-weight: bold;">Bảng 2. Bảng Phân khúc Nhóm trường &amp; Khuyến nghị Chiến lược cho Ban Giám hiệu</p>
 <table>
@@ -282,25 +282,25 @@ tr:last-child td { border-bottom: 2pt solid #000; }
   </thead>
   <tbody>
     <tr>
-      <td><b>Cụm 1: Tiên phong (Digital Leaders)</b></td>
+      <td><b>Cụm 1: Tiên phong (Đơn vị Dẫn đầu)</b></td>
       <td style="text-align: center;">${khau3_descriptive.clustersProfiles[0]?.share || '28%'}</td>
       <td style="text-align: center; font-weight: bold; color: #059669;">${khau3_descriptive.clustersProfiles[0]?.dri || '88/100'}</td>
-      <td>Điểm 5 trụ cột đồng đều &ge; 4.2/5; văn hóa số thấm nhuần, lãnh đạo cam kết cao, hạ tầng CNTT chuẩn hóa.</td>
-      <td>Đóng vai trò hạt nhân chia sẻ kinh nghiệm, chuyển giao học liệu số hóa và tiên phong ứng dụng AI thế hệ mới.</td>
+      <td>Điểm 5 trụ cột đồng đều &ge; 4.2/5; văn hóa đổi mới thấm nhuần, lãnh đạo cam kết cao, nguồn lực và cơ chế vận hành chuẩn hóa.</td>
+      <td>Đóng vai trò hạt nhân chia sẻ kinh nghiệm, chuyển giao học liệu mở và tiên phong thử nghiệm phương pháp mới.</td>
     </tr>
     <tr>
-      <td><b>Cụm 2: Tiềm năng (Digital Challengers)</b></td>
+      <td><b>Cụm 2: Tiềm năng (Đơn vị Đang chuyển mình)</b></td>
       <td style="text-align: center;">${khau3_descriptive.clustersProfiles[1]?.share || '52%'}</td>
       <td style="text-align: center; font-weight: bold; color: #2563EB;">${khau3_descriptive.clustersProfiles[1]?.dri || '76/100'}</td>
-      <td>Điểm dao động 3.4 - 3.9/5; đã số hóa quy trình cơ bản nhưng cơ sở dữ liệu còn phân mảnh, thiếu liên thông API.</td>
-      <td>Tập trung tích hợp hệ thống một cửa số, mở rộng đào tạo kỹ năng sư phạm số và hoàn thiện quy chế khen thưởng.</td>
+      <td>Điểm dao động 3.4 - 3.9/5; đã triển khai quy trình cơ bản nhưng các nguồn lực còn phân mảnh, thiếu liên thông.</td>
+      <td>Tập trung tích hợp quy trình một cửa, mở rộng đào tạo kỹ năng sư phạm và hoàn thiện quy chế khen thưởng.</td>
     </tr>
     <tr>
-      <td><b>Cụm 3: Cần hỗ trợ (Digital Laggards)</b></td>
+      <td><b>Cụm 3: Cần hỗ trợ (Đơn vị Cần đồng hành)</b></td>
       <td style="text-align: center;">${khau3_descriptive.clustersProfiles[2]?.share || '20%'}</td>
       <td style="text-align: center; font-weight: bold; color: #DC2626;">${khau3_descriptive.clustersProfiles[2]?.dri || '62/100'}</td>
-      <td>Điểm &lt; 3.2/5; hạ tầng mạng và thiết bị còn yếu, giảng viên ngại thay đổi, nguồn kinh phí đầu tư còn hạn hẹp.</td>
-      <td>Triển khai gói hỗ trợ kỹ thuật khẩn cấp, tập huấn cầm tay chỉ việc, chuẩn hóa hạ tầng mạng tối thiểu và tái cấu trúc quy trình.</td>
+      <td>Điểm &lt; 3.2/5; hạ tầng và nguồn lực còn yếu, giảng viên ngại thay đổi, nguồn kinh phí đầu tư còn hạn hẹp.</td>
+      <td>Triển khai gói hỗ trợ trọng tâm khẩn cấp, tập huấn cầm tay chỉ việc, chuẩn hóa hạ tầng tối thiểu và tái cấu trúc quy trình.</td>
     </tr>
   </tbody>
 </table>
@@ -401,7 +401,7 @@ tr:last-child td { border-bottom: 2pt solid #000; }
   <p class="no-indent" style="margin: 0;"><b>Tổng phương sai trích (Cumulative Variance Explained):</b> <b>${khau2_reliability.totalVarianceExplained}%</b> (đạt chuẩn &gt; 50%), toàn bộ factor loadings đều &ge; 0.50 khẳng định giá trị hội tụ và phân biệt của thang đo.</p>
 </div>
 
-<h3>4.3. Ma trận Tương quan Tuyến tính Pearson &amp; Kiểm tra Hiện tượng Đa cộng tuyến</h3>
+<h3>4.3. Ma trận tương quan tuyến tính Pearson &amp; kiểm tra hiện tượng đa cộng tuyến</h3>
 <p class="no-indent" style="font-weight: bold;">Bảng 6. Ma trận tương quan Pearson và hệ số phóng đại phương sai (VIF)</p>
 <table>
   <thead>
@@ -463,13 +463,13 @@ tr:last-child td { border-bottom: 2pt solid #000; }
 <h2>SẢN PHẨM 5. PHÂN TÍCH Ý KIẾN ĐỊNH TÍNH &amp; ĐÁM MÂY TỪ KHÓA (WORD CLOUD)</h2>
 <p>Dựa trên tập dữ liệu gồm <b>${khau1_cleaning.cleanCount} phiếu khảo sát hợp lệ</b> (trên tổng số <b>${khau1_cleaning.rawCount} phiếu thu thập</b>), hệ thống ghi nhận phản hồi định tính từ <b>${khau5_qualitative.sentimentStats.respondentsCount || khau1_cleaning.cleanCount} người tham gia</b> qua ${khau5_qualitative.sentimentStats.openQuestionsCount || 2} câu hỏi tự luận mở trong biểu mẫu. Tổng cộng hệ thống đã trích xuất <b>${khau5_qualitative.sentimentStats.total} lượt câu trả lời tự luận</b> (bao gồm <b>${khau5_qualitative.sentimentStats.barrierCount} ý kiến phản ánh rào cản</b> và <b>${khau5_qualitative.sentimentStats.solutionCount} ý kiến đề xuất giải pháp</b>). Kết quả phân loại cấu trúc nội dung ghi nhận:</p>
 
-<p class="no-indent">• <b>Nhóm Đề xuất &amp; Sáng kiến Giải pháp (Constructive Solutions):</b> Chiếm <b>${khau5_qualitative.sentimentStats.solutionPct}%</b> (${khau5_qualitative.sentimentStats.solutionCount} ý kiến), thể hiện tinh thần xây dựng tích cực, hiến kế cụ thể về mở rộng cơ hội thực tập, đổi mới phương pháp giảng dạy, hoàn thiện cơ sở vật chất và nâng cấp công cụ học tập.</p>
-<p class="no-indent">• <b>Nhóm Phản ánh Rào cản &amp; Nút thắt thực tế (Barriers &amp; Pain Points):</b> Chiếm <b>${khau5_qualitative.sentimentStats.barrierPct}%</b> (${khau5_qualitative.sentimentStats.barrierCount} ý kiến), phản ánh trung thực các vấn đề cần nhà trường ưu tiên giải tỏa, hỗ trợ kỹ thuật và cải tiến quy trình học vụ.</p>
-<p class="no-indent">• <b>Chỉ số Đồng thuận &amp; Tinh thần Xây dựng:</b> Đạt <b>${khau5_qualitative.sentimentStats.constructiveIndex}%</b> ý kiến thể hiện sự tâm huyết, đồng hành và tin tưởng vào định hướng phát triển của nhà trường, tương ứng với <b>Chỉ số Đánh giá Tổng thể đạt ${driAvg}/100 (${readinessTier})</b> của cuộc khảo sát.</p>
+<p class="no-indent">• <b>Nhóm đề xuất &amp; sáng kiến giải pháp (Constructive Solutions):</b> Chiếm <b>${khau5_qualitative.sentimentStats.solutionPct}%</b> (${khau5_qualitative.sentimentStats.solutionCount} ý kiến), thể hiện tinh thần xây dựng tích cực, hiến kế cụ thể về mở rộng cơ hội thực tập, đổi mới phương pháp giảng dạy, hoàn thiện cơ sở vật chất và nâng cấp công cụ học tập.</p>
+<p class="no-indent">• <b>Nhóm phản ánh rào cản &amp; nút thắt thực tế (Barriers &amp; Pain Points):</b> Chiếm <b>${khau5_qualitative.sentimentStats.barrierPct}%</b> (${khau5_qualitative.sentimentStats.barrierCount} ý kiến), phản ánh trung thực các vấn đề cần nhà trường ưu tiên giải tỏa, hỗ trợ kỹ thuật và cải tiến quy trình học vụ.</p>
+<p class="no-indent">• <b>Chỉ số đồng thuận &amp; tinh thần xây dựng:</b> Đạt <b>${khau5_qualitative.sentimentStats.constructiveIndex}%</b> ý kiến thể hiện sự tâm huyết, đồng hành và tin tưởng vào định hướng phát triển của nhà trường, tương ứng với <b>chỉ số đánh giá tổng thể đạt ${driAvg}/100 (${readinessTier})</b> của cuộc khảo sát.</p>
 
 <p><b>Đám mây từ khóa chuyên ngành (Word Cloud Key Phrases):</b> Các cụm từ khóa chuyên môn xuất hiện với tần suất dày đặc nhất trong câu hỏi mở bao gồm: <i>${khau5_qualitative.wordCloudTags.slice(0, 12).map(t => `${t.text} (${t.weight})`).join(', ')}</i>.</p>
 
-<p class="no-indent" style="font-weight: bold; margin-top: 10pt;">Danh sách Trích dẫn Nguyên văn Điển hình (Verbatim Quotes) phân theo các nhóm đối tượng khảo sát:</p>
+<p class="no-indent" style="font-weight: bold; margin-top: 10pt;">Danh sách trích dẫn nguyên văn điển hình (Verbatim Quotes) phân theo các nhóm đối tượng khảo sát:</p>
 
 ${isStudentSurvey ? `
 <p class="no-indent" style="font-weight: bold; color: #1e3a8a; margin-top: 8pt;">A. Ý kiến Sinh viên đang theo học (Undergraduate Students):</p>
@@ -708,7 +708,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
           <div className="card" style={{ 
             marginBottom: '1.5rem', 
             padding: '1.5rem', 
-            background: 'linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #1D4ED8 100%)',
+            background: 'linear-gradient(135deg, #022C22 0%, #065F46 55%, #10B981 100%)',
             color: 'white',
             borderRadius: '12px',
             boxShadow: '0 10px 25px -5px rgba(15, 23, 42, 0.4)',
@@ -720,7 +720,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                   <span style={{ backgroundColor: '#10B981', color: 'white', padding: '0.2rem 0.65rem', borderRadius: '4px', fontSize: '0.725rem', fontWeight: 'bold', letterSpacing: '0.05em' }}>
                     SỐ LIỆU ĐỘC LẬP TỪ DỮ LIỆU THỰC ĐỊA
                   </span>
-                  <span style={{ fontSize: '0.8rem', color: '#93C5FD', fontWeight: '600' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#6EE7B7', fontWeight: '600' }}>
                     {institution}
                   </span>
                   <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)' }}>
@@ -741,7 +741,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                   className="btn"
                   style={{ 
                     backgroundColor: '#FFFFFF', 
-                    color: '#1E3A8A', 
+                    color: '#065F46', 
                     fontWeight: 'bold', 
                     fontSize: '0.85rem',
                     display: 'flex',
@@ -752,7 +752,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                     padding: '0.55rem 1rem'
                   }}
                 >
-                  <FileDown size={16} color="#1E3A8A" />
+                  <FileDown size={16} color="#065F46" />
                   <span>Xuất File Báo Cáo APA 7 (.doc)</span>
                 </button>
               </div>
@@ -797,7 +797,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                 <div style={{ fontSize: '0.725rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', fontWeight: 'bold' }}>
                   3. THẾ MẠNH ĐƯỢC CHẤM CAO NHẤT
                 </div>
-                <div style={{ fontSize: '1.35rem', fontWeight: 'bold', margin: '0.35rem 0 0.15rem 0', color: '#93C5FD' }}>
+                <div style={{ fontSize: '1.35rem', fontWeight: 'bold', margin: '0.35rem 0 0.15rem 0', color: '#6EE7B7' }}>
                   {highestPillar.code}: {highestPillar.mean} / 5.0
                 </div>
                 <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.9)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -833,7 +833,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button 
                   onClick={() => setActiveStage(4)}
-                  style={{ background: 'none', border: 'none', color: '#93C5FD', cursor: 'pointer', fontSize: '0.8rem', textDecoration: 'underline' }}
+                  style={{ background: 'none', border: 'none', color: '#6EE7B7', cursor: 'pointer', fontSize: '0.8rem', textDecoration: 'underline' }}
                 >
                   Xem mô hình SEM &rarr;
                 </button>
@@ -1267,7 +1267,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
               <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: 'bold', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Sparkles size={18} color="var(--primary)" />
-                  Bảng 3b. Ma trận Tương quan Tuyến tính Pearson (APA 7th Edition)
+                  Bảng 3b. Ma trận tương quan tuyến tính Pearson (APA 7th Edition)
                 </h3>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
                   Kiểm tra tương quan cặp giữa các biến (yêu cầu r &lt; 0.85, VIF &lt; 5.0 để khẳng định không xảy ra hiện tượng đa cộng tuyến):
@@ -1547,7 +1547,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
               <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem', backgroundColor: '#F8FAFC', border: '1px solid #CBD5E1' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#1E3A8A' }}>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#065F46' }}>
                       <Sliders size={20} color="var(--primary)" />
                       Công Cụ Mô Phỏng Dự Báo Mức Độ Sẵn Sàng Chuyển Đổi (ML Prediction Simulator)
                     </h3>
@@ -1948,7 +1948,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                 {(() => {
                   const descList = analysisData.khau3_descriptive?.descriptiveTable || [];
                   const sortedDesc = [...descList].sort((a, b) => b.mean - a.mean);
-                  const highest = sortedDesc[0] || { code: 'STR', name: 'Chiến lược & Định hướng', mean: 4.14, sd: 0.65 };
+                  const highest = sortedDesc[0] || { code: 'STR', name: 'Chiến lược & định hướng', mean: 4.14, sd: 0.65 };
                   const lowest = sortedDesc[sortedDesc.length - 1] || { code: 'RES', name: 'Nguồn lực & CSVC', mean: 4.06, sd: 0.68 };
 
                   const hypList = analysisData.khau4_sem_ml?.hypothesisResults || [];
@@ -2015,7 +2015,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                           <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1D4ED8', marginBottom: '0.25rem' }}>
                             {topDriver.path || `${topDriver.independent} ➔ ${targetVar}`} (&beta; = {topDriver.beta})
                           </div>
-                          <div style={{ fontSize: '0.825rem', color: '#1E3A8A', lineHeight: 1.4 }}>
+                          <div style={{ fontSize: '0.825rem', color: '#065F46', lineHeight: 1.4 }}>
                             Mối quan hệ <b>{topDriver.path || topDriver.independent}</b> có lực kéo mạnh nhất tới kết quả khảo sát (t = {topDriver.t}, p &lt; .001). Cải thiện dịch vụ hỗ trợ sẽ tạo đột phá trực tiếp.
                           </div>
                         </div>
@@ -2090,7 +2090,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                               1. Tối ưu dịch vụ hỗ trợ sinh viên &amp; Cố vấn học tập (SER)
                             </div>
                             <div style={{ fontSize: '0.8rem', color: '#475569', lineHeight: 1.4 }}>
-                              Vì SER là đòn bẩy lớn nhất (&beta; = {topDriver.beta}), nhà trường cần số hóa 100% quy trình một cửa cho người học, rút ngắn thời gian xử lý hồ sơ hành chính dưới 24h.
+                              Vì SER là đòn bẩy lớn nhất (&beta; = {topDriver.beta}), nhà trường cần tối ưu hóa toàn diện quy trình một cửa cho người học, rút ngắn thời gian xử lý hồ sơ hành chính dưới 24h.
                             </div>
                           </div>
 
@@ -2135,7 +2135,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1E40AF', marginBottom: '0.5rem' }}>
                   Xuất Bản Báo Cáo Học Thuật Chuẩn APA 7th Edition (.doc)
                 </h3>
-                <p style={{ color: '#1E3A8A', maxWidth: '640px', margin: '0 auto 1.25rem auto', fontSize: '0.9rem' }}>
+                <p style={{ color: '#065F46', maxWidth: '640px', margin: '0 auto 1.25rem auto', fontSize: '0.9rem' }}>
                   Toàn bộ 5 khâu phân tích toán học (Làm sạch, Cronbach's Alpha, EFA/KMO, Pearson, PLS-SEM, K-Means DRI, Học máy XGBoost &amp; SHAP) kèm lời bình luận tự động đã sẵn sàng để xuất ra file Word chuẩn mực đính kèm trực tiếp vào Luận văn / Bài báo khoa học.
                 </p>
                 <button 
