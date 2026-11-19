@@ -1,5 +1,6 @@
 // src/services/api.js
 import { supabase } from '../lib/supabaseClient';
+import { runCompleteAcademicPipeline } from '../lib/statisticsEngine';
 
 async function fetchProfile(userId) {
   const { data, error } = await supabase
@@ -86,6 +87,36 @@ export const authAPI = {
 async function currentProfileId() {
   const { data } = await supabase.auth.getSession();
   return data.session?.user?.id || null;
+}
+
+async function getAnalysisImpl(id, filterOutliers = true) {
+  const survey = await surveysAPI.getById(id);
+  const { data: rawResponses, error } = await supabase
+    .from('responses')
+    .select('*')
+    .eq('survey_id', id)
+    .order('id', { ascending: true });
+  if (error) throw new Error(error.message);
+
+  if (!rawResponses || rawResponses.length === 0) {
+    return {
+      surveyInfo: {
+        id: survey.id,
+        title: survey.title,
+        subtitle: survey.subtitle,
+        audience: survey.audience,
+        institution: survey.institution,
+        target: survey.target,
+        scale: survey.scale,
+        variables: survey.variables
+      },
+      hasData: false,
+      message: 'Khảo sát này chưa có phản hồi nào. Vui lòng thu thập phản hồi hoặc chạy scripts/seed-responses.mjs.'
+    };
+  }
+
+  const analysisResults = runCompleteAcademicPipeline(survey, rawResponses, { filterOutliers });
+  return { hasData: true, ...analysisResults };
 }
 
 export const surveysAPI = {
@@ -175,6 +206,14 @@ export const surveysAPI = {
   delete: async (id) => {
     const { error } = await supabase.from('surveys').delete().eq('id', id);
     if (error) throw new Error(error.message);
+  },
+
+  getAnalysis: (id, filterOutliers = true) => getAnalysisImpl(id, filterOutliers),
+  seedResponses: async () => {
+    throw new Error('Sinh dữ liệu mẫu chỉ chạy qua "node scripts/seed-responses.mjs" ở máy phát triển (cần service role key).');
+  },
+  seedAll: async () => {
+    throw new Error('Sinh dữ liệu mẫu chỉ chạy qua "node scripts/seed-responses.mjs" ở máy phát triển (cần service role key).');
   }
 };
 
