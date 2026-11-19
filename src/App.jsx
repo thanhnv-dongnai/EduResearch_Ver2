@@ -14,6 +14,7 @@ import Responses from './pages/Responses';
 import Analytics from './pages/Analytics';
 import Clustering from './pages/Clustering';
 import Documents from './pages/Documents';
+import Users from './pages/Users';
 import PublicSurvey from './pages/PublicSurvey';
 import { useAuth } from './context/AuthContext';
 
@@ -55,6 +56,7 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="clustering" element={<Clustering />} />
           <Route path="documents" element={<Documents />} />
+          <Route path="users" element={<Users />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

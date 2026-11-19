@@ -497,3 +497,43 @@ export const dashboardAPI = {
     };
   }
 };
+
+export const usersAPI = {
+  getAll: async () => {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('id, name, role, unit, created_at')
+      .order('created_at', { ascending: false });
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  create: async (formData) => {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const { data, error } = await supabase.functions.invoke('admin-create-user', {
+      body: formData,
+      headers: { Authorization: `Bearer ${sessionData.session?.access_token}` }
+    });
+    if (error) throw new Error(error.message || 'Lỗi khi tạo tài khoản.');
+    return data;
+  },
+
+  update: async (id, formData) => {
+    const patch = {};
+    if (formData.name !== undefined) patch.name = formData.name;
+    if (formData.role !== undefined) patch.role = formData.role;
+    if (formData.unit !== undefined) patch.unit = formData.unit;
+    const { data, error } = await supabase.from('profiles').update(patch).eq('id', id).select().single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  delete: async (id) => {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const { error } = await supabase.functions.invoke('admin-delete-user', {
+      body: { id },
+      headers: { Authorization: `Bearer ${sessionData.session?.access_token}` }
+    });
+    if (error) throw new Error(error.message || 'Lỗi khi xóa tài khoản.');
+  }
+};
