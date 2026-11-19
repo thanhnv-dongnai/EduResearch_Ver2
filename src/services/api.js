@@ -333,3 +333,158 @@ export const responsesAPI = {
     return { message: `Đã nhập thành công ${rows.length} phản hồi vào khảo sát.`, count: rows.length };
   }
 };
+
+const DOC_TYPE_STYLE = {
+  'Lý thuyết': { color: '#3B82F6', bg: '#EFF6FF' },
+  'Báo cáo': { color: '#8B5CF6', bg: '#F3E8FF' },
+  'Tham khảo': { color: '#10B981', bg: '#D1FAE5' },
+  'Dữ liệu': { color: '#F59E0B', bg: '#FEF3C7' }
+};
+
+export const documentsAPI = {
+  getAll: async () => {
+    const { data, error } = await supabase.from('documents').select('*').order('created_at', { ascending: false });
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  create: async (formData) => {
+    const title = formData.get('title');
+    const type = formData.get('type') || 'Tham khảo';
+    const file = formData.get('file');
+    if (!file) throw new Error('Vui lòng chọn file.');
+
+    const uploaded_by = await currentProfileId();
+    const storagePath = `${Date.now()}_${file.name}`;
+    const { error: uploadError } = await supabase.storage.from('documents').upload(storagePath, file);
+    if (uploadError) throw new Error(uploadError.message);
+
+    const styling = DOC_TYPE_STYLE[type] || DOC_TYPE_STYLE['Tham khảo'];
+    const sizeInMB = `${(file.size / (1024 * 1024)).toFixed(2)} MB`;
+
+    const { data, error } = await supabase
+      .from('documents')
+      .insert({
+        title,
+        type,
+        size: sizeInMB,
+        color: styling.color,
+        bg: styling.bg,
+        date: formatDateVN(),
+        file_path: storagePath,
+        original_name: file.name,
+        uploaded_by
+      })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  delete: async (id) => {
+    const { data: doc } = await supabase.from('documents').select('file_path').eq('id', id).single();
+    const { error } = await supabase.from('documents').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+    if (doc?.file_path) {
+      await supabase.storage.from('documents').remove([doc.file_path]);
+    }
+  },
+
+  getDownloadUrl: async (filePath) => {
+    const { data, error } = await supabase.storage.from('documents').createSignedUrl(filePath, 60);
+    if (error) throw new Error(error.message);
+    return data.signedUrl;
+  }
+};
+
+export const dashboardAPI = {
+  getStats: async (surveyId = '') => {
+    const isSpecific = surveyId && surveyId !== 'all';
+
+    const { data: surveysList, error: surveysErr } = await supabase
+      .from('surveys')
+      .select('id, title, target, responses_count, audience, scale, status')
+      .order('created_at', { ascending: true });
+    if (surveysErr) throw new Error(surveysErr.message);
+
+    const totalSurveys = surveysList.length;
+    const selectedSurvey = isSpecific ? surveysList.find((s) => s.id === surveyId) : null;
+
+    let responsesQuery = supabase.from('responses').select('role, status, answers', { count: 'exact' });
+    if (isSpecific) responsesQuery = responsesQuery.eq('survey_id', surveyId);
+    const { data: respRows, error: respErr } = await responsesQuery;
+    if (respErr) throw new Error(respErr.message);
+
+    const totalResponses = respRows.length;
+    const validResponses = respRows.filter((r) => r.status === 'valid').length;
+
+    let pieData = [];
+    if (isSpecific) {
+      const roleCounts = respRows.reduce((acc, r) => {
+        acc[r.role] = (acc[r.role] || 0) + 1;
+        return acc;
+      }, {});
+      pieData = Object.keys(roleCounts).map((k) => ({ name: k, value: roleCounts[k] }));
+    } else {
+      const { data: allResp } = await supabase.from('responses').select('survey_id');
+      const bySurvey = (allResp || []).reduce((acc, r) => {
+        acc[r.survey_id] = (acc[r.survey_id] || 0) + 1;
+        return acc;
+      }, {});
+      pieData = surveysList
+        .filter((s) => bySurvey[s.id])
+        .map((s) => ({
+          name: s.title.split('—')[0].replace(/Bộ \d:/, '').trim(),
+          fullName: s.title,
+          surveyId: s.id,
+          value: bySurvey[s.id]
+        }));
+    }
+
+    const validAnswerRows = respRows.filter((r) => r.status === 'valid');
+    let totalScore = 0;
+    let countItems = 0;
+    validAnswerRows.forEach((r) => {
+      const ans = r.answers || {};
+      Object.keys(ans).forEach((k) => {
+        const num = parseFloat(ans[k]);
+        if (!isNaN(num) && num >= 1 && num <= 5) {
+          totalScore += num;
+          countItems++;
+        }
+      });
+    });
+    const avgScore = countItems > 0 ? totalScore / countItems : 3.85;
+    const readinessIndex = Math.min(100, Math.max(0, avgScore * 20));
+
+    const areaData = [
+      { name: 'Thứ 2', value: Math.max(1, Math.round(totalResponses * 0.12)) },
+      { name: 'Thứ 3', value: Math.max(2, Math.round(totalResponses * 0.18)) },
+      { name: 'Thứ 4', value: Math.max(3, Math.round(totalResponses * 0.24)) },
+      { name: 'Thứ 5', value: Math.max(2, Math.round(totalResponses * 0.2)) },
+      { name: 'Thứ 6', value: Math.max(2, Math.round(totalResponses * 0.15)) },
+      { name: 'Thứ 7', value: Math.max(1, Math.round(totalResponses * 0.07)) },
+      { name: 'Chủ nhật', value: Math.max(1, Math.round(totalResponses * 0.04)) }
+    ];
+
+    const totalSystemTarget = surveysList.reduce((acc, s) => acc + (s.target || 0), 0);
+    const target = selectedSurvey ? selectedSurvey.target || 100 : totalSystemTarget;
+    const pilotTarget = Math.round(target * 0.15);
+
+    return {
+      surveyId: isSpecific ? surveyId : 'all',
+      isAllSurveys: !isSpecific,
+      selectedSurvey,
+      surveysList,
+      totalSurveys,
+      totalResponses,
+      validResponses,
+      target,
+      pilotTarget,
+      totalAnalysis: 5,
+      readinessIndex: parseFloat(readinessIndex.toFixed(1)),
+      areaData,
+      pieData
+    };
+  }
+};

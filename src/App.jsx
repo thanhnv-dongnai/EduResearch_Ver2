@@ -7,11 +7,13 @@ import PublicLayout from './layouts/PublicLayout';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
+import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Surveys from './pages/Surveys';
 import Responses from './pages/Responses';
 import Analytics from './pages/Analytics';
 import Clustering from './pages/Clustering';
+import Documents from './pages/Documents';
 import PublicSurvey from './pages/PublicSurvey';
 import { useAuth } from './context/AuthContext';
 
@@ -46,12 +48,13 @@ function App() {
             <DashboardLayout />
           </ProtectedRoute>
         }>
-          <Route index element={<div>Dashboard — sẽ làm ở Task 10</div>} />
+          <Route index element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
           <Route path="surveys" element={<Surveys />} />
           <Route path="responses" element={<Responses />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="clustering" element={<Clustering />} />
+          <Route path="documents" element={<Documents />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
