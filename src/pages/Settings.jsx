@@ -10,7 +10,7 @@ const Settings = () => {
   const { currentUser } = useAuth();
   const { settings, academicYears, refreshSettings } = useSettings();
 
-  const [formData, setFormData] = useState({ institution_name: '', principal_name: '' });
+  const [formData, setFormData] = useState({ institution_name: '', principal_name: '', location: '' });
   const [saving, setSaving] = useState(false);
   const [newYearLabel, setNewYearLabel] = useState('');
   const [savingYear, setSavingYear] = useState(false);
@@ -25,7 +25,8 @@ const Settings = () => {
     if (settings) {
       setFormData({
         institution_name: settings.institution_name || '',
-        principal_name: settings.principal_name || ''
+        principal_name: settings.principal_name || '',
+        location: settings.location || ''
       });
     }
   }, [settings]);
@@ -110,6 +111,17 @@ const Settings = () => {
                 placeholder="VD: PGS.TS. Nguyễn Văn A"
               />
               <span className="form-hint">Dùng trong phần chữ ký của các báo cáo xuất</span>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Tỉnh / Thành phố</label>
+              <input
+                type="text" className="input"
+                value={formData.location}
+                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                placeholder="VD: Đồng Nai"
+              />
+              <span className="form-hint">Dùng cho dòng "...., ngày ..." ở chữ ký báo cáo xuất — để trống sẽ hiển thị chỗ chấm để điền tay</span>
             </div>
           </div>
 

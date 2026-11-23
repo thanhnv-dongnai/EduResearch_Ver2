@@ -569,13 +569,14 @@ export const settingsAPI = {
     return data;
   },
 
-  update: async ({ institution_name, principal_name }) => {
+  update: async ({ institution_name, principal_name, location }) => {
     const { data: sessionData } = await supabase.auth.getSession();
     const { data, error } = await supabase
       .from('app_settings')
       .update({
         institution_name,
         principal_name,
+        location,
         updated_at: new Date().toISOString(),
         updated_by: sessionData.session?.user?.id
       })

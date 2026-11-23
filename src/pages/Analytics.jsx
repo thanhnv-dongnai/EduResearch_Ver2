@@ -226,7 +226,7 @@ tr:last-child td { border-bottom: 2pt solid #000; }
 <body>
 
 <div class="header-box">
-  <div class="sub-inst">${settings?.institution_name || 'Trường Đại học'} — HỆ THỐNG EDURESEARCH ACADEMIC</div>
+  <div class="sub-inst">${settings?.institution_name || 'Trường Đại học'}</div>
   <div class="main-title">BÁO CÁO KẾT QUẢ PHÂN TÍCH ĐẦU RA TOÀN DIỆN (${primaryOutcome})</div>
   <div class="caption">Đề tài: ${surveyTitle} — ${institutionName}</div>
   <div class="meta-info">Tiêu chuẩn học thuật: APA 7th Edition • Năm học: ${selectedYear?.label || '—'} • Mẫu thô: N = ${khau1_cleaning.rawCount} • Mẫu sạch hợp lệ: N = ${khau1_cleaning.cleanCount} • Ngày xuất bản: ${dateStr}</div>
@@ -442,7 +442,7 @@ tr:last-child td { border-bottom: 2pt solid #000; }
 </table>
 <div class="table-note">Ghi chú: ** p &lt; 0.01; * p &lt; 0.05. Hệ số VIF &lt; 2.50 và r &lt; 0.85 khẳng định mô hình hoàn toàn không xảy ra hiện tượng đa cộng tuyến.</div>
 
-<h3>4.4. Bảng Kiểm định Giả thuyết Mô hình Cấu trúc SEM (H1 ➔ H${khau4_sem_ml.hypothesisResults.length})</h3>
+<h3>4.4. Bảng kiểm định giả thuyết mô hình cấu trúc SEM (H1 ➔ H${khau4_sem_ml.hypothesisResults.length})</h3>
 <p class="no-indent" style="font-weight: bold;">Bảng 7. Kết quả kiểm định các giả thuyết nghiên cứu tác động lên biến trung tâm ${primaryOutcome}</p>
 <table>
   <thead>
@@ -519,7 +519,7 @@ ${(khau5_qualitative.quotesByRole?.leadership || []).slice(0, 2).map(q => `
   </div>
 `).join('')}
 
-<p class="no-indent" style="font-weight: bold; color: #1e3a8a; margin-top: 8pt;">B. Ý kiến Giảng viên &amp; Cán bộ chuyên trách (Faculty &amp; Staff):</p>
+<p class="no-indent" style="font-weight: bold; color: #1e3a8a; margin-top: 8pt;">B. Ý kiến Giảng viên &amp; Cán bộ Nhân viên (Faculty &amp; Staff):</p>
 ${(khau5_qualitative.quotesByRole?.faculty || []).slice(0, 2).map(q => `
   <div class="quote-box">
     "${q.content}"
@@ -540,7 +540,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
 <!-- SẢN PHẨM 6 -->
 <!-- ========================================== -->
 <h2>SẢN PHẨM 6. THẢO LUẬN KẾT QUẢ HỌC THUẬT &amp; HÀM Ý QUẢN TRỊ (ACADEMIC DISCUSSION)</h2>
-<p>Dựa trên kết quả định lượng thu nhận từ mô hình cấu trúc PLS-SEM và SHAP Machine Learning từ dữ liệu khảo sát thực tế tại <b>${institutionName}</b> (N = ${khau1_cleaning.cleanCount} mẫu hợp lệ), nhóm nghiên cứu đề xuất các luận giải học thuật viết sẵn phục vụ trực tiếp cho phần Thảo luận (Discussion) của đề tài / luận văn:</p>
+<p>Dựa trên kết quả định lượng thu nhận từ mô hình cấu trúc PLS-SEM và SHAP Machine Learning từ dữ liệu khảo sát thực tế tại <b>${institutionName}</b> (N = ${khau1_cleaning.cleanCount} mẫu hợp lệ), tác giả đề xuất các luận giải học thuật viết sẵn phục vụ trực tiếp cho phần Thảo luận (Discussion) của đề tài / luận văn:</p>
 
 <p><b>1. Đòn bẩy trọng tâm dẫn dắt sự biến thiên của ${primaryOutcome}:</b> Kết quả kiểm định giả thuyết SEM chứng minh tác động <b>${topDriver.path || `${topDriver.independent} ➔ ${primaryOutcome}`}</b> đạt hệ số hồi quy chuẩn hóa lớn nhất (β = ${topDriver.beta}, t = ${topDriver.t}, p &lt; .001). Điều này tương thích hoàn toàn với kết quả phân tích tầm quan trọng thuộc tính SHAP. Việc cải tiến và nâng cấp chất lượng nhóm chỉ số này sẽ tạo ra sự chuyển biến đột phá và trực tiếp nhất tới mức độ hài lòng chung (${primaryOutcome}).</p>
 
@@ -563,7 +563,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
       ` : ''}
     </td>
     <td style="border: none; width: 50%; text-align: center;">
-      <p class="no-indent" style="font-style: italic;">Hà Nội, ngày ${dateStr}</p>
+      <p class="no-indent" style="font-style: italic;">${settings?.location || '……………'}, ngày ${dateStr}</p>
       <p class="no-indent" style="font-weight: bold; margin-top: 4pt;">CHỦ NHIỆM ĐỀ TÀI / NHÓM NGHIÊN CỨU</p>
       <div style="height: 55pt;"></div>
       <p class="no-indent" style="font-weight: bold; font-size: 13pt;">${currentUser?.name || 'Nhóm Nghiên Cứu EduResearch'}</p>
