@@ -16,6 +16,7 @@ import Clustering from './pages/Clustering';
 import Documents from './pages/Documents';
 import Users from './pages/Users';
 import PublicSurvey from './pages/PublicSurvey';
+import ShortLink from './pages/ShortLink';
 import { useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
@@ -43,6 +44,8 @@ function App() {
           <Route path="/survey" element={<PublicSurvey />} />
           <Route path="/survey/:id" element={<PublicSurvey />} />
         </Route>
+
+        <Route path="/s/:code" element={<ShortLink />} />
 
         <Route path="/" element={
           <ProtectedRoute>

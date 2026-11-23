@@ -4,7 +4,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import QRCode from 'qrcode';
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
-import { surveysAPI } from '../services/api';
+import { surveysAPI, shortLinksAPI } from '../services/api';
 import Toast from '../components/Toast';
 
 // 4 MẪU BỘ CÂU HỎI CHUẨN THEO CHỨC VỤ
@@ -182,6 +182,7 @@ const Surveys = () => {
   // QR Code Modal State
   const [qrModalSurvey, setQrModalSurvey] = useState(null);
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
+  const [shortUrl, setShortUrl] = useState('');
   const [copiedLink, setCopiedLink] = useState(false);
 
   // Question builder tabs
@@ -384,9 +385,20 @@ const Surveys = () => {
   const handleOpenQRModal = async (survey) => {
     setQrModalSurvey(survey);
     setCopiedLink(false);
-    const surveyUrl = `${window.location.origin}/survey/${survey.id}`;
+    setShortUrl('');
+
+    let linkToEncode = `${window.location.origin}/survey/${survey.id}`;
     try {
-      const url = await QRCode.toDataURL(surveyUrl, {
+      const code = await shortLinksAPI.getOrCreate(survey.id);
+      const short = `${window.location.origin}/s/${code}`;
+      setShortUrl(short);
+      linkToEncode = short;
+    } catch (err) {
+      console.error('Error creating short link, falling back to full URL:', err);
+    }
+
+    try {
+      const url = await QRCode.toDataURL(linkToEncode, {
         width: 280,
         margin: 2,
         color: {
@@ -410,7 +422,7 @@ const Surveys = () => {
   };
 
   const handleCopySurveyLink = (surveyId) => {
-    const url = `${window.location.origin}/survey/${surveyId}`;
+    const url = shortUrl || `${window.location.origin}/survey/${surveyId}`;
     navigator.clipboard.writeText(url);
     setCopiedLink(true);
     showToast('Đã sao chép đường dẫn khảo sát vào Clipboard!');
@@ -539,11 +551,17 @@ const Surveys = () => {
     }
   };
 
-  const handleShare = (survey) => {
-    const shareUrl = `${window.location.origin}/survey/${survey.id}`;
+  const handleShare = async (survey) => {
+    let shareUrl = `${window.location.origin}/survey/${survey.id}`;
+    try {
+      const code = await shortLinksAPI.getOrCreate(survey.id);
+      shareUrl = `${window.location.origin}/s/${code}`;
+    } catch (err) {
+      console.error('Error creating short link, falling back to full URL:', err);
+    }
     if (navigator.clipboard) {
       navigator.clipboard.writeText(shareUrl);
-      showToast(`Đã sao chép link khảo sát #${survey.id}!`);
+      showToast(`Đã sao chép link khảo sát: ${survey.title}!`);
     } else {
       showToast(`Link khảo sát: ${shareUrl}`);
     }
@@ -1485,7 +1503,7 @@ const Surveys = () => {
         <div className="modal-backdrop" onClick={() => setQrModalSurvey(null)}>
           <div className="modal-content" style={{ maxWidth: '460px', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2 className="modal-title">Mã QR Khảo Sát #{qrModalSurvey.id}</h2>
+              <h2 className="modal-title">Mã QR khảo sát</h2>
               <button className="modal-close-btn" onClick={() => setQrModalSurvey(null)}>
                 <X size={20} />
               </button>
@@ -1511,10 +1529,10 @@ const Surveys = () => {
               )}
 
               <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0.75rem', backgroundColor: '#F8FAFC', borderRadius: '8px', border: '1px solid var(--border-color)', marginBottom: '1rem' }}>
-                <input 
-                  type="text" 
-                  readOnly 
-                  value={`${window.location.origin}/survey/${qrModalSurvey.id}`}
+                <input
+                  type="text"
+                  readOnly
+                  value={shortUrl || `${window.location.origin}/survey/${qrModalSurvey.id}`}
                   style={{ flex: 1, background: 'none', border: 'none', fontSize: '0.75rem', color: 'var(--text-main)', outline: 'none' }}
                 />
                 <button 

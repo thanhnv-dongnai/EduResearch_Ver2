@@ -609,3 +609,50 @@ export const settingsAPI = {
     return data;
   }
 };
+
+const SHORT_CODE_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789';
+function randomShortCode(length = 6) {
+  let code = '';
+  for (let i = 0; i < length; i++) {
+    code += SHORT_CODE_CHARS[Math.floor(Math.random() * SHORT_CODE_CHARS.length)];
+  }
+  return code;
+}
+
+export const shortLinksAPI = {
+  // Trả về mã rút gọn đã có sẵn cho khảo sát này (nếu có), hoặc tạo mới.
+  getOrCreate: async (surveyId) => {
+    const { data: existing, error: findError } = await supabase
+      .from('short_links')
+      .select('code')
+      .eq('survey_id', surveyId)
+      .order('created_at', { ascending: true })
+      .limit(1)
+      .maybeSingle();
+    if (findError) throw new Error(findError.message);
+    if (existing) return existing.code;
+
+    // Thử vài lần để tránh trùng mã (xác suất rất thấp với 6 ký tự base36).
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const code = randomShortCode();
+      const { data, error } = await supabase
+        .from('short_links')
+        .insert({ code, survey_id: surveyId })
+        .select('code')
+        .single();
+      if (!error) return data.code;
+      if (error.code !== '23505') throw new Error(error.message); // not a unique-violation
+    }
+    throw new Error('Không thể tạo mã rút gọn, vui lòng thử lại.');
+  },
+
+  resolve: async (code) => {
+    const { data, error } = await supabase
+      .from('short_links')
+      .select('survey_id')
+      .eq('code', code)
+      .single();
+    if (error) throw new Error('Không tìm thấy link khảo sát.');
+    return data.survey_id;
+  }
+};

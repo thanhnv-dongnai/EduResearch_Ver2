@@ -99,7 +99,6 @@ const Settings = () => {
                 onChange={(e) => setFormData({ ...formData, institution_name: e.target.value })}
                 placeholder="VD: Trường Đại học ABC"
               />
-              <span className="form-hint">Hiển thị trên Topbar và tiêu đề các báo cáo xuất (.doc)</span>
             </div>
 
             <div className="form-group">
@@ -110,7 +109,6 @@ const Settings = () => {
                 onChange={(e) => setFormData({ ...formData, principal_name: e.target.value })}
                 placeholder="VD: PGS.TS. Nguyễn Văn A"
               />
-              <span className="form-hint">Dùng trong phần chữ ký của các báo cáo xuất</span>
             </div>
 
             <div className="form-group">
@@ -121,7 +119,6 @@ const Settings = () => {
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                 placeholder="VD: Đồng Nai"
               />
-              <span className="form-hint">Dùng cho dòng "...., ngày ..." ở chữ ký báo cáo xuất — để trống sẽ hiển thị chỗ chấm để điền tay</span>
             </div>
           </div>
 
