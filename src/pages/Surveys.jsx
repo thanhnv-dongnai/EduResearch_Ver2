@@ -198,7 +198,7 @@ const Surveys = () => {
   const [formData, setFormData] = useState({
     title: '',
     subtitle: '',
-    institution: 'Trường Đại học Sư phạm',
+    institution: 'Trường Đại học Lạc Hồng',
     audience: 'leadership',
     questions_count: 12,
     status: 'Active',
@@ -275,7 +275,7 @@ const Surveys = () => {
   };
 
   const handleOpenCreate = () => {
-    const defaultInst = 'Trường Đại học Sư phạm';
+    const defaultInst = 'Trường Đại học Lạc Hồng';
     const tmpl = ROLE_QUESTIONNAIRES.leadership;
     setSelectedRoleTemplate('leadership');
     setFormData({
