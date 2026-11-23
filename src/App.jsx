@@ -8,7 +8,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
+import Settings from './pages/Settings';
 import Surveys from './pages/Surveys';
 import Responses from './pages/Responses';
 import Analytics from './pages/Analytics';
@@ -50,7 +50,7 @@ function App() {
           </ProtectedRoute>
         }>
           <Route index element={<Dashboard />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="surveys" element={<Surveys />} />
           <Route path="responses" element={<Responses />} />
           <Route path="analytics" element={<Analytics />} />

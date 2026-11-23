@@ -152,7 +152,8 @@ export const surveysAPI = {
       questions,
       hypotheses: formData.hypotheses || [],
       questions_count: questions.length,
-      created_by
+      created_by,
+      academic_year_id: formData.academicYearId || null
     };
     const { data, error } = await supabase.from('surveys').insert(row).select().single();
     if (error) throw new Error(error.message);
@@ -523,8 +524,31 @@ export const usersAPI = {
     if (formData.name !== undefined) patch.name = formData.name;
     if (formData.role !== undefined) patch.role = formData.role;
     if (formData.unit !== undefined) patch.unit = formData.unit;
-    const { data, error } = await supabase.from('profiles').update(patch).eq('id', id).select().single();
-    if (error) throw new Error(error.message);
+
+    let data;
+    if (Object.keys(patch).length > 0) {
+      const { data: updated, error } = await supabase.from('profiles').update(patch).eq('id', id).select().single();
+      if (error) throw new Error(error.message);
+      data = updated;
+    }
+
+    // Đổi email/mật khẩu người dùng khác đụng tới auth.users, phải qua Edge
+    // Function dùng service role key — bảng profiles.email chỉ là bản sao.
+    if (formData.email || formData.password) {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const { data: credResult, error: credError } = await supabase.functions.invoke('admin-update-credentials', {
+        body: { id, email: formData.email || undefined, password: formData.password || undefined },
+        headers: { Authorization: `Bearer ${sessionData.session?.access_token}` }
+      });
+      if (credError) throw new Error(credError.message || 'Lỗi khi cập nhật email/mật khẩu.');
+      data = { ...(data || {}), ...credResult };
+    }
+
+    if (!data) {
+      const { data: current, error } = await supabase.from('profiles').select('id, name, role, unit, email, created_at').eq('id', id).single();
+      if (error) throw new Error(error.message);
+      data = current;
+    }
     return data;
   },
 
@@ -535,5 +559,52 @@ export const usersAPI = {
       headers: { Authorization: `Bearer ${sessionData.session?.access_token}` }
     });
     if (error) throw new Error(error.message || 'Lỗi khi xóa tài khoản.');
+  }
+};
+
+export const settingsAPI = {
+  get: async () => {
+    const { data, error } = await supabase.from('app_settings').select('*').eq('id', true).single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  update: async ({ institution_name, principal_name }) => {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const { data, error } = await supabase
+      .from('app_settings')
+      .update({
+        institution_name,
+        principal_name,
+        updated_at: new Date().toISOString(),
+        updated_by: sessionData.session?.user?.id
+      })
+      .eq('id', true)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  listAcademicYears: async () => {
+    const { data, error } = await supabase.from('academic_years').select('*').order('label', { ascending: false });
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  createAcademicYear: async (label) => {
+    const { data, error } = await supabase.from('academic_years').insert({ label }).select().single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  setCurrentAcademicYear: async (id) => {
+    // Chỉ số unique partial (is_current where true) buộc phải tắt năm cũ
+    // trước khi bật năm mới, nếu không sẽ đụng ràng buộc duy nhất.
+    const { error: clearError } = await supabase.from('academic_years').update({ is_current: false }).eq('is_current', true);
+    if (clearError) throw new Error(clearError.message);
+    const { data, error } = await supabase.from('academic_years').update({ is_current: true }).eq('id', id).select().single();
+    if (error) throw new Error(error.message);
+    return data;
   }
 };

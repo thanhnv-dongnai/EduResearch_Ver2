@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Shield, ShieldCheck, ShieldAlert, X, AlertTriangle, Users as UsersIcon } from 'lucide-react';
+import { Plus, Trash2, Shield, ShieldCheck, ShieldAlert, X, AlertTriangle, Users as UsersIcon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { usersAPI } from '../services/api';
 import Toast from '../components/Toast';
+import UserDetailModal from '../components/UserDetailModal';
 
 const Users = () => {
   const { currentUser } = useAuth();
@@ -12,7 +13,6 @@ const Users = () => {
 
   // Modals state
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [deleteConfirmUser, setDeleteConfirmUser] = useState(null);
 
@@ -83,30 +83,9 @@ const Users = () => {
     }
   };
 
-  const handleOpenEdit = (user) => {
-    setSelectedUser(user);
-    setFormData({
-      name: user.name,
-      email: user.email,
-      password: '',
-      role: user.role,
-      unit: user.unit || ''
-    });
-    setIsEditOpen(true);
-  };
-
-  const handleEditSubmit = async (e) => {
-    e.preventDefault();
-    if (!selectedUser) return;
-    try {
-      const updated = await usersAPI.update(selectedUser.id, formData);
-      setUsers(users.map(u => u.id === updated.id ? updated : u));
-      setIsEditOpen(false);
-      setSelectedUser(null);
-      showToast('Cập nhật tài khoản thành công!');
-    } catch (err) {
-      showToast(err.message || 'Lỗi khi cập nhật tài khoản', 'error');
-    }
+  const handleUserSaved = (updated) => {
+    setUsers(users.map(u => u.id === updated.id ? { ...u, ...updated } : u));
+    showToast('Cập nhật tài khoản thành công!');
   };
 
   const handleDelete = async (id) => {
@@ -214,7 +193,12 @@ const Users = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.id}>
+                <tr
+                  key={user.id}
+                  onClick={() => setSelectedUser(user)}
+                  style={{ cursor: 'pointer' }}
+                  title="Xem thông tin chi tiết người dùng"
+                >
                   <td>
                     <div style={{ fontWeight: '600' }}>{user.name}</div>
                     {user.id === currentUser?.id && (
@@ -229,24 +213,16 @@ const Users = () => {
                       Hoạt động
                     </span>
                   </td>
-                  <td style={{ textAlign: 'right' }}>
+                  <td style={{ textAlign: 'right' }} onClick={(e) => e.stopPropagation()}>
                     <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', alignItems: 'center' }}>
-                      <button 
+                      <button
                         className="btn-outline"
-                        style={{ padding: '0.375rem', borderRadius: 'var(--radius-md)', color: 'var(--text-muted)' }} 
-                        title="Chỉnh sửa người dùng"
-                        onClick={() => handleOpenEdit(user)}
-                      >
-                        <Edit size={16} />
-                      </button>
-                      <button 
-                        className="btn-outline"
-                        style={{ 
-                          padding: '0.375rem', 
-                          borderRadius: 'var(--radius-md)', 
+                        style={{
+                          padding: '0.375rem',
+                          borderRadius: 'var(--radius-md)',
                           color: user.id === currentUser?.id ? '#D1D5DB' : 'var(--danger)',
                           cursor: user.id === currentUser?.id ? 'not-allowed' : 'pointer'
-                        }} 
+                        }}
                         title={user.id === currentUser?.id ? 'Không thể tự xóa' : 'Xóa người dùng'}
                         disabled={user.id === currentUser?.id}
                         onClick={() => setDeleteConfirmUser(user)}
@@ -350,88 +326,13 @@ const Users = () => {
         </div>
       )}
 
-      {/* Modal Chỉnh sửa người dùng */}
-      {isEditOpen && selectedUser && (
-        <div className="modal-backdrop" onClick={() => setIsEditOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2 className="modal-title">Chỉnh sửa người dùng: {selectedUser.name}</h2>
-              <button className="modal-close-btn" onClick={() => setIsEditOpen(false)}>
-                <X size={20} />
-              </button>
-            </div>
-            <form onSubmit={handleEditSubmit}>
-              <div className="modal-body">
-                <div className="form-group">
-                  <label className="form-label">Họ và tên *</label>
-                  <input 
-                    type="text" 
-                    className="input" 
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Email</label>
-                  <input 
-                    type="email" 
-                    className="input" 
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Mật khẩu mới (bỏ trống nếu giữ nguyên)</label>
-                  <input 
-                    type="password" 
-                    className="input" 
-                    placeholder="Nhập mật khẩu mới để đổi"
-                    value={formData.password}
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  />
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  <div className="form-group">
-                    <label className="form-label">Vai trò</label>
-                    <select 
-                      className="input"
-                      value={formData.role}
-                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    >
-                      <option value="researcher">Nhà nghiên cứu (Researcher)</option>
-                      <option value="viewer">Người xem (Viewer)</option>
-                      <option value="admin">Quản trị viên (Admin)</option>
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label className="form-label">Đơn vị công tác</label>
-                    <input 
-                      type="text" 
-                      className="input" 
-                      value={formData.unit}
-                      onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="modal-footer">
-                <button type="button" className="btn btn-outline" onClick={() => setIsEditOpen(false)}>
-                  Hủy bỏ
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Lưu thay đổi
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+      {/* Popup Thông tin chi tiết người dùng */}
+      {selectedUser && (
+        <UserDetailModal
+          user={selectedUser}
+          onClose={() => setSelectedUser(null)}
+          onSaved={handleUserSaved}
+        />
       )}
 
       {/* Modal Xác nhận xóa */}

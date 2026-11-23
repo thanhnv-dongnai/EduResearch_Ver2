@@ -3,6 +3,7 @@ import { Plus, Edit, Share2, Trash2, BarChart2, X, AlertTriangle, FileSpreadshee
 import { useNavigate, Link } from 'react-router-dom';
 import QRCode from 'qrcode';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 import { surveysAPI } from '../services/api';
 import Toast from '../components/Toast';
 
@@ -161,6 +162,7 @@ const SAMPLE_QUESTIONS = {
 
 const Surveys = () => {
   const { currentUser } = useAuth();
+  const { selectedYearId } = useSettings();
   const navigate = useNavigate();
   const [surveys, setSurveys] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -293,7 +295,7 @@ const Surveys = () => {
       return;
     }
     try {
-      const created = await surveysAPI.create(formData);
+      const created = await surveysAPI.create({ ...formData, academicYearId: selectedYearId });
       setSurveys([created, ...surveys]);
       setIsCreateOpen(false);
       showToast(`Đã tạo thành công bộ khảo sát cho ${formData.institution}!`);
@@ -550,11 +552,12 @@ const Surveys = () => {
   // Danh sách các trường có trong DB để lọc
   const uniqueInstitutions = Array.from(new Set(surveys.map(s => s.institution).filter(Boolean)));
 
-  // Lọc khảo sát
+  // Lọc khảo sát — tất cả dữ liệu khảo sát đi theo năm học chọn trên Topbar
   const filteredSurveys = surveys.filter(s => {
     const matchInst = filterInstitution === 'all' || s.institution === filterInstitution;
     const matchAud = filterAudience === 'all' || s.audience === filterAudience;
-    return matchInst && matchAud;
+    const matchYear = !selectedYearId || !s.academic_year_id || s.academic_year_id === selectedYearId;
+    return matchInst && matchAud && matchYear;
   });
 
   if (loading) {

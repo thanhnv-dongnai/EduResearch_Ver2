@@ -1,8 +1,10 @@
-import React from 'react';
-import { Outlet, useLocation, Link } from 'react-router-dom';
-import { Building2, Shield, User, ChevronRight, GraduationCap, CheckCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { Building2, ChevronRight } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
+import UserDetailModal from '../components/UserDetailModal';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 
 const ROUTE_NAMES = {
   '/': 'Tổng quan hệ thống',
@@ -12,13 +14,13 @@ const ROUTE_NAMES = {
   '/analytics': 'Phân tích thống kê & Định tính',
   '/clustering': 'Bản đồ Phân cụm Hồ sơ Phát triển',
   '/users': 'Quản lý tài khoản',
-
-  '/profile': 'Hồ sơ người dùng & Bảo mật',
-  '/settings': 'Cấu hình hệ thống',
+  '/settings': 'Cấu hình thông tin',
 };
 
 const DashboardLayout = () => {
   const { currentUser } = useAuth();
+  const { settings, academicYears, selectedYearId, setSelectedYearId } = useSettings();
+  const [showSelfModal, setShowSelfModal] = useState(false);
   const location = useLocation();
 
   const currentPath = location.pathname;
@@ -69,11 +71,29 @@ const DashboardLayout = () => {
               color: '#059669',
               backgroundColor: '#ECFDF5',
               border: '1px solid #A7F3D0',
-              padding: '0.2rem 0.6rem',
-              borderRadius: '20px'
+              borderRadius: '20px',
+              padding: '0.1rem 0.3rem 0.1rem 0.6rem'
             }}>
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10B981', display: 'inline-block' }} />
-              Năm học 2026 - 2027
+              <span>Năm học</span>
+              <select
+                value={selectedYearId || ''}
+                onChange={(e) => setSelectedYearId(e.target.value)}
+                title="Chọn năm học để khảo sát"
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#059669',
+                  fontWeight: '700',
+                  fontSize: '0.75rem',
+                  cursor: 'pointer',
+                  outline: 'none'
+                }}
+              >
+                {academicYears.map((year) => (
+                  <option key={year.id} value={year.id}>{year.label}</option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -92,17 +112,17 @@ const DashboardLayout = () => {
               color: 'var(--text-main)'
             }}>
               <Building2 size={16} color="var(--primary)" />
-              <span style={{ fontWeight: '500' }}>{currentUser?.unit || 'Trường Đại học Sư phạm TP.HCM'}</span>
+              <span style={{ fontWeight: '500' }}>{settings?.institution_name || 'Trường Đại học'}</span>
             </div>
 
             {/* PHÂN CÁCH */}
             <div style={{ width: '1px', height: '24px', backgroundColor: 'var(--border-color)' }} />
 
             {/* THÔNG TIN TÀI KHOẢN VÀ VAI TRÒ */}
-            <Link 
-              to="/profile" 
-              style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', color: 'inherit', padding: '0.25rem 0.5rem', borderRadius: 'var(--radius-md)', transition: 'background-color 0.2s' }}
-              title="Xem hồ sơ & Đổi mật khẩu"
+            <button
+              onClick={() => setShowSelfModal(true)}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', color: 'inherit', padding: '0.25rem 0.5rem', borderRadius: 'var(--radius-md)', transition: 'background-color 0.2s', background: 'none', border: 'none', cursor: 'pointer' }}
+              title="Xem thông tin & Đổi mật khẩu"
             >
               <div style={{
                 width: '38px',
@@ -139,7 +159,7 @@ const DashboardLayout = () => {
                   {currentUser?.email || 'admin@eduresearch.com'}
                 </span>
               </div>
-            </Link>
+            </button>
           </div>
         </header>
 
@@ -147,6 +167,10 @@ const DashboardLayout = () => {
           <Outlet />
         </main>
       </div>
+
+      {showSelfModal && currentUser && (
+        <UserDetailModal user={currentUser} onClose={() => setShowSelfModal(false)} />
+      )}
     </div>
   );
 };

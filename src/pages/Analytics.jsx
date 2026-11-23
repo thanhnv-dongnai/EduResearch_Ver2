@@ -11,12 +11,14 @@ import {
   Sliders, Copy, ExternalLink, Zap
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 import { surveysAPI } from '../services/api';
 import GaugeMeter from '../components/GaugeMeter';
 import Toast from '../components/Toast';
 
 const Analytics = () => {
   const { currentUser } = useAuth();
+  const { settings, selectedYear } = useSettings();
   const [searchParams] = useSearchParams();
   const querySurveyId = searchParams.get('surveyId');
 
@@ -211,10 +213,10 @@ tr:last-child td { border-bottom: 2pt solid #000; }
 <body>
 
 <div class="header-box">
-  <div class="sub-inst">HỆ THỐNG EDURESEARCH ACADEMIC</div>
+  <div class="sub-inst">${settings?.institution_name || 'Trường Đại học'} — HỆ THỐNG EDURESEARCH ACADEMIC</div>
   <div class="main-title">BÁO CÁO KẾT QUẢ PHÂN TÍCH ĐẦU RA TOÀN DIỆN (${primaryOutcome})</div>
   <div class="caption">Đề tài: ${surveyTitle} — ${institutionName}</div>
-  <div class="meta-info">Tiêu chuẩn học thuật: APA 7th Edition • Mẫu thô: N = ${khau1_cleaning.rawCount} • Mẫu sạch hợp lệ: N = ${khau1_cleaning.cleanCount} • Ngày xuất bản: ${dateStr}</div>
+  <div class="meta-info">Tiêu chuẩn học thuật: APA 7th Edition • Năm học: ${selectedYear?.label || '—'} • Mẫu thô: N = ${khau1_cleaning.rawCount} • Mẫu sạch hợp lệ: N = ${khau1_cleaning.cleanCount} • Ngày xuất bản: ${dateStr}</div>
 </div>
 
 <p>Báo cáo này là kết quả đầu ra hoàn chỉnh sau khi toàn bộ dữ liệu phản hồi thực địa tại <b>${institutionName}</b> trải qua <b>5 khâu xử lý và phân tích thống kê khép kín</b> trên hệ thống EduResearch. Toàn bộ các kết quả được đóng gói thành <b>6 sản phẩm khoa học</b>, lấy biến <b>“${primaryOutcome}”</b> làm biến kết quả trung tâm, phụ thuộc vào ${descTable.length} chiều cạnh nghiên cứu: <i>${descTable.map(d => `${d.name} (${d.code})`).join(', ')}</i>.</p>
@@ -538,7 +540,15 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
 
 <table class="sign-block" style="border: none; width: 100%;">
   <tr style="border: none;">
-    <td style="border: none; width: 50%;"></td>
+    <td style="border: none; width: 50%; text-align: center;">
+      ${settings?.principal_name ? `
+      <p class="no-indent" style="font-style: italic;">&nbsp;</p>
+      <p class="no-indent" style="font-weight: bold; margin-top: 4pt;">HIỆU TRƯỞNG</p>
+      <div style="height: 55pt;"></div>
+      <p class="no-indent" style="font-weight: bold; font-size: 13pt;">${settings.principal_name}</p>
+      <p class="no-indent" style="font-size: 11pt; color: #4b5563;">${settings.institution_name || ''}</p>
+      ` : ''}
+    </td>
     <td style="border: none; width: 50%; text-align: center;">
       <p class="no-indent" style="font-style: italic;">Hà Nội, ngày ${dateStr}</p>
       <p class="no-indent" style="font-weight: bold; margin-top: 4pt;">CHỦ NHIỆM ĐỀ TÀI / NHÓM NGHIÊN CỨU</p>
