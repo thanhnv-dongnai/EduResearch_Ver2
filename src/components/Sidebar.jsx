@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, FileText, Users, PieChart, Database, FileBox, LogOut, Compass, Settings as SettingsIcon } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, PieChart, Database, FileBox, LogOut, Compass, Settings as SettingsIcon, ListPlus } from 'lucide-react';
 import UserDetailModal from './UserDetailModal';
 
 const Sidebar = () => {
@@ -16,6 +16,7 @@ const Sidebar = () => {
     { name: 'Bản đồ phân cụm', path: '/clustering', icon: <Compass size={20} />, roles: ['admin', 'researcher', 'viewer'] },
     { name: 'Kho tài liệu', path: '/documents', icon: <FileBox size={20} />, roles: ['admin', 'researcher', 'viewer'] },
     { name: 'Người dùng', path: '/users', icon: <Users size={20} />, roles: ['admin'] },
+    { name: 'Tạo bộ khảo sát', path: '/surveys/new', icon: <ListPlus size={20} />, roles: ['admin'] },
     { name: 'Cấu hình thông tin', path: '/settings', icon: <SettingsIcon size={20} />, roles: ['admin'] },
   ];
 
@@ -49,8 +50,9 @@ const Sidebar = () => {
                   <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase', marginTop: '1rem', marginBottom: '0.5rem', paddingLeft: '0.75rem' }}>
                     Nghiên cứu
                   </div>
-                  <NavLink 
-                    to={item.path} 
+                  <NavLink
+                    to={item.path}
+                    end
                     className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
                     style={({ isActive }) => ({
                       display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem', borderRadius: 'var(--radius-md)',

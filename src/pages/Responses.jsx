@@ -345,7 +345,7 @@ const Responses = () => {
             <option value="">Tất cả khảo sát</option>
             {surveys.map(s => (
               <option key={s.id} value={s.id}>
-                #{s.id} - {s.title}
+                {s.title}
               </option>
             ))}
           </select>
@@ -921,7 +921,7 @@ const Responses = () => {
                   <option value="" disabled>-- Vui lòng chọn khảo sát đích --</option>
                   {surveys.map(s => (
                     <option key={s.id} value={s.id}>
-                      #{s.id} - {s.title} ({s.institution || 'Chung'})
+                      {s.title} ({s.institution || 'Chung'})
                     </option>
                   ))}
                 </select>

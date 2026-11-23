@@ -52,6 +52,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="settings" element={<Settings />} />
           <Route path="surveys" element={<Surveys />} />
+          <Route path="surveys/new" element={<Surveys />} />
           <Route path="responses" element={<Responses />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="clustering" element={<Clustering />} />

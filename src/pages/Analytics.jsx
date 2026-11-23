@@ -653,7 +653,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
             >
               {surveys.map(s => (
                 <option key={s.id} value={s.id}>
-                  Khảo sát #{s.id} — {s.title} ({s.responses_count || 0} phản hồi)
+                  {s.title} ({s.responses_count || 0} phản hồi)
                 </option>
               ))}
             </select>

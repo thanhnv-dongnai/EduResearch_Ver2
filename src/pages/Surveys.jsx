@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Share2, Trash2, BarChart2, X, AlertTriangle, FileSpreadsheet, ListPlus, Sparkles, CheckCircle, QrCode, Copy, Eye, Download, Check, Building2, Users, GraduationCap, Briefcase, Filter } from 'lucide-react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import QRCode from 'qrcode';
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
@@ -164,6 +164,7 @@ const Surveys = () => {
   const { currentUser } = useAuth();
   const { selectedYearId } = useSettings();
   const navigate = useNavigate();
+  const location = useLocation();
   const [surveys, setSurveys] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -232,6 +233,15 @@ const Surveys = () => {
     fetchSurveys();
   }, []);
 
+  // Menu "Tạo bộ khảo sát" (Quản trị) điều hướng tới /surveys/new để tự
+  // động mở modal khởi tạo ngay khi vào trang.
+  useEffect(() => {
+    if (location.pathname === '/surveys/new') {
+      handleOpenCreate();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
   // Khi chọn một template bộ câu hỏi theo chức vụ
   const applyRoleTemplate = (roleKey, instName) => {
     const tmpl = ROLE_QUESTIONNAIRES[roleKey];
@@ -298,9 +308,29 @@ const Surveys = () => {
       const created = await surveysAPI.create({ ...formData, academicYearId: selectedYearId });
       setSurveys([created, ...surveys]);
       setIsCreateOpen(false);
-      showToast(`Đã tạo thành công bộ khảo sát cho ${formData.institution}!`);
+
+      // Tới từ menu "Tạo bộ khảo sát" (Quản trị) -> nối tiếp sang popup
+      // Thiết kế bộ câu hỏi & Giả thuyết SEM để rà soát/chỉnh sửa ngay.
+      if (location.pathname === '/surveys/new') {
+        navigate('/surveys', { replace: true });
+        setSelectedSurvey(created);
+        setCurrentQuestions(created.questions || []);
+        setCurrentHypotheses(created.hypotheses || []);
+        setBuilderTab('questions');
+        setIsQuestionBuilderOpen(true);
+        showToast(`Đã tạo bộ khảo sát cho ${formData.institution}! Tiếp tục rà soát bộ câu hỏi & giả thuyết bên dưới.`);
+      } else {
+        showToast(`Đã tạo thành công bộ khảo sát cho ${formData.institution}!`);
+      }
     } catch (err) {
       showToast(err.message || 'Lỗi khi tạo khảo sát', 'error');
+    }
+  };
+
+  const closeCreateModal = () => {
+    setIsCreateOpen(false);
+    if (location.pathname === '/surveys/new') {
+      navigate('/surveys', { replace: true });
     }
   };
 
@@ -833,7 +863,7 @@ const Surveys = () => {
       {/* MODAL TẠO MỚI BẢNG HỎI (HỖ TRỢ THEO CHỨC VỤ & ĐƠN VỊ ĐỊNH DANH) */}
       {/* ========================================================= */}
       {isCreateOpen && (
-        <div className="modal-backdrop" onClick={() => setIsCreateOpen(false)}>
+        <div className="modal-backdrop" onClick={closeCreateModal}>
           <div className="modal-content" style={{ maxWidth: '820px' }} onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div>
@@ -842,7 +872,7 @@ const Surveys = () => {
                   Lựa chọn bộ mẫu chuẩn hóa theo chức vụ và định danh theo trường/cơ sở giáo dục để thu thập xử lý
                 </p>
               </div>
-              <button className="modal-close-btn" onClick={() => setIsCreateOpen(false)}>
+              <button className="modal-close-btn" onClick={closeCreateModal}>
                 <X size={20} />
               </button>
             </div>
@@ -1004,7 +1034,7 @@ const Surveys = () => {
               </div>
 
               <div className="modal-footer">
-                <button type="button" className="btn btn-outline" onClick={() => setIsCreateOpen(false)}>
+                <button type="button" className="btn btn-outline" onClick={closeCreateModal}>
                   Hủy bỏ
                 </button>
                 <button type="submit" className="btn btn-primary">

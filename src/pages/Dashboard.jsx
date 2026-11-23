@@ -83,7 +83,7 @@ const Dashboard = () => {
                 </span>
                 {data.selectedSurvey && (
                   <span style={{ fontSize: '0.75rem', backgroundColor: '#DBEAFE', color: '#1E40AF', padding: '0.1rem 0.5rem', borderRadius: '4px', fontWeight: 'bold' }}>
-                    Khảo sát #{data.selectedSurvey.id}
+                    {data.selectedSurvey.title}
                   </span>
                 )}
               </div>
@@ -98,7 +98,7 @@ const Dashboard = () => {
                 </option>
                 {data.surveysList && data.surveysList.map(s => (
                   <option key={s.id} value={s.id}>
-                    Khảo sát #{s.id}: {s.title} ({s.responses_count || 0} phản hồi thu nhận)
+                    {s.title} ({s.responses_count || 0} phản hồi thu nhận)
                   </option>
                 ))}
               </select>
@@ -184,7 +184,7 @@ const Dashboard = () => {
         <div className="card" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <GaugeMeter 
             score={data.readinessIndex || 78.5} 
-            title={data.isAllSurveys ? 'Chỉ số Sẵn sàng Chuyển đổi (AT Tổng thể)' : `Chỉ số Sẵn sàng AT (Khảo sát #${data.selectedSurvey?.id})`}
+            title={data.isAllSurveys ? 'Chỉ số Sẵn sàng Chuyển đổi (AT Tổng thể)' : 'Chỉ số Sẵn sàng Chuyển đổi (AT) — Khảo sát đã chọn'}
           />
           <div style={{ textAlign: 'center', marginTop: '0.75rem' }}>
             <Link 
