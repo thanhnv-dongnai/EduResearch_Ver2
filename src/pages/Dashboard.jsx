@@ -370,7 +370,7 @@ const Dashboard = () => {
 
           <Link to="/surveys" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', backgroundColor: '#F8FAFC', borderRadius: 'var(--radius-md)', border: '1px solid #E2E8F0', textDecoration: 'none', color: 'inherit' }}>
             <div>
-              <div style={{ fontWeight: 'bold', color: 'var(--text-main)', fontSize: '0.9rem' }}>Quản lý Bảng hỏi</div>
+              <div style={{ fontWeight: 'bold', color: 'var(--text-main)', fontSize: '0.9rem' }}>Quản lý bảng hỏi</div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>4 bộ thang đo chuẩn hóa giáo dục</div>
             </div>
             <ArrowRight size={18} color="var(--primary)" />

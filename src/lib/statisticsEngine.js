@@ -238,21 +238,21 @@ function matDeterminant(A) {
 
 const VARIABLE_LABELS = {
   // Bộ 4: Người học & Cựu người học
-  SER: 'Chất lượng Dịch vụ Đào tạo & Hỗ trợ Người học',
-  RES: 'Môi trường Cơ sở vật chất & Học liệu số',
-  CAP: 'Năng lực Tiếp thu phản hồi & Đồng hành',
-  STR: 'Định hướng Đổi mới sáng tạo & Thực tiễn',
-  REA: 'Sự Hài lòng & Tự hào Thương hiệu',
+  SER: 'Chất lượng dịch vụ đào tạo & hỗ trợ người học',
+  RES: 'Môi trường cơ sở vật chất & học liệu số',
+  CAP: 'Năng lực tiếp thu phản hồi & đồng hành',
+  STR: 'Định hướng đổi mới sáng tạo & thực tiễn',
+  REA: 'Sự hài lòng & tự hào thương hiệu',
   // Bộ 1 & 2: Quản trị & Cán bộ GV
-  SP: 'Lập kế hoạch Chiến lược Phát triển',
-  LD: 'Năng lực Lãnh đạo số & Quản trị',
-  DX: 'Năng lực Số hóa & Đổi mới sáng tạo',
-  RO: 'Nguồn lực & Cơ sở hạ tầng',
-  CS: 'Chất lượng Dịch vụ & Uy tín',
-  AT: 'Mức độ Sẵn sàng Chuyển đổi số',
-  LEA: 'Lãnh đạo số & Thể chế',
-  EMP: 'Trải nghiệm & Sự gắn kết của Cán bộ GV',
-  COL: 'Hợp tác Doanh nghiệp & Việc làm'
+  SP: 'Lập kế hoạch chiến lược phát triển',
+  LD: 'Năng lực lãnh đạo số & quản trị',
+  DX: 'Năng lực số hóa & đổi mới sáng tạo',
+  RO: 'Nguồn lực & cơ sở hạ tầng',
+  CS: 'Chất lượng dịch vụ & uy tín',
+  AT: 'Mức độ sẵn sàng chuyển đổi số',
+  LEA: 'Lãnh đạo số & thể chế',
+  EMP: 'Trải nghiệm & sự gắn kết của cán bộ GV',
+  COL: 'Hợp tác doanh nghiệp & việc làm'
 };
 
 function parseTimeTakenSeconds(str) {
@@ -665,18 +665,18 @@ function runDescriptivePearsonAndProfiling(cleanResponses, likertQuestions, vari
     const kt = kurtosis(vector, m, sd);
 
     const VARIABLE_LABELS = {
-      STR: 'Chiến lược & Định hướng Đổi mới',
-      LEA: 'Lãnh đạo số & Quản trị',
-      CAP: 'Năng lực Tiếp thu & Thích ứng',
-      RES: 'Cơ sở vật chất & Học liệu số',
-      SER: 'Dịch vụ Đào tạo & Hỗ trợ Người học',
-      REA: 'Sự Hài lòng & Tự hào Thương hiệu',
-      SP: 'Lập kế hoạch Chiến lược',
-      LD: 'Năng lực Lãnh đạo số',
-      DX: 'Năng lực Chuyển đổi số',
-      RO: 'Nguồn lực & Cơ sở vật chất',
-      CS: 'Chất lượng Dịch vụ & Uy tín',
-      AT: 'Mức độ Sẵn sàng Chuyển đổi'
+      STR: 'Chiến lược & định hướng đổi mới',
+      LEA: 'Lãnh đạo số & quản trị',
+      CAP: 'Năng lực tiếp thu & thích ứng',
+      RES: 'Cơ sở vật chất & học liệu số',
+      SER: 'Dịch vụ đào tạo & hỗ trợ người học',
+      REA: 'Sự hài lòng & tự hào thương hiệu',
+      SP: 'Lập kế hoạch chiến lược',
+      LD: 'Năng lực lãnh đạo số',
+      DX: 'Năng lực chuyển đổi số',
+      RO: 'Nguồn lực & cơ sở vật chất',
+      CS: 'Chất lượng dịch vụ & uy tín',
+      AT: 'Mức độ sẵn sàng chuyển đổi'
     };
 
     descriptiveTable.push({
@@ -805,7 +805,7 @@ function runDescriptivePearsonAndProfiling(cleanResponses, likertQuestions, vari
 
   const clustersProfiles = [
     {
-      title: 'Cụm 1: Nhóm Tiên phong & Xuất sắc (Leaders)',
+      title: 'Cụm 1: Nhóm Tiên phong & xuất sắc (Leaders)',
       dri: `${avgDRI_C1.toFixed(1)} / 100`,
       share: `${((cluster1.length / N) * 100).toFixed(1)}% (${cluster1.length}/${N} mẫu)`,
       color: '#10B981',
@@ -814,7 +814,7 @@ function runDescriptivePearsonAndProfiling(cleanResponses, likertQuestions, vari
       action: 'Xây dựng mạng lưới kết nối cựu người học tiêu biểu, nhân rộng mô hình đào tạo thực chiến và lan tỏa uy tín học hiệu.'
     },
     {
-      title: 'Cụm 2: Nhóm Khá & Tiềm năng (Challengers)',
+      title: 'Cụm 2: Nhóm khá & tiềm năng (Challengers)',
       dri: `${avgDRI_C2.toFixed(1)} / 100`,
       share: `${((cluster2.length / N) * 100).toFixed(1)}% (${cluster2.length}/${N} mẫu)`,
       color: '#3B82F6',
@@ -823,7 +823,7 @@ function runDescriptivePearsonAndProfiling(cleanResponses, likertQuestions, vari
       action: `Tối ưu hóa quy trình một cửa, nâng cao tốc độ phản hồi thắc mắc và hiện đại hóa học liệu giảng dạy.`
     },
     {
-      title: 'Cụm 3: Nhóm Cần Hỗ trợ Cấp bách (Need Support)',
+      title: 'Cụm 3: Nhóm cần hỗ trợ cấp bách (Need Support)',
       dri: `${avgDRI_C3.toFixed(1)} / 100`,
       share: `${((cluster3.length / N) * 100).toFixed(1)}% (${cluster3.length}/${N} mẫu)`,
       color: '#EF4444',
@@ -974,14 +974,14 @@ function runSEMAndMachineLearning(respondentConstructScores, hypothesesList, var
       r2: parseFloat((r2 * 0.94).toFixed(3)),
       rmse: parseFloat((baseRMSE * 1.08).toFixed(3)),
       mae: parseFloat((baseMAE * 1.05).toFixed(3)),
-      status: 'Mô hình Tuyến tính Chuẩn'
+      status: 'Mô hình tuyến tính chuẩn'
     },
     {
       model: 'Random Forest Regressor',
       r2: parseFloat(Math.min(0.92, r2 * 1.05).toFixed(3)),
       rmse: parseFloat((baseRMSE * 0.88).toFixed(3)),
       mae: parseFloat((baseMAE * 0.86).toFixed(3)),
-      status: 'Học tập Ensemble Phi tuyến'
+      status: 'Học tập ensemble phi tuyến'
     },
     {
       model: 'XGBoost / Gradient Boosting',

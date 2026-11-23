@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, 
@@ -13,6 +13,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
 import { surveysAPI } from '../services/api';
+import { buildResponseCodeMap } from '../lib/responseCode';
 import GaugeMeter from '../components/GaugeMeter';
 import Toast from '../components/Toast';
 
@@ -40,6 +41,18 @@ const Analytics = () => {
 
   // Interactive ML Simulator Values in Stage 4
   const [simValues, setSimValues] = useState({});
+
+  // Mã định danh dễ đọc cho từng phiếu (B0x + thời điểm nộp + số thứ tự),
+  // tính từ TOÀN BỘ phản hồi thô của khảo sát (sạch + bị lọc) để số thứ tự
+  // phản ánh đúng vị trí thực của phiếu, không chỉ trong danh sách bị lọc.
+  const responseCodeMap = useMemo(() => {
+    if (!analysisData?.khau1_cleaning) return {};
+    const allRaw = [
+      ...(analysisData.khau1_cleaning.cleanedResponses || []),
+      ...(analysisData.khau1_cleaning.flaggedResponses || [])
+    ];
+    return buildResponseCodeMap(allRaw, () => analysisData.surveyInfo?.audience);
+  }, [analysisData]);
 
   useEffect(() => {
     if (analysisData?.khau3_descriptive?.descriptiveTable) {
@@ -161,7 +174,7 @@ const Analytics = () => {
     const driAvg = khau3_descriptive?.dri?.average || 75.0;
     const dri10 = (driAvg / 10).toFixed(2);
 
-    let readinessTier = 'Cấp độ 2 — Đạt Chuẩn Khá';
+    let readinessTier = 'Cấp độ 2 — Đạt chuẩn khá';
     let readinessTierDesc = `Đơn vị đạt kết quả tích cực, các chỉ số cốt lõi đáp ứng yêu cầu nhưng cần củng cố thêm ở nhân tố ${lowestConstruct.name}.`;
     let tierColor = '#D97706';
     if (driAvg >= 80) {
@@ -169,7 +182,7 @@ const Analytics = () => {
       readinessTierDesc = `Đơn vị đạt điểm chất lượng vượt trội (${driAvg}/100), dẫn đầu về sự hài lòng và phát triển toàn diện.`;
       tierColor = '#059669';
     } else if (driAvg < 60) {
-      readinessTier = 'Cấp độ 3 — Cần Cải thiện Cấp bách';
+      readinessTier = 'Cấp độ 3 — Cần cải thiện cấp bách';
       readinessTierDesc = `Đơn vị dưới ngưỡng an toàn, cần tập trung nguồn lực tháo gỡ điểm nghẽn tại ${lowestConstruct.name}.`;
       tierColor = '#DC2626';
     }
@@ -245,13 +258,13 @@ tr:last-child td { border-bottom: 2pt solid #000; }
   </thead>
   <tbody>
     <tr style="background-color: ${driAvg >= 80 ? '#ecfdf5' : 'transparent'};">
-      <td><b>Cấp độ 1 — Sẵn sàng Cao</b></td>
+      <td><b>Cấp độ 1 — Sẵn sàng cao</b></td>
       <td style="text-align: center;">&ge; 80 / 100</td>
       <td style="text-align: center;">&ge; 8.0 / 10</td>
       <td>Đơn vị tiên phong, có đủ nguồn lực, nhân sự và cơ chế vận hành để chủ động thích ứng toàn diện. Giữ vai trò dẫn dắt mạng lưới.</td>
     </tr>
     <tr style="background-color: ${driAvg >= 60 && driAvg < 80 ? '#fffbeb' : 'transparent'};">
-      <td><b>Cấp độ 2 — Sẵn sàng Trung bình</b></td>
+      <td><b>Cấp độ 2 — Sẵn sàng trung bình</b></td>
       <td style="text-align: center;">60 – 79 / 100</td>
       <td style="text-align: center;">6.0 – 7.9 / 10</td>
       <td>Đơn vị đang triển khai tích cực các giải pháp đổi mới, nhưng một số yếu tố then chốt (năng lực nhân sự, nguồn lực hoặc cơ chế vận hành) vẫn còn khoảng cách cần thu hẹp.</td>
@@ -600,7 +613,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
             </span>
           </div>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '0.35rem' }}>
-            Phân Tích Thống Kê &amp; Báo Cáo Khảo Sát Tự Động
+            Phân tích thống kê &amp; báo cáo khảo sát tự động
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
             Toàn bộ số liệu và bảng biểu được tính toán toán học thực tế trên từng lượt dữ liệu phản hồi riêng biệt của mỗi khảo sát.
@@ -738,7 +751,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                   </span>
                 </div>
                 <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', margin: 0, color: 'white' }}>
-                  Bản Tin Kết Quả Nghiên Cứu Thực Địa — {surveyInfo?.title || 'Khảo sát'}
+                  Bản tin kết quả nghiên cứu thực địa — {surveyInfo?.title || 'Khảo sát'}
                 </h2>
                 <p style={{ margin: '0.35rem 0 0 0', fontSize: '0.85rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
                   Hệ thống tự động tính toán mô hình toán học và bóc tách kết quả trực tiếp từ <b>{khau1_cleaning.rawCount} phiếu khảo sát thực tế</b>. Đã loại trừ {khau1_cleaning.straightliningCount} phiếu đánh ngẫu nhiên và {khau1_cleaning.speedersCount} phiếu làm ẩu.
@@ -972,7 +985,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
               <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Filter size={18} color="var(--primary)" />
-                  Bảng Nhật Ký Lọc Rác Dữ Liệu Tự Động (Data Cleaning Audit Log)
+                  Bảng nhật ký lọc rác dữ liệu tự động (Data Cleaning Audit Log)
                 </h3>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', marginBottom: '1rem' }}>
                   Thuật toán EduResearch quét qua từng phản hồi để phát hiện tính bất thường (outliers), lọc rác thông minh trước khi đưa vào các mô hình toán học:
@@ -999,7 +1012,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                       <tbody>
                         {analysisData.khau1_cleaning.flaggedResponses.map(r => (
                           <tr key={r.id}>
-                            <td style={{ fontWeight: '600' }}>#{r.id}</td>
+                            <td style={{ fontWeight: '600', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>{responseCodeMap[r.id] || r.id}</td>
                             <td>{r.role}</td>
                             <td>{r.unit}</td>
                             <td>{r.institution}</td>
@@ -1605,7 +1618,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                   const predicted100 = parseFloat((predicted5 * 20).toFixed(1));
                   const predicted10 = (predicted100 / 10).toFixed(2);
 
-                  let simTierName = 'Cấp độ 2 — Đạt Chuẩn Tốt';
+                  let simTierName = 'Cấp độ 2 — Đạt chuẩn tốt';
                   let simTierBadge = '#D97706';
                   let simTierBg = '#FEF3C7';
                   let simTierIcon = '🟡';
@@ -1618,7 +1631,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                     simTierIcon = '🟢';
                     simTierAdvice = `Đạt ngưỡng chất lượng vượt trội (${predicted100}/100). Đơn vị giữ vững vị thế dẫn đầu về sự hài lòng và trải nghiệm đào tạo.`;
                   } else if (predicted100 < 60) {
-                    simTierName = 'Cấp độ 3 — Cần Cải thiện Cấp bách';
+                    simTierName = 'Cấp độ 3 — Cần cải thiện cấp bách';
                     simTierBadge = '#DC2626';
                     simTierBg = '#FEE2E2';
                     simTierIcon = '🔴';
@@ -1707,7 +1720,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                 <div className="card" style={{ padding: '1.25rem' }}>
                   <h3 style={{ fontSize: '1rem', fontWeight: 'bold', marginBottom: '0.35rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <MessageSquare size={18} color="var(--primary)" />
-                    Phân Tích Cấu Trúc Ý Kiến Tự Luận &amp; Cảm Xúc
+                    Phân tích cấu trúc ý kiến tự luận &amp; cảm xúc
                   </h3>
                   <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
                     Trích xuất từ <b>{analysisData.khau1_cleaning?.validResponses ?? analysisData.khau1_cleaning?.cleanCount ?? 0} phiếu khảo sát hợp lệ</b> (trên tổng số {analysisData.khau1_cleaning?.totalResponses ?? analysisData.khau1_cleaning?.rawCount ?? 0} phiếu thu thập). Ghi nhận phản hồi từ <b>{analysisData.khau5_qualitative.sentimentStats.respondentsCount || analysisData.khau1_cleaning?.cleanCount || 0} người tham gia</b> qua {analysisData.khau5_qualitative.sentimentStats.openQuestionsCount || 2} câu hỏi mở &rarr; Tổng cộng: <b>{analysisData.khau5_qualitative.sentimentStats.total} lượt câu trả lời tự luận</b> ({analysisData.khau5_qualitative.sentimentStats.barrierCount} ý kiến rào cản + {analysisData.khau5_qualitative.sentimentStats.solutionCount} ý kiến đề xuất).
@@ -1752,7 +1765,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                 <div className="card" style={{ padding: '1.25rem' }}>
                   <h3 style={{ fontSize: '1rem', fontWeight: 'bold', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <Sparkles size={18} color="var(--primary)" />
-                    Đám Mây Từ Khóa Trọng Tâm (Academic Word Cloud)
+                    Đám mây từ khóa trọng tâm (Academic Word Cloud)
                   </h3>
                   <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
                     Trích xuất tự động từ các câu hỏi mở về rào cản và đề xuất giải pháp:
@@ -1787,7 +1800,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                   <div>
                     <h3 style={{ fontSize: '1.05rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       <MessageSquare size={18} color="var(--primary)" />
-                      Trích Dẫn Ý Kiến Tự Luận Điển Hình Phân Loại Theo Đối Tượng (Verbatim Quotes)
+                      Trích dẫn ý kiến tự luận điển hình phân loại theo đối tượng (Verbatim Quotes)
                     </h3>
                     <p style={{ color: 'var(--text-muted)', fontSize: '0.825rem', margin: 0 }}>
                       Phân loại trích dẫn ý kiến hay nhất theo từng đối tượng để đưa thẳng vào phần thảo luận kết quả luận văn / bài báo:
@@ -1982,7 +1995,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                           </span>
                           <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--text-main)', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Sparkles size={20} color="#F59E0B" />
-                            Báo Cáo Đánh Giá Thực Trạng &amp; Đề Xuất Chiến Lược — {instName}
+                            Báo cáo đánh giá thực trạng &amp; đề xuất chiến lược — {instName}
                           </h3>
                         </div>
                         <div style={{ textAlign: 'right' }}>
@@ -2050,13 +2063,13 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                       <div style={{ backgroundColor: '#F8FAFC', padding: '1.25rem', borderRadius: '8px', border: '1px solid #E2E8F0', marginBottom: '1.5rem' }}>
                         <h4 style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                           <Users size={16} color="var(--primary)" />
-                          Đặc Tính 3 Phân Khúc Người Học (K-Means Clustering) &amp; Chiến Lược Tác Động
+                          Đặc tính 3 phân khúc người học (K-Means Clustering) &amp; chiến lược tác động
                         </h4>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem' }}>
                           
                           <div style={{ backgroundColor: 'white', padding: '0.85rem', borderRadius: '6px', borderLeft: '4px solid #10B981', border: '1px solid #E2E8F0', borderLeftWidth: '4px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                              <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#065F46' }}>Cụm 1: Hài Lòng Cao (Leaders)</span>
+                              <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#065F46' }}>Cụm 1: Hài lòng cao (Leaders)</span>
                               <span style={{ fontSize: '0.75rem', backgroundColor: '#D1FAE5', color: '#047857', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 'bold' }}>{c1.percentage}% ({c1.size})</span>
                             </div>
                             <p style={{ fontSize: '0.8rem', color: '#475569', margin: 0, lineHeight: 1.4 }}>
@@ -2066,7 +2079,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
 
                           <div style={{ backgroundColor: 'white', padding: '0.85rem', borderRadius: '6px', borderLeft: '4px solid #3B82F6', border: '1px solid #E2E8F0', borderLeftWidth: '4px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                              <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#1E40AF' }}>Cụm 2: Khá &amp; Tiềm Năng (Challengers)</span>
+                              <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#1E40AF' }}>Cụm 2: Khá &amp; tiềm năng (Challengers)</span>
                               <span style={{ fontSize: '0.75rem', backgroundColor: '#DBEAFE', color: '#1D4ED8', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 'bold' }}>{c2.percentage}% ({c2.size})</span>
                             </div>
                             <p style={{ fontSize: '0.8rem', color: '#475569', margin: 0, lineHeight: 1.4 }}>
@@ -2076,7 +2089,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
 
                           <div style={{ backgroundColor: 'white', padding: '0.85rem', borderRadius: '6px', borderLeft: '4px solid #EF4444', border: '1px solid #E2E8F0', borderLeftWidth: '4px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                              <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#991B1B' }}>Cụm 3: Cần Quan Tâm (Laggards)</span>
+                              <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#991B1B' }}>Cụm 3: Cần quan tâm (Laggards)</span>
                               <span style={{ fontSize: '0.75rem', backgroundColor: '#FEE2E2', color: '#B91C1C', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 'bold' }}>{c3.percentage}% ({c3.size})</span>
                             </div>
                             <p style={{ fontSize: '0.8rem', color: '#475569', margin: 0, lineHeight: 1.4 }}>
@@ -2091,7 +2104,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                       <div>
                         <h4 style={{ fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                           <CheckCircle2 size={16} color="var(--success)" />
-                          4 Khuyến Nghị Hành Động Chiến Lược Cho Ban Giám Hiệu &amp; Các Khoa Phòng
+                          4 khuyến nghị hành động chiến lược cho Ban Giám hiệu &amp; các khoa phòng
                         </h4>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem' }}>
                           
@@ -2143,7 +2156,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
               <div className="card" style={{ padding: '2rem', textAlign: 'center', backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE' }}>
                 <Award size={40} color="#1E40AF" style={{ margin: '0 auto 0.75rem auto' }} />
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1E40AF', marginBottom: '0.5rem' }}>
-                  Xuất Bản Báo Cáo Học Thuật Chuẩn APA 7th Edition (.doc)
+                  Xuất bản báo cáo học thuật chuẩn APA 7th Edition (.doc)
                 </h3>
                 <p style={{ color: '#065F46', maxWidth: '640px', margin: '0 auto 1.25rem auto', fontSize: '0.9rem' }}>
                   Toàn bộ 5 khâu phân tích toán học (Làm sạch, Cronbach's Alpha, EFA/KMO, Pearson, PLS-SEM, K-Means DRI, Học máy XGBoost &amp; SHAP) kèm lời bình luận tự động đã sẵn sàng để xuất ra file Word chuẩn mực đính kèm trực tiếp vào Luận văn / Bài báo khoa học.
@@ -2153,7 +2166,7 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                   onClick={handleExportAPAReport}
                   style={{ padding: '0.75rem 1.75rem', fontSize: '0.95rem', fontWeight: 'bold', backgroundColor: '#1E40AF' }}
                 >
-                  <FileDown size={18} /> Tải file Word Báo cáo Nghiên cứu Hoàn chỉnh (.doc)
+                  <FileDown size={18} /> Tải file Word báo cáo nghiên cứu hoàn chỉnh (.doc)
                 </button>
               </div>
 

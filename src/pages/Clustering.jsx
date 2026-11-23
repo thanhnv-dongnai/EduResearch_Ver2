@@ -151,7 +151,7 @@ const Clustering = () => {
             </span>
           </div>
           <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', color: 'var(--text-main)', marginBottom: '0.35rem' }}>
-            Bản Đồ Phân Cụm Hồ Sơ Phát Triển (Cluster Profiling)
+            Bản đồ phân cụm hồ sơ phát triển (Cluster Profiling)
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
             Định vị tọa độ cụ thể của từng cơ sở giáo dục đại học trên không gian năng lực cạnh tranh và phân tách nhóm trường điển hình.
@@ -262,10 +262,10 @@ const Clustering = () => {
           <div>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Compass size={20} color="var(--primary)" />
-              Biểu Đồ Phân Tán Không Gian Cạnh Tranh 2D (Scatter Plot)
+              Biểu đồ phân tán không gian cạnh tranh 2D (Scatter Plot)
             </h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-              Trục X: Năng lực đổi mới &amp; Nguồn lực (DX &amp; RO) • Trục Y: Kế hoạch Chiến lược &amp; Năng lực Lãnh đạo (SP &amp; LD)
+              Trục X: Năng lực đổi mới &amp; nguồn lực (DX &amp; RO) • Trục Y: Kế hoạch chiến lược &amp; năng lực lãnh đạo (SP &amp; LD)
             </p>
           </div>
           
@@ -301,7 +301,7 @@ const Clustering = () => {
                 dataKey="y" 
                 name="Chiến lược & Lãnh đạo (SP & LD)" 
                 domain={[1.5, 5.0]} 
-                label={{ value: 'Chiến lược & Năng lực Lãnh đạo (SP & LD)', angle: -90, position: 'insideLeft', offset: 10, fill: '#64748B', fontSize: 12, fontWeight: 600 }}
+                label={{ value: 'Chiến lược & năng lực lãnh đạo (SP & LD)', angle: -90, position: 'insideLeft', offset: 10, fill: '#64748B', fontSize: 12, fontWeight: 600 }}
               />
               <ZAxis type="number" dataKey="z" range={[50, 220]} name="Điểm Sẵn sàng AT" />
               <Tooltip 
@@ -340,7 +340,7 @@ const Clustering = () => {
       <div className="card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
         <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Layers size={18} color="var(--primary)" />
-          Bảng Phân Khúc Nhóm Trường Điển Hình &amp; Khuyến Nghị Cho Ban Giám Hiệu
+          Bảng phân khúc nhóm trường điển hình &amp; khuyến nghị cho Ban Giám hiệu
         </h3>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
           Chi tiết đặc điểm nhận diện, cấu hình 5 chiều cạnh và kế hoạch can thiệp chiến lược:
@@ -354,7 +354,7 @@ const Clustering = () => {
                 <th style={{ textAlign: 'center' }}>Quy mô mẫu</th>
                 <th style={{ textAlign: 'center' }}>Điểm AT TB</th>
                 <th>Cấu hình 5 chiều cạnh (SP, LD, DX, RO, CS)</th>
-                <th>Vị thế cạnh tranh &amp; Định hướng Ban Giám hiệu</th>
+                <th>Vị thế cạnh tranh &amp; định hướng Ban Giám hiệu</th>
               </tr>
             </thead>
             <tbody>

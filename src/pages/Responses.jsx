@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Download, Upload, Filter, MessageSquare, CheckCircle, XCircle, Trash2, Eye, X, ExternalLink, Sparkles, AlertTriangle, FileSpreadsheet, Building2, School } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { responsesAPI, surveysAPI } from '../services/api';
+import { buildResponseCodeMap } from '../lib/responseCode';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import Toast from '../components/Toast';
 
@@ -14,6 +15,17 @@ const Responses = () => {
   const [selectedSurveyId, setSelectedSurveyId] = useState('');
   const [data, setData] = useState({ list: [], stats: { total: 0, valid: 0, invalid: 0 }, charts: { roleData: [], genderData: [] } });
   const [loading, setLoading] = useState(true);
+
+  // Mã định danh dễ đọc cho từng phiếu (B0x + thời điểm nộp + số thứ tự),
+  // thay cho UUID thô trong các bảng/đối chiếu hiển thị cho người dùng.
+  const surveyAudienceById = useMemo(
+    () => Object.fromEntries(surveys.map(s => [s.id, s.audience])),
+    [surveys]
+  );
+  const responseCodeMap = useMemo(
+    () => buildResponseCodeMap(data.list, (r) => surveyAudienceById[r.survey_id]),
+    [data.list, surveyAudienceById]
+  );
 
   // Status & Institution Filters
   const [statusFilter, setStatusFilter] = useState('all'); // all, valid, invalid
@@ -93,7 +105,7 @@ const Responses = () => {
 
     const headers = ['Mã phản hồi', 'Khảo sát ID', 'Trường / Cơ sở', 'Đối tượng / Chức vụ', 'Khoa / Đơn vị', 'Giới tính', 'Thời gian làm bài', 'Trạng thái', 'Ngày nhận'];
     const rows = data.list.map(r => [
-      `#${r.id}`,
+      responseCodeMap[r.id] || `#${r.id}`,
       r.survey_id,
       `"${r.institution || 'Cơ sở giáo dục'}"`,
       `"${r.role}"`,
@@ -463,7 +475,7 @@ const Responses = () => {
           {data.list.length > 0 && (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1.5rem', marginBottom: '2rem' }}>
               <div className="card">
-                <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', marginBottom: '1.5rem', textAlign: 'center' }}>Phân bố Giới tính</h3>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', marginBottom: '1.5rem', textAlign: 'center' }}>Phân bố giới tính</h3>
                 <div style={{ height: '240px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -485,7 +497,7 @@ const Responses = () => {
               </div>
 
               <div className="card">
-                <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Phân bố Đối tượng tham gia</h3>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Phân bố đối tượng tham gia</h3>
                 <div style={{ height: '240px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart layout="vertical" data={data.charts.roleData} margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
@@ -581,7 +593,7 @@ const Responses = () => {
                           style={{ cursor: 'pointer' }}
                         />
                       </th>
-                      <th style={{ width: '60px' }}>Mã #</th>
+                      <th style={{ width: '150px' }}>Mã</th>
                       <th>Trường / Cơ sở</th>
                       <th>Đối tượng</th>
                       <th>Đơn vị</th>
@@ -603,7 +615,7 @@ const Responses = () => {
                             style={{ cursor: 'pointer' }}
                           />
                         </td>
-                        <td style={{ fontWeight: '600', color: 'var(--text-muted)' }}>#{res.id}</td>
+                        <td style={{ fontWeight: '600', color: 'var(--text-muted)', fontSize: '0.75rem', whiteSpace: 'nowrap' }}>{responseCodeMap[res.id] || res.id}</td>
                         <td>
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', fontWeight: '600', padding: '0.15rem 0.45rem', backgroundColor: '#F3E8FF', color: '#6B21A8', borderRadius: '4px' }}>
                             <Building2 size={12} />
@@ -653,7 +665,7 @@ const Responses = () => {
         <div className="modal-backdrop" onClick={() => setViewResponse(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2 className="modal-title">Chi tiết phiếu phản hồi #{viewResponse.id}</h2>
+              <h2 className="modal-title">Chi tiết phiếu phản hồi {responseCodeMap[viewResponse.id] || `#${viewResponse.id}`}</h2>
               <button className="modal-close-btn" onClick={() => setViewResponse(null)}>
                 <X size={20} />
               </button>
@@ -672,8 +684,8 @@ const Responses = () => {
                   <div>{getStatusBadge(viewResponse.status)}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Khảo sát ID</div>
-                  <div style={{ fontWeight: '600' }}>Khảo sát #{viewResponse.survey_id}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Khảo sát</div>
+                  <div style={{ fontWeight: '600' }}>{surveys.find(s => s.id === viewResponse.survey_id)?.title || `#${viewResponse.survey_id}`}</div>
                 </div>
                 <div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>Đối tượng / Chức vụ</div>
@@ -839,7 +851,7 @@ const Responses = () => {
                         const isFast = (s.time_taken || '').toLowerCase().includes('giây') && parseInt(s.time_taken) < 25;
                         return (
                           <tr key={s.id}>
-                            <td style={{ fontWeight: 'bold' }}>#{s.id}</td>
+                            <td style={{ fontWeight: 'bold', fontSize: '0.75rem', whiteSpace: 'nowrap' }}>{responseCodeMap[s.id] || s.id}</td>
                             <td>{s.role}</td>
                             <td>{s.time_taken}</td>
                             <td>

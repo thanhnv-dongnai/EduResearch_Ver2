@@ -14,20 +14,20 @@ const GaugeMeter = ({ score = 78.5, size = 260, title = 'Chỉ số Sẵn sàng 
 
   // Xác định cấp độ
   let level = 2;
-  let levelName = 'Cấp độ 2 — Sẵn sàng Trung bình';
+  let levelName = 'Cấp độ 2 — Sẵn sàng trung bình';
   let levelColor = '#D97706'; // Amber
   let levelBg = '#FEF3C7';
   let levelDesc = 'Đơn vị đang triển khai tích cực các giải pháp đổi mới, tuy nhiên một số yếu tố then chốt (năng lực nhân sự, nguồn lực hoặc cơ chế vận hành) vẫn còn khoảng cách cần thu hẹp.';
 
   if (boundedScore >= 80) {
     level = 1;
-    levelName = 'Cấp độ 1 — Sẵn sàng Cao (Tiên phong)';
+    levelName = 'Cấp độ 1 — Sẵn sàng cao (Tiên phong)';
     levelColor = '#059669'; // Emerald
     levelBg = '#D1FAE5';
     levelDesc = 'Đơn vị tiên phong dẫn đầu, có đủ nguồn lực, nhân sự và cơ chế vận hành để chủ động thích ứng toàn diện với yêu cầu đổi mới giáo dục.';
   } else if (boundedScore < 60) {
     level = 3;
-    levelName = 'Cấp độ 3 — Cần Cải thiện Cấp bách';
+    levelName = 'Cấp độ 3 — Cần cải thiện cấp bách';
     levelColor = '#DC2626'; // Red
     levelBg = '#FEE2E2';
     levelDesc = 'Mức độ sẵn sàng thấp, nguồn lực và cơ chế vận hành thiếu đồng bộ, sức ỳ nội tại còn lớn; năng lực đổi mới chưa đáp ứng yêu cầu chuyển đổi.';
