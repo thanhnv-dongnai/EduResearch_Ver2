@@ -20,6 +20,8 @@ const ROLE_QUESTIONNAIRES = {
     variables: 'STR, LEA, CAP, RES, SER, REA',
     defaultTarget: 50,
     questions: [
+      { code: 'INFO_POSITION', text: 'Chức vụ / Vị trí công tác', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Chủ tịch / Phó Chủ tịch Hội đồng trường', 'Hiệu trưởng / Phó Hiệu trưởng', 'Thành viên Hội đồng trường / Đảng ủy viên'] },
+      { code: 'INFO_TENURE', text: 'Thâm niên quản lý ở cấp trường', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'tenure', options: ['Dưới 3 năm', 'Từ 3 – 5 năm', 'Từ 5 – 10 năm', 'Trên 10 năm'] },
       { code: 'STR1', text: 'Nhà trường đã xây dựng chiến lược phát triển tổng thể, tích hợp rõ ràng các xu hướng số hóa và chuyển đổi giáo dục đại học.', variable: 'STR', type: 'likert', group: '1. Chiến lược & Thể chế vĩ mô (STR)' },
       { code: 'STR2', text: 'Kế hoạch chiến lược của nhà trường được rà soát, định kỳ điều chỉnh linh hoạt theo sự biến động của môi trường giáo dục.', variable: 'STR', type: 'likert', group: '1. Chiến lược & Thể chế vĩ mô (STR)' },
       { code: 'LEA1', text: 'Hội đồng trường / Ban Giám hiệu thể hiện tầm nhìn và năng lực lãnh đạo số mạnh mẽ trong chỉ đạo và điều hành.', variable: 'LEA', type: 'likert', group: '2. Năng lực Lãnh đạo số (LEA)' },
@@ -51,6 +53,8 @@ const ROLE_QUESTIONNAIRES = {
     variables: 'STR, LEA, CAP, RES, SER, REA',
     defaultTarget: 80,
     questions: [
+      { code: 'INFO_POSITION', text: 'Chức vụ / Vị trí công tác', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Trưởng Khoa / Viện trưởng đào tạo', 'Phó Trưởng Khoa / Phó Viện trưởng', 'Trưởng Phòng / Ban / Trung tâm chức năng', 'Phó Trưởng Phòng / Ban / Trung tâm'] },
+      { code: 'INFO_TENURE', text: 'Thâm niên quản lý ở cấp đơn vị', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'tenure', options: ['Dưới 3 năm', 'Từ 3 – 5 năm', 'Từ 5 – 10 năm', 'Trên 10 năm'] },
       { code: 'STR1', text: 'Đơn vị của tôi hiểu rõ và chủ động cụ thể hóa các mục tiêu chiến lược của nhà trường thành kế hoạch hành động.', variable: 'STR', type: 'likert', group: '1. Triển khai Chiến lược tại đơn vị (STR)' },
       { code: 'STR2', text: 'Kế hoạch hoạt động của đơn vị được liên kết chặt chẽ với các chỉ số đánh giá hiệu quả (KPIs) chung của trường.', variable: 'STR', type: 'likert', group: '1. Triển khai Chiến lược tại đơn vị (STR)' },
       { code: 'LEA1', text: 'Lãnh đạo đơn vị tích cực hỗ trợ, tạo điều kiện cho cán bộ/giảng viên ứng dụng các phương pháp và quy trình làm việc mới.', variable: 'LEA', type: 'likert', group: '2. Lãnh đạo cấp trung & Đổi mới (LEA)' },
@@ -81,6 +85,8 @@ const ROLE_QUESTIONNAIRES = {
     variables: 'STR, LEA, CAP, RES, SER, REA',
     defaultTarget: 150,
     questions: [
+      { code: 'INFO_POSITION', text: 'Vị trí công tác', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Giảng viên trực tiếp giảng dạy', 'Giáo viên / Trợ giảng', 'Chuyên viên / Nhân viên hành chính nghiệp vụ', 'Nghiên cứu viên'] },
+      { code: 'INFO_EDUCATION', text: 'Trình độ chuyên môn cao nhất', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'education', options: ['Cử nhân / Kỹ sư', 'Thạc sĩ', 'Tiến sĩ', 'Phó Giáo sư / Giáo sư'] },
       { code: 'STR1', text: 'Tôi được phổ biến rõ ràng về định hướng phát triển và các chiến lược chuyển đổi của nhà trường.', variable: 'STR', type: 'likert', group: '1. Nhận thức Chiến lược (STR)' },
       { code: 'LEA1', text: 'Lãnh đạo nhà trường/khoa luôn lắng nghe, chia sẻ và đồng hành cùng giảng viên/nhân viên khi triển khai cái mới.', variable: 'LEA', type: 'likert', group: '2. Sự Đồng hành của Lãnh đạo (LEA)' },
       { code: 'CAP1', text: 'Tôi chủ động áp dụng các phương pháp giảng dạy hiện đại, công nghệ số hoặc quy trình mới vào công việc chuyên môn.', variable: 'CAP', type: 'likert', group: '3. Năng lực Thích ứng Chuyên môn (CAP)' },
@@ -112,6 +118,8 @@ const ROLE_QUESTIONNAIRES = {
     variables: 'SER, RES, CAP, STR, REA',
     defaultTarget: 200,
     questions: [
+      { code: 'INFO_POSITION', text: 'Đối tượng người học', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Sinh viên đang theo học (Năm 1 - 2)', 'Sinh viên đang theo học (Năm 3 - 4)', 'Học viên Sau đại học (ThS, NCS)', 'Cựu người học / Cựu sinh viên'] },
+      { code: 'INFO_MAJOR', text: 'Khối ngành đào tạo', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'major', options: ['Khoa học Tự nhiên & Kỹ thuật', 'Kinh tế, Quản trị & Luật', 'Khoa học Xã hội, Nhân văn & Sư phạm'] },
       { code: 'SER1', text: 'Chương trình đào tạo mang tính cập nhật, thực tiễn và đáp ứng tốt nhu cầu của thị trường lao động.', variable: 'SER', type: 'likert', group: '1. Chất lượng Dịch vụ Đào tạo & Hỗ trợ (SER)' },
       { code: 'SER2', text: 'Giảng viên sử dụng các phương pháp giảng dạy tích cực, ứng dụng công nghệ và tương tác hiệu quả với người học.', variable: 'SER', type: 'likert', group: '1. Chất lượng Dịch vụ Đào tạo & Hỗ trợ (SER)' },
       { code: 'SER3', text: 'Các dịch vụ hành chính (xác nhận học vụ, bảng điểm, đăng ký môn học...) được thực hiện nhanh chóng, tiện lợi trên nền tảng số.', variable: 'SER', type: 'likert', group: '1. Chất lượng Dịch vụ Đào tạo & Hỗ trợ (SER)' },

@@ -53,7 +53,10 @@ const PublicSurvey = () => {
     institution: '',
     unit: '',
     role: '',
-    gender: 'Không nêu'
+    gender: 'Không nêu',
+    tenure: '',
+    education: '',
+    major: ''
   });
 
   const [answers, setAnswers] = useState({});
@@ -167,6 +170,9 @@ const PublicSurvey = () => {
         if (q.mapsTo === 'role') mapped.role = answers[q.code];
         if (q.mapsTo === 'unit') mapped.unit = answers[q.code];
         if (q.mapsTo === 'gender') mapped.gender = answers[q.code];
+        if (q.mapsTo === 'tenure') mapped.tenure = answers[q.code];
+        if (q.mapsTo === 'education') mapped.education = answers[q.code];
+        if (q.mapsTo === 'major') mapped.major = answers[q.code];
       });
       if (!mapped.role) mapped.role = answers[demographicQuestions[0].code] || 'Người tham gia';
       if (!mapped.unit) mapped.unit = participant.unit || 'Đơn vị trực thuộc';
@@ -203,6 +209,9 @@ const PublicSurvey = () => {
         unit: participant.unit || 'Khoa / Đơn vị',
         institution: participant.institution || surveyInfo?.institution || 'Cơ sở giáo dục đại học',
         gender: participant.gender || 'Không nêu',
+        tenure: participant.tenure || null,
+        education: participant.education || null,
+        major: participant.major || null,
         time_taken: timeTakenStr,
         status: 'valid',
         answers: answers
@@ -362,7 +371,7 @@ const PublicSurvey = () => {
             </div>
 
             {/* KHOA / PHÒNG / BAN */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: demographicQuestions.length > 0 ? '1fr' : '1fr 1fr', gap: '1.25rem' }}>
               <div>
                 <label className="form-label" style={{ fontWeight: '700' }}>Khoa / Phòng / Ban / Lớp công tác *</label>
                 <input
@@ -375,20 +384,24 @@ const PublicSurvey = () => {
                 />
               </div>
 
-              <div>
-                <label className="form-label" style={{ fontWeight: '700' }}>Chức vụ / Vị trí của bạn *</label>
-                <select
-                  className="input"
-                  value={participant.role}
-                  onChange={(e) => setParticipant({ ...participant, role: e.target.value })}
-                  required
-                >
-                  <option value="">-- Chọn chức vụ / vị trí --</option>
-                  {getRoleOptions().map((opt) => (
-                    <option key={opt} value={opt}>{opt}</option>
-                  ))}
-                </select>
-              </div>
+              {/* Khảo sát cũ không có bộ câu hỏi INFO_POSITION riêng: dùng ô
+                  chọn chức vụ chung làm phương án dự phòng. */}
+              {demographicQuestions.length === 0 && (
+                <div>
+                  <label className="form-label" style={{ fontWeight: '700' }}>Chức vụ / Vị trí của bạn *</label>
+                  <select
+                    className="input"
+                    value={participant.role}
+                    onChange={(e) => setParticipant({ ...participant, role: e.target.value })}
+                    required
+                  >
+                    <option value="">-- Chọn chức vụ / vị trí --</option>
+                    {getRoleOptions().map((opt) => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
 
             {/* CÂU HỎI NHÂN KHẨU HỌC BỔ SUNG NẾU CÓ */}
