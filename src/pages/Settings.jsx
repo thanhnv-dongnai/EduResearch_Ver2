@@ -81,7 +81,6 @@ const Settings = () => {
 
       <div style={{ marginBottom: '2rem' }}>
         <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Cấu hình thông tin</h1>
-        <p style={{ color: 'var(--text-muted)' }}>Thông tin trường/cơ sở đào tạo và năm học — dùng làm tiêu đề cho các báo cáo xuất và hiển thị trên Topbar</p>
       </div>
 
       <div className="card" style={{ maxWidth: '720px', marginBottom: '2rem' }}>
