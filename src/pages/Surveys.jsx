@@ -17,29 +17,29 @@ const ROLE_QUESTIONNAIRES = {
     icon: Building2,
     defaultTitle: 'Bộ 1: Ban Giám hiệu & Hội đồng trường — Chiến lược, thể chế và quản trị vĩ mô',
     subtitle: 'Đánh giá ở tầm vĩ mô: Thể chế, chiến lược, quản trị, phân bổ nguồn lực và lợi thế cạnh tranh tổng thể',
-    variables: 'STR, LEA, CAP, RES, SER, REA',
+    variables: 'SP, LD, DX, RO, CS, AT',
     defaultTarget: 50,
     questions: [
       { code: 'INFO_POSITION', text: 'Chức vụ / Vị trí công tác', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Chủ tịch / Phó Chủ tịch Hội đồng trường', 'Hiệu trưởng / Phó Hiệu trưởng', 'Thành viên Hội đồng trường / Đảng ủy viên'] },
       { code: 'INFO_TENURE', text: 'Thâm niên quản lý ở cấp trường', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'tenure', options: ['Dưới 3 năm', 'Từ 3 – 5 năm', 'Từ 5 – 10 năm', 'Trên 10 năm'] },
-      { code: 'STR1', text: 'Nhà trường đã xây dựng chiến lược phát triển tổng thể, tích hợp rõ ràng các xu hướng số hóa và chuyển đổi giáo dục đại học.', variable: 'STR', type: 'likert', group: '1. Chiến lược & Thể chế vĩ mô (STR)' },
-      { code: 'STR2', text: 'Kế hoạch chiến lược của nhà trường được rà soát, định kỳ điều chỉnh linh hoạt theo sự biến động của môi trường giáo dục.', variable: 'STR', type: 'likert', group: '1. Chiến lược & Thể chế vĩ mô (STR)' },
-      { code: 'LEA1', text: 'Hội đồng trường / Ban Giám hiệu thể hiện tầm nhìn và năng lực lãnh đạo số mạnh mẽ trong chỉ đạo và điều hành.', variable: 'LEA', type: 'likert', group: '2. Năng lực Lãnh đạo số (LEA)' },
-      { code: 'LEA2', text: 'Nhà trường ban hành các cơ chế, thể chế quản trị linh hoạt, phân cấp mạnh mẽ cho các đơn vị để tạo sự chủ động.', variable: 'LEA', type: 'likert', group: '2. Năng lực Lãnh đạo số (LEA)' },
-      { code: 'CAP1', text: 'Cơ cấu tổ chức của nhà trường có khả năng tái cấu trúc và thích ứng nhanh trước các mô hình đào tạo mới.', variable: 'CAP', type: 'likert', group: '3. Năng lực Thích ứng Tổ chức (CAP)' },
-      { code: 'RES1', text: 'Việc phân bổ ngân sách, tài chính và hạ tầng CNTT được ưu tiên gắn liền với các mục tiêu chiến lược trọng điểm.', variable: 'RES', type: 'likert', group: '4. Phân bổ Nguồn lực & Đầu tư (RES)' },
-      { code: 'RES2', text: 'Nhà trường có chính sách thu hút, phát triển và giữ chân đội ngũ nhân sự chất lượng cao đáp ứng chuẩn mực mới.', variable: 'RES', type: 'likert', group: '4. Phân bổ Nguồn lực & Đầu tư (RES)' },
-      { code: 'SER1', text: 'Nhà trường duy trì được vị thế, uy tín và lợi thế cạnh tranh bền vững so với các cơ sở giáo dục đại học khác.', variable: 'SER', type: 'likert', group: '5. Lợi thế Cạnh tranh & Uy tín (SER)' },
-      { code: 'REA1', text: 'Toàn hệ thống nhà trường đã đạt được sự sẵn sàng cao về mọi mặt để thích ứng thành công với các xu hướng giáo dục mới.', variable: 'REA', type: 'likert', group: '6. Mức độ Sẵn sàng Thích ứng (REA)' },
-      { code: 'REA2', text: 'Nhà trường có khả năng dự báo và ứng phó hiệu quả trước các rủi ro, thách thức trong quá trình chuyển đổi tổ chức.', variable: 'REA', type: 'likert', group: '6. Mức độ Sẵn sàng Thích ứng (REA)' },
-      { code: 'TXT_BARRIER_BGH', text: 'Theo Ông/Bà, đâu là rào cản lớn nhất về mặt cơ chế, thể chế hoặc nguồn lực trong quá trình chuyển đổi của nhà trường?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về cơ chế, thể chế, phân bổ nguồn lực...' },
-      { code: 'TXT_SUGGESTION_BGH', text: 'Ông/Bà có đề xuất định hướng chiến lược trọng tâm gì để gia tăng lợi thế cạnh tranh của nhà trường trong 3–5 năm tới?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất định hướng chiến lược trọng tâm...' }
+      { code: 'G1_SP01', text: 'Nhà trường đã xây dựng chiến lược chuyển đổi số và phát triển dài hạn rõ ràng, gắn kết chặt chẽ với sứ mạng, tầm nhìn và định vị cạnh tranh trong hệ thống giáo dục đại học.', variable: 'SP', type: 'likert', group: '1. Lập kế hoạch chiến lược phát triển (SP)' },
+      { code: 'G1_SP02', text: 'Các mục tiêu chiến lược về đổi mới mô hình đào tạo và quản trị của nhà trường được rà soát, cập nhật linh hoạt trước những biến động của thị trường lao động và công nghệ giáo dục.', variable: 'SP', type: 'likert', group: '1. Lập kế hoạch chiến lược phát triển (SP)' },
+      { code: 'G1_LD01', text: 'Ban Giám hiệu và Hội đồng trường luôn tiên phong trong việc dẫn dắt tư duy đổi mới, tạo dựng văn hóa ra quyết định dựa trên dữ liệu (data-driven) trong toàn trường.', variable: 'LD', type: 'likert', group: '2. Năng lực lãnh đạo số & quản trị (LD)' },
+      { code: 'G1_LD02', text: 'Cơ chế phân cấp, phân quyền và trao quyền tự chủ cho các đơn vị trực thuộc được thiết lập minh bạch, tạo điều kiện thúc đẩy sáng kiến chuyển đổi từ cơ sở.', variable: 'LD', type: 'likert', group: '2. Năng lực lãnh đạo số & quản trị (LD)' },
+      { code: 'G1_DX01', text: 'Nhà trường đã tái cấu trúc thành công các quy trình quản trị cốt lõi theo hướng tinh gọn, tích hợp và vận hành trên nền tảng số đồng bộ.', variable: 'DX', type: 'likert', group: '3. Năng lực số hóa & đổi mới sáng tạo (DX)' },
+      { code: 'G1_RO01', text: 'Nhà trường có đủ năng lực tài chính và cơ chế huy động các nguồn lực xã hội hóa để đầu tư bền vững cho các dự án chuyển đổi trọng điểm.', variable: 'RO', type: 'likert', group: '4. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G1_RO02', text: 'Hạ tầng công nghệ thông tin, hệ thống dữ liệu tập trung và cơ sở vật chất hiện tại đáp ứng tốt yêu cầu mở rộng quy mô và đổi mới phương thức hoạt động của nhà trường.', variable: 'RO', type: 'likert', group: '4. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G1_CS01', text: 'Hệ sinh thái dịch vụ số của nhà trường (cổng thông tin, quản lý đào tạo, hành chính công trực tuyến) bảo đảm tính liên thông, an toàn và nâng cao trải nghiệm cho các bên liên quan.', variable: 'CS', type: 'likert', group: '5. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G1_AT01', text: 'Nhà trường có khả năng nhận diện sớm các cơ hội và rủi ro từ sự phát triển của trí tuệ nhân tạo (AI) cũng như các mô hình giáo dục linh hoạt để kịp thời điều chỉnh chiến lược.', variable: 'AT', type: 'likert', group: '6. Mức độ sẵn sàng chuyển đổi số (AT)' },
+      { code: 'G1_AT02', text: 'Tổng thể tổ chức của nhà trường hiện đạt mức độ sẵn sàng cao để chuyển đổi toàn diện và duy trì lợi thế cạnh tranh bền vững trong 3–5 năm tới.', variable: 'AT', type: 'likert', group: '6. Mức độ sẵn sàng chuyển đổi số (AT)' },
+      { code: 'G1_OPEN01', text: 'Từ góc độ hoạch định chiến lược và quản trị cấp cao, đâu là 2–3 rào cản lớn nhất (về cơ chế, nguồn lực tài chính, hay văn hóa tổ chức) đang cản trở tiến trình chuyển đổi của nhà trường hiện nay?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về cơ chế, nguồn lực tài chính, văn hóa tổ chức...' },
+      { code: 'G1_OPEN02', text: 'Nhà trường cần ưu tiên thực hiện những đột phá chính sách hoặc phân bổ nguồn lực trọng tâm nào trong giai đoạn tới để nâng cao năng lực thích ứng và vị thế cạnh tranh?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất đột phá chính sách, phân bổ nguồn lực trọng tâm...' }
     ],
     hypotheses: [
-      { code: 'H1', name: 'STR ➔ REA', description: 'Chiến lược phát triển (STR) tác động thuận chiều đến mức độ sẵn sàng chuyển đổi (REA)', independent: 'STR', dependent: 'REA' },
-      { code: 'H2', name: 'LEA ➔ REA', description: 'Lãnh đạo số (LEA) tác động thuận chiều đến mức độ sẵn sàng chuyển đổi (REA)', independent: 'LEA', dependent: 'REA' },
-      { code: 'H3', name: 'CAP ➔ SER', description: 'Năng lực thích ứng tổ chức (CAP) có tác động tích cực đến lợi thế cạnh tranh (SER)', independent: 'CAP', dependent: 'SER' },
-      { code: 'H4', name: 'RES ➔ REA', description: 'Nguồn lực và ngân sách (RES) tác động thuận chiều đến sự sẵn sàng tổ chức (REA)', independent: 'RES', dependent: 'REA' }
+      { code: 'H1', name: 'SP ➔ AT', description: 'Chiến lược chuyển đổi số và phát triển dài hạn (SP) tác động thuận chiều đến mức độ sẵn sàng chuyển đổi tổng thể (AT)', independent: 'SP', dependent: 'AT' },
+      { code: 'H2', name: 'LD ➔ AT', description: 'Năng lực lãnh đạo số và cơ chế trao quyền (LD) tác động thuận chiều đến mức độ sẵn sàng chuyển đổi (AT)', independent: 'LD', dependent: 'AT' },
+      { code: 'H3', name: 'RO ➔ DX', description: 'Năng lực tài chính và hạ tầng (RO) tác động thuận chiều đến năng lực số hóa quy trình quản trị (DX)', independent: 'RO', dependent: 'DX' },
+      { code: 'H4', name: 'DX ➔ CS', description: 'Năng lực số hóa quy trình quản trị (DX) tác động thuận chiều đến chất lượng hệ sinh thái dịch vụ số (CS)', independent: 'DX', dependent: 'CS' }
     ]
   },
   dept_head: {
@@ -50,28 +50,29 @@ const ROLE_QUESTIONNAIRES = {
     icon: Briefcase,
     defaultTitle: 'Bộ 2: Trưởng / Phó Khoa, Phòng / Ban — Triển khai chiến lược và quy trình vận hành cấp trung',
     subtitle: 'Đánh giá ở cấp trung: Triển khai chiến lược, quy trình vận hành, quản lý nhân sự và chất lượng dịch vụ nội bộ',
-    variables: 'STR, LEA, CAP, RES, SER, REA',
+    variables: 'SP, LD, DX, RO, CS, AT',
     defaultTarget: 80,
     questions: [
       { code: 'INFO_POSITION', text: 'Chức vụ / Vị trí công tác', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Trưởng Khoa / Viện trưởng đào tạo', 'Phó Trưởng Khoa / Phó Viện trưởng', 'Trưởng Phòng / Ban / Trung tâm chức năng', 'Phó Trưởng Phòng / Ban / Trung tâm'] },
       { code: 'INFO_TENURE', text: 'Thâm niên quản lý ở cấp đơn vị', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'tenure', options: ['Dưới 3 năm', 'Từ 3 – 5 năm', 'Từ 5 – 10 năm', 'Trên 10 năm'] },
-      { code: 'STR1', text: 'Đơn vị của tôi hiểu rõ và chủ động cụ thể hóa các mục tiêu chiến lược của nhà trường thành kế hoạch hành động.', variable: 'STR', type: 'likert', group: '1. Triển khai Chiến lược tại đơn vị (STR)' },
-      { code: 'STR2', text: 'Kế hoạch hoạt động của đơn vị được liên kết chặt chẽ với các chỉ số đánh giá hiệu quả (KPIs) chung của trường.', variable: 'STR', type: 'likert', group: '1. Triển khai Chiến lược tại đơn vị (STR)' },
-      { code: 'LEA1', text: 'Lãnh đạo đơn vị tích cực hỗ trợ, tạo điều kiện cho cán bộ/giảng viên ứng dụng các phương pháp và quy trình làm việc mới.', variable: 'LEA', type: 'likert', group: '2. Lãnh đạo cấp trung & Đổi mới (LEA)' },
-      { code: 'LEA2', text: 'Lãnh đạo đơn vị thường xuyên khen thưởng, động viên các ý tưởng đổi mới sáng tạo từ cán bộ/giảng viên.', variable: 'LEA', type: 'likert', group: '2. Lãnh đạo cấp trung & Đổi mới (LEA)' },
-      { code: 'CAP1', text: 'Quy trình phối hợp công việc giữa đơn vị của tôi với các phòng/khoa/ban khác diễn ra mượt mà, giảm bớt thủ tục hành chính.', variable: 'CAP', type: 'likert', group: '3. Năng lực Quy trình & Phối hợp (CAP)' },
-      { code: 'CAP2', text: 'Đơn vị có khả năng xử lý linh hoạt và nhanh chóng các sự cố phát sinh trong quá trình vận hành.', variable: 'CAP', type: 'likert', group: '3. Năng lực Quy trình & Phối hợp (CAP)' },
-      { code: 'RES1', text: 'Trang thiết bị, phần mềm quản lý và hạ tầng công nghệ được cung cấp đầy đủ, đáp ứng tốt nhu cầu làm việc của đơn vị.', variable: 'RES', type: 'likert', group: '4. Nguồn lực & Hạ tầng đơn vị (RES)' },
-      { code: 'RES2', text: 'Cán bộ/nhân sự tại đơn vị thường xuyên được bồi dưỡng nâng cao năng lực chuyên môn và kỹ năng số.', variable: 'RES', type: 'likert', group: '4. Nguồn lực & Hạ tầng đơn vị (RES)' },
-      { code: 'SER1', text: 'Đơn vị duy trì chất lượng phục vụ/hỗ trợ cao đối với các đơn vị khác, giảng viên và người học.', variable: 'SER', type: 'likert', group: '5. Chất lượng Dịch vụ & Hỗ trợ (SER)' },
-      { code: 'REA1', text: 'Đơn vị của tôi đạt mức độ sẵn sàng cao trong việc thay đổi thói quen làm việc để đáp ứng yêu cầu chuyển đổi chung.', variable: 'REA', type: 'likert', group: '6. Mức độ Sẵn sàng Chuyển đổi (REA)' },
-      { code: 'TXT_BARRIER_DEPT', text: 'Khó khăn hoặc điểm nghẽn lớn nhất mà đơn vị của Thầy/Cô gặp phải trong quy trình vận hành và phối hợp liên phòng ban là gì?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về quy trình, thủ tục hành chính...' },
-      { code: 'TXT_SUGGESTION_DEPT', text: 'Thầy/Cô có đề xuất gì để cải tiến cơ chế phối hợp và phân quyền cho cấp đơn vị khoa/phòng ban hiệu quả hơn?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất cải tiến cơ chế quản trị và phân quyền...' }
+      { code: 'G2_SP01', text: 'Các mục tiêu chiến lược của nhà trường được cụ thể hóa thành kế hoạch hành động và bộ chỉ số đo lường hiệu quả công việc (KPI) rõ ràng, khả thi tại đơn vị tôi phụ trách.', variable: 'SP', type: 'likert', group: '1. Lập kế hoạch chiến lược phát triển (SP)' },
+      { code: 'G2_SP02', text: 'Đơn vị tôi chủ động điều chỉnh kế hoạch đào tạo, nghiên cứu hoặc vận hành hàng năm để bám sát định hướng chuyển đổi của nhà trường.', variable: 'SP', type: 'likert', group: '1. Lập kế hoạch chiến lược phát triển (SP)' },
+      { code: 'G2_LD01', text: 'Đội ngũ lãnh đạo cấp trung được Ban Giám hiệu trao đủ thẩm quyền và hỗ trợ kịp thời để giải quyết các vướng mắc phát sinh trong quá trình triển khai đổi mới.', variable: 'LD', type: 'likert', group: '2. Năng lực lãnh đạo số & quản trị (LD)' },
+      { code: 'G2_LD02', text: 'Ban lãnh đạo khoa/phòng/ban thường xuyên khuyến khích, tạo động lực và đánh giá công bằng đối với các cá nhân tích cực ứng dụng công nghệ vào công việc.', variable: 'LD', type: 'likert', group: '2. Năng lực lãnh đạo số & quản trị (LD)' },
+      { code: 'G2_DX01', text: 'Công tác phối hợp và chia sẻ dữ liệu giữa đơn vị tôi với các khoa, phòng, ban chức năng khác diễn ra thông suốt trên môi trường số.', variable: 'DX', type: 'likert', group: '3. Năng lực số hóa & đổi mới sáng tạo (DX)' },
+      { code: 'G2_DX02', text: 'Các quy trình nghiệp vụ nội bộ tại đơn vị đã được chuẩn hóa và số hóa, giúp giảm thiểu đáng kể thủ tục hành chính thủ công.', variable: 'DX', type: 'likert', group: '3. Năng lực số hóa & đổi mới sáng tạo (DX)' },
+      { code: 'G2_RO01', text: 'Đơn vị được phân bổ ngân sách, trang thiết bị và phần mềm chuyên dụng tương xứng với nhiệm vụ chuyển đổi được giao.', variable: 'RO', type: 'likert', group: '4. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G2_RO02', text: 'Đội ngũ nhân sự tại đơn vị hiện có đủ năng lực chuyên môn và kỹ năng số để đáp ứng yêu cầu đổi mới quy trình vận hành.', variable: 'RO', type: 'likert', group: '4. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G2_CS01', text: 'Các nền tảng số và dịch vụ hỗ trợ kỹ thuật nội bộ của nhà trường hoạt động ổn định, đáp ứng kịp thời nhu cầu quản lý, điều hành của đơn vị.', variable: 'CS', type: 'likert', group: '5. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G2_AT01', text: 'Đơn vị tôi có đủ sự linh hoạt và năng lực tổ chức để triển khai nhanh chóng các chương trình, quy trình mới khi nhà trường có chủ trương thay đổi.', variable: 'AT', type: 'likert', group: '6. Mức độ sẵn sàng chuyển đổi số (AT)' },
+      { code: 'G2_OPEN01', text: 'Trong quá trình chuyển hóa định hướng của nhà trường thành hoạt động thực tế tại đơn vị, Anh/Chị gặp phải những điểm nghẽn nào về quy trình vận hành, nhân sự hoặc sự phối hợp liên đơn vị?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về quy trình vận hành, nhân sự, phối hợp liên đơn vị...' },
+      { code: 'G2_OPEN02', text: 'Anh/Chị có đề xuất cụ thể gì về cơ chế phân quyền, đầu tư công cụ quản lý hoặc đào tạo nhân sự để giúp đơn vị nâng cao hiệu quả triển khai chuyển đổi số?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất cơ chế phân quyền, công cụ quản lý, đào tạo nhân sự...' }
     ],
     hypotheses: [
-      { code: 'H1', name: 'STR ➔ CAP', description: 'Hiểu rõ chiến lược (STR) tác động tích cực đến năng lực phối hợp quy trình (CAP)', independent: 'STR', dependent: 'CAP' },
-      { code: 'H2', name: 'LEA ➔ REA', description: 'Lãnh đạo đơn vị đổi mới (LEA) thúc đẩy mức độ sẵn sàng thay đổi (REA)', independent: 'LEA', dependent: 'REA' },
-      { code: 'H3', name: 'RES ➔ SER', description: 'Hạ tầng và bồi dưỡng nhân lực (RES) tác động thuận chiều đến chất lượng phục vụ (SER)', independent: 'RES', dependent: 'SER' }
+      { code: 'H1', name: 'SP ➔ AT', description: 'Cụ thể hóa chiến lược thành KPI (SP) tác động thuận chiều đến năng lực linh hoạt triển khai thay đổi của đơn vị (AT)', independent: 'SP', dependent: 'AT' },
+      { code: 'H2', name: 'LD ➔ DX', description: 'Sự trao quyền của lãnh đạo cấp trung (LD) thúc đẩy số hóa và chuẩn hóa quy trình nội bộ (DX)', independent: 'LD', dependent: 'DX' },
+      { code: 'H3', name: 'RO ➔ DX', description: 'Nguồn lực ngân sách, nhân sự (RO) tác động thuận chiều đến năng lực số hóa quy trình (DX)', independent: 'RO', dependent: 'DX' },
+      { code: 'H4', name: 'CS ➔ AT', description: 'Chất lượng nền tảng số nội bộ (CS) tác động thuận chiều đến khả năng triển khai nhanh các thay đổi (AT)', independent: 'CS', dependent: 'AT' }
     ]
   },
   lecturer_staff: {
@@ -82,29 +83,29 @@ const ROLE_QUESTIONNAIRES = {
     icon: Users,
     defaultTitle: 'Bộ 3: Giảng viên / Giáo viên / Nhân viên — Công cụ làm việc, phương pháp giảng dạy và văn hóa đổi mới',
     subtitle: 'Đánh giá trực tiếp: Công cụ làm việc, phương pháp giảng dạy, văn hóa đổi mới và sự hỗ trợ từ tổ chức',
-    variables: 'STR, LEA, CAP, RES, SER, REA',
+    variables: 'SP, LD, DX, RO, CS, AT',
     defaultTarget: 150,
     questions: [
       { code: 'INFO_POSITION', text: 'Vị trí công tác', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Giảng viên trực tiếp giảng dạy', 'Giáo viên / Trợ giảng', 'Chuyên viên / Nhân viên hành chính nghiệp vụ', 'Nghiên cứu viên'] },
       { code: 'INFO_EDUCATION', text: 'Trình độ chuyên môn cao nhất', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'education', options: ['Cử nhân / Kỹ sư', 'Thạc sĩ', 'Tiến sĩ', 'Phó Giáo sư / Giáo sư'] },
-      { code: 'STR1', text: 'Tôi được phổ biến rõ ràng về định hướng phát triển và các chiến lược chuyển đổi của nhà trường.', variable: 'STR', type: 'likert', group: '1. Nhận thức Chiến lược (STR)' },
-      { code: 'LEA1', text: 'Lãnh đạo nhà trường/khoa luôn lắng nghe, chia sẻ và đồng hành cùng giảng viên/nhân viên khi triển khai cái mới.', variable: 'LEA', type: 'likert', group: '2. Sự Đồng hành của Lãnh đạo (LEA)' },
-      { code: 'CAP1', text: 'Tôi chủ động áp dụng các phương pháp giảng dạy hiện đại, công nghệ số hoặc quy trình mới vào công việc chuyên môn.', variable: 'CAP', type: 'likert', group: '3. Năng lực Thích ứng Chuyên môn (CAP)' },
-      { code: 'CAP2', text: 'Bản thân tôi có khả năng thích ứng nhanh với các thay đổi về công nghệ và quy trình làm việc tại trường.', variable: 'CAP', type: 'likert', group: '3. Năng lực Thích ứng Chuyên môn (CAP)' },
-      { code: 'RES1', text: 'Hạ tầng CNTT, mạng Internet và phần mềm giảng dạy/quản lý của trường hoạt động ổn định và hiệu quả.', variable: 'RES', type: 'likert', group: '4. Hạ tầng & Môi trường Làm việc (RES)' },
-      { code: 'RES2', text: 'Cơ sở vật chất, phòng làm việc/giảng dạy được trang bị đầy đủ, tạo môi trường làm việc thuận lợi.', variable: 'RES', type: 'likert', group: '4. Hạ tầng & Môi trường Làm việc (RES)' },
-      { code: 'SER1', text: 'Nhà trường cung cấp các khóa đào tạo, tập huấn thiết thực giúp tôi nâng cao kỹ năng ứng dụng công nghệ/chuyển đổi.', variable: 'SER', type: 'likert', group: '5. Đào tạo & Tiếp nhận Phản hồi (SER)' },
-      { code: 'SER2', text: 'Các kênh phản hồi, góp ý của cán bộ/giảng viên được nhà trường ghi nhận và phản hồi kịp thời.', variable: 'SER', type: 'likert', group: '5. Đào tạo & Tiếp nhận Phản hồi (SER)' },
-      { code: 'REA1', text: 'Tôi sẵn sàng điều chỉnh thói quen và nâng cao năng lực cá nhân để đáp ứng các yêu cầu chuyển đổi của nhà trường.', variable: 'REA', type: 'likert', group: '6. Thái độ Sẵn sàng & Niềm tin (REA)' },
-      { code: 'REA2', text: 'Tôi tin tưởng vào sự thành công và phát triển bền vững của nhà trường trong giai đoạn chuyển đổi hiện nay.', variable: 'REA', type: 'likert', group: '6. Thái độ Sẵn sàng & Niềm tin (REA)' },
-      { code: 'TXT_BARRIER_STAFF', text: 'Thầy/Cô/Anh/Chị gặp khó khăn gì nhiều nhất về hạ tầng, công cụ số hay thời gian làm việc hiện nay?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về công cụ, phần mềm, thiết bị...' },
-      { code: 'TXT_SUGGESTION_STAFF', text: 'Thầy/Cô/Anh/Chị có nguyện vọng hoặc đề xuất gì về chính sách đãi ngộ, tập huấn để an tâm cống hiến tốt hơn?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất về tập huấn, đãi ngộ và môi trường...' }
+      { code: 'G3_SP01', text: 'Tôi nắm rõ mục tiêu, lộ trình chuyển đổi số của nhà trường cũng như vai trò cụ thể của bản thân trong tiến trình này.', variable: 'SP', type: 'likert', group: '1. Lập kế hoạch chiến lược phát triển (SP)' },
+      { code: 'G3_LD01', text: 'Lãnh đạo đơn vị và nhà trường luôn lắng nghe phản hồi, ghi nhận nỗ lực và có chính sách khuyến khích thiết thực cho giảng viên/nhân viên khi đổi mới phương pháp làm việc.', variable: 'LD', type: 'likert', group: '2. Năng lực lãnh đạo số & quản trị (LD)' },
+      { code: 'G3_DX01', text: 'Tôi thành thạo việc sử dụng các công cụ số, hệ thống quản lý học tập (LMS) hoặc phần mềm nghiệp vụ để tối ưu hóa công tác giảng dạy, nghiên cứu và hành chính.', variable: 'DX', type: 'likert', group: '3. Năng lực số hóa & đổi mới sáng tạo (DX)' },
+      { code: 'G3_DX02', text: 'Việc ứng dụng công nghệ và dữ liệu số trong công việc hàng ngày giúp tôi nâng cao năng suất và chất lượng chuyên môn rõ rệt.', variable: 'DX', type: 'likert', group: '3. Năng lực số hóa & đổi mới sáng tạo (DX)' },
+      { code: 'G3_RO01', text: 'Hạ tầng mạng, máy tính, phòng học thông minh và các công cụ làm việc số do nhà trường trang bị đáp ứng tốt nhu cầu thực tế của tôi.', variable: 'RO', type: 'likert', group: '4. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G3_RO02', text: 'Nhà trường thường xuyên tổ chức các khóa tập huấn, bồi dưỡng kỹ năng số sát với nhu cầu thực tiễn công việc của giảng viên và nhân viên.', variable: 'RO', type: 'likert', group: '4. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G3_CS01', text: 'Hệ thống phần mềm quản lý đào tạo, LMS và các cổng dịch vụ nội bộ của nhà trường có giao diện thân thiện, vận hành ổn định và ít xảy ra lỗi kỹ thuật.', variable: 'CS', type: 'likert', group: '5. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G3_CS02', text: 'Bộ phận kỹ thuật và hành chính luôn hỗ trợ kịp thời, hiệu quả mỗi khi tôi gặp sự cố trong quá trình sử dụng các nền tảng số của nhà trường.', variable: 'CS', type: 'likert', group: '5. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G3_AT01', text: 'Tôi sẵn sàng chủ động học hỏi các công nghệ mới (như trí tuệ nhân tạo, phân tích dữ liệu học tập) để đổi mới phương pháp giảng dạy hoặc quy trình làm việc.', variable: 'AT', type: 'likert', group: '6. Mức độ sẵn sàng chuyển đổi số (AT)' },
+      { code: 'G3_AT02', text: 'Tôi cảm thấy tự tin và dễ dàng thích nghi trước những thay đổi về công nghệ và yêu cầu công việc tại nhà trường trong thời gian qua.', variable: 'AT', type: 'likert', group: '6. Mức độ sẵn sàng chuyển đổi số (AT)' },
+      { code: 'G3_OPEN01', text: 'Những khó khăn, bất cập nào về hạ tầng công nghệ, phần mềm nghiệp vụ hoặc khối lượng công việc đang ảnh hưởng trực tiếp đến quá trình ứng dụng công nghệ số của Thầy/Cô/Anh/Chị?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về hạ tầng, phần mềm, khối lượng công việc...' },
+      { code: 'G3_OPEN02', text: 'Thầy/Cô/Anh/Chị mong muốn nhà trường bổ sung những công cụ, khóa đào tạo kỹ năng hoặc chính sách hỗ trợ nào để công tác giảng dạy/vận hành đạt hiệu quả cao hơn?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất công cụ, khóa đào tạo, chính sách hỗ trợ...' }
     ],
     hypotheses: [
-      { code: 'H1', name: 'STR ➔ REA', description: 'Nhận thức chiến lược (STR) tác động tích cực đến sự sẵn sàng đổi mới cá nhân (REA)', independent: 'STR', dependent: 'REA' },
-      { code: 'H2', name: 'LEA ➔ CAP', description: 'Sự đồng hành của lãnh đạo (LEA) thúc đẩy năng lực ứng dụng công nghệ (CAP)', independent: 'LEA', dependent: 'CAP' },
-      { code: 'H3', name: 'RES ➔ CAP', description: 'Hạ tầng và điều kiện làm việc (RES) nâng cao năng lực thích ứng chuyên môn (CAP)', independent: 'RES', dependent: 'CAP' },
-      { code: 'H4', name: 'SER ➔ REA', description: 'Tập huấn và tiếp nhận phản hồi (SER) củng cố niềm tin và sự thích ứng cá nhân (REA)', independent: 'SER', dependent: 'REA' }
+      { code: 'H1', name: 'LD ➔ AT', description: 'Sự đồng hành, ghi nhận của lãnh đạo (LD) tác động thuận chiều đến tâm thế sẵn sàng thích ứng của cá nhân (AT)', independent: 'LD', dependent: 'AT' },
+      { code: 'H2', name: 'RO ➔ DX', description: 'Hạ tầng, trang thiết bị và tập huấn (RO) tác động thuận chiều đến năng lực số cá nhân (DX)', independent: 'RO', dependent: 'DX' },
+      { code: 'H3', name: 'CS ➔ DX', description: 'Chất lượng nền tảng số và hỗ trợ kỹ thuật (CS) tác động thuận chiều đến năng lực ứng dụng công nghệ (DX)', independent: 'CS', dependent: 'DX' },
+      { code: 'H4', name: 'DX ➔ AT', description: 'Năng lực số cá nhân (DX) tác động thuận chiều đến sự tự tin và sẵn sàng thích ứng (AT)', independent: 'DX', dependent: 'AT' }
     ]
   },
   student_alumni: {
@@ -115,56 +116,56 @@ const ROLE_QUESTIONNAIRES = {
     icon: GraduationCap,
     defaultTitle: 'Bộ 4: Người học & Cựu người học — Trải nghiệm dịch vụ đào tạo, môi trường và uy tín thương hiệu',
     subtitle: 'Đánh giá từ góc độ thụ hưởng: Trải nghiệm người học, chất lượng dịch vụ đào tạo, môi trường và giá trị thương hiệu',
-    variables: 'SER, RES, CAP, STR, REA',
+    variables: 'SP, DX, RO, CS, AT',
     defaultTarget: 200,
     questions: [
       { code: 'INFO_POSITION', text: 'Đối tượng người học', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'role', options: ['Sinh viên đang theo học (Năm 1 - 2)', 'Sinh viên đang theo học (Năm 3 - 4)', 'Học viên Sau đại học (ThS, NCS)', 'Cựu người học / Cựu sinh viên'] },
       { code: 'INFO_MAJOR', text: 'Khối ngành đào tạo', variable: 'INFO', type: 'choice', section: 'demographics', mapsTo: 'major', options: ['Khoa học Tự nhiên & Kỹ thuật', 'Kinh tế, Quản trị & Luật', 'Khoa học Xã hội, Nhân văn & Sư phạm'] },
-      { code: 'SER1', text: 'Chương trình đào tạo mang tính cập nhật, thực tiễn và đáp ứng tốt nhu cầu của thị trường lao động.', variable: 'SER', type: 'likert', group: '1. Chất lượng Dịch vụ Đào tạo & Hỗ trợ (SER)' },
-      { code: 'SER2', text: 'Giảng viên sử dụng các phương pháp giảng dạy tích cực, ứng dụng công nghệ và tương tác hiệu quả với người học.', variable: 'SER', type: 'likert', group: '1. Chất lượng Dịch vụ Đào tạo & Hỗ trợ (SER)' },
-      { code: 'SER3', text: 'Các dịch vụ hành chính (xác nhận học vụ, bảng điểm, đăng ký môn học...) được thực hiện nhanh chóng, tiện lợi trên nền tảng số.', variable: 'SER', type: 'likert', group: '1. Chất lượng Dịch vụ Đào tạo & Hỗ trợ (SER)' },
-      { code: 'SER4', text: 'Các hoạt động hỗ trợ người học (tư vấn tâm lý, hướng nghiệp, học bổng...) được nhà trường thực hiện chu đáo, chuyên nghiệp.', variable: 'SER', type: 'likert', group: '1. Chất lượng Dịch vụ Đào tạo & Hỗ trợ (SER)' },
-      { code: 'RES1', text: 'Phòng học, phòng thí nghiệm, thư viện và hạ tầng Internet của trường đáp ứng tốt nhu cầu học tập và nghiên cứu.', variable: 'RES', type: 'likert', group: '2. Môi trường Cơ sở vật chất & Học liệu số (RES)' },
-      { code: 'RES2', text: 'Các nền tảng học tập trực tuyến (LMS, phần mềm học tập) hỗ trợ đắc lực cho quá trình tự học của tôi/người học.', variable: 'RES', type: 'likert', group: '2. Môi trường Cơ sở vật chất & Học liệu số (RES)' },
-      { code: 'CAP1', text: 'Nhà trường nhanh chóng tiếp thu ý kiến đóng góp của người học/cựu sinh viên để cải thiện chất lượng dịch vụ đào tạo.', variable: 'CAP', type: 'likert', group: '3. Năng lực Lắng nghe & Tiếp thu (CAP)' },
-      { code: 'STR1', text: 'Nhà trường thể hiện định hướng phát triển hiện đại, tiên phong trong ứng dụng công nghệ và đổi mới sáng tạo.', variable: 'STR', type: 'likert', group: '4. Định hướng Tiên phong Đổi mới (STR)' },
-      { code: 'REA1', text: 'Tôi nhận thấy nhà trường có khả năng thích ứng tốt và duy trì chất lượng đào tạo ổn định trước những thay đổi.', variable: 'REA', type: 'likert', group: '5. Uy tín & Sự Hài lòng Thụ hưởng (REA)' },
-      { code: 'REA2', text: 'Tôi hài lòng và tự hào về uy tín, chất lượng đào tạo của nhà trường khi học tập hoặc giới thiệu cho người khác.', variable: 'REA', type: 'likert', group: '5. Uy tín & Sự Hài lòng Thụ hưởng (REA)' },
-      { code: 'TXT_BARRIER_STUDENT', text: 'Những rào cản hoặc điểm chưa hài lòng lớn nhất mà Bạn gặp phải về dịch vụ hoặc cơ sở vật chất của trường là gì?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về thủ tục học vụ, Wifi, học liệu, phòng học...' },
-      { code: 'TXT_SUGGESTION_STUDENT', text: 'Bạn có mong muốn hoặc đề xuất cụ thể nào để nhà trường nâng cấp trải nghiệm học tập và hỗ trợ sinh viên tốt hơn?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất cải tiến dịch vụ người học và cơ sở vật chất...' }
+      { code: 'G4_SP01', text: 'Chương trình đào tạo và định hướng phát triển của nhà trường cập nhật kịp thời xu hướng công nghệ và đáp ứng tốt yêu cầu thực tiễn của thị trường lao động.', variable: 'SP', type: 'likert', group: '1. Lập kế hoạch chiến lược phát triển (SP)' },
+      { code: 'G4_DX01', text: 'Giảng viên ứng dụng hiệu quả công nghệ số và các phương pháp giảng dạy linh hoạt (học tập kết hợp, tương tác trực tuyến) giúp nâng cao hiệu quả tiếp thu kiến thức.', variable: 'DX', type: 'likert', group: '2. Năng lực số hóa & đổi mới sáng tạo (DX)' },
+      { code: 'G4_RO01', text: 'Cơ sở vật chất, phòng thực hành, thư viện số và đường truyền Internet/Wi-Fi tại trường đáp ứng tốt nhu cầu học tập và nghiên cứu của người học.', variable: 'RO', type: 'likert', group: '3. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G4_RO02', text: 'Nguồn học liệu điện tử, giáo trình số và các phần mềm chuyên ngành do nhà trường cung cấp phong phú, dễ truy cập và hữu ích.', variable: 'RO', type: 'likert', group: '3. Nguồn lực & cơ sở hạ tầng (RO)' },
+      { code: 'G4_CS01', text: 'Hệ thống quản lý học tập trực tuyến (LMS) hoạt động ổn định, thuận tiện cho việc theo dõi bài giảng, nộp bài tập và tương tác với giảng viên.', variable: 'CS', type: 'likert', group: '4. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G4_CS02', text: 'Các thủ tục hành chính và dịch vụ học vụ trực tuyến (đăng ký học phần, xin giấy xác nhận, tra cứu điểm, đóng học phí) được xử lý nhanh chóng, minh bạch.', variable: 'CS', type: 'likert', group: '4. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G4_CS03', text: 'Cổng thông tin người học và các ứng dụng di động của nhà trường cung cấp thông tin chính xác, kịp thời và dễ sử dụng.', variable: 'CS', type: 'likert', group: '4. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G4_CS04', text: 'Các kênh tiếp nhận phản hồi và hỗ trợ người học trực tuyến giải đáp thắc mắc, xử lý sự cố kỹ thuật nhanh chóng và thỏa đáng.', variable: 'CS', type: 'likert', group: '4. Chất lượng dịch vụ & uy tín (CS)' },
+      { code: 'G4_AT01', text: 'Môi trường học tập số của nhà trường giúp tôi rèn luyện tốt kỹ năng tự học, tư duy số và khả năng thích ứng với môi trường làm việc hiện đại.', variable: 'AT', type: 'likert', group: '5. Mức độ sẵn sàng chuyển đổi số (AT)' },
+      { code: 'G4_AT02', text: 'Tôi hài lòng với tốc độ đổi mới chất lượng đào tạo và dịch vụ hỗ trợ người học của nhà trường trước các xu hướng giáo dục mới.', variable: 'AT', type: 'likert', group: '5. Mức độ sẵn sàng chuyển đổi số (AT)' },
+      { code: 'G4_OPEN01', text: 'Trong quá trình học tập và sử dụng các dịch vụ trực tuyến (hệ thống LMS, cổng thông tin, thủ tục hành chính, Wi-Fi/thiết bị), Bạn gặp phải những bất tiện hoặc lỗi kỹ thuật nào gây ảnh hưởng nhiều nhất đến trải nghiệm của mình?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Ý kiến về LMS, cổng thông tin, thủ tục hành chính, Wi-Fi...' },
+      { code: 'G4_OPEN02', text: 'Bạn có đề xuất cải tiến cụ thể nào về phương pháp giảng dạy số, hệ thống công nghệ hoặc dịch vụ hỗ trợ để nâng cao chất lượng học tập tại nhà trường?', variable: 'QUALITATIVE', type: 'textarea', placeholder: 'Đề xuất cải tiến phương pháp giảng dạy, công nghệ, dịch vụ hỗ trợ...' }
     ],
     hypotheses: [
-      { code: 'H1', name: 'RES ➔ SER', description: 'Môi trường CSVC và LMS (RES) tác động thuận chiều đến chất lượng đào tạo (SER)', independent: 'RES', dependent: 'SER' },
-      { code: 'H2', name: 'SER ➔ REA', description: 'Chất lượng dịch vụ đào tạo (SER) tác động tích cực đến sự hài lòng và tự hào thương hiệu (REA)', independent: 'SER', dependent: 'REA' },
-      { code: 'H3', name: 'CAP ➔ REA', description: 'Năng lực lắng nghe phản hồi (CAP) củng cố niềm tin và sự gắn kết người học (REA)', independent: 'CAP', dependent: 'REA' }
+      { code: 'H1', name: 'RO ➔ CS', description: 'Cơ sở vật chất và học liệu số (RO) tác động thuận chiều đến chất lượng dịch vụ/hệ thống hỗ trợ người học (CS)', independent: 'RO', dependent: 'CS' },
+      { code: 'H2', name: 'CS ➔ AT', description: 'Chất lượng dịch vụ hỗ trợ người học (CS) tác động thuận chiều đến mức độ hài lòng và sẵn sàng thích ứng (AT)', independent: 'CS', dependent: 'AT' },
+      { code: 'H3', name: 'DX ➔ AT', description: 'Ứng dụng công nghệ và phương pháp giảng dạy số (DX) tác động thuận chiều đến khả năng tự học và thích ứng của người học (AT)', independent: 'DX', dependent: 'AT' }
     ]
   }
 };
 
 const SAMPLE_QUESTIONS = {
-  STR: [
-    { code: 'STR1', text: 'Nhà trường đã xây dựng chiến lược phát triển tổng thể, tích hợp rõ ràng các xu hướng số hóa và chuyển đổi giáo dục đại học.', variable: 'STR', type: 'likert' },
-    { code: 'STR2', text: 'Kế hoạch chiến lược của nhà trường được rà soát, định kỳ điều chỉnh linh hoạt theo sự biến động của môi trường giáo dục.', variable: 'STR', type: 'likert' }
+  SP: [
+    { code: 'SP1', text: 'Đơn vị/Nhà trường có chiến lược rõ ràng, gắn kết chặt chẽ với chuyển đổi số và năng lực cạnh tranh.', variable: 'SP', type: 'likert' },
+    { code: 'SP2', text: 'Mục tiêu chiến lược được rà soát, cập nhật linh hoạt theo biến động thực tế.', variable: 'SP', type: 'likert' }
   ],
-  LEA: [
-    { code: 'LEA1', text: 'Lãnh đạo thể hiện tầm nhìn và năng lực điều hành mạnh mẽ, đồng hành cùng các đơn vị trong đổi mới.', variable: 'LEA', type: 'likert' },
-    { code: 'LEA2', text: 'Nhà trường ban hành các cơ chế, thể chế quản trị linh hoạt, phân cấp mạnh mẽ tạo sự chủ động.', variable: 'LEA', type: 'likert' }
+  LD: [
+    { code: 'LD1', text: 'Lãnh đạo thể hiện năng lực dẫn dắt đổi mới và ra quyết định dựa trên dữ liệu.', variable: 'LD', type: 'likert' },
+    { code: 'LD2', text: 'Cơ chế phân quyền, trao quyền tự chủ được thiết lập rõ ràng, minh bạch.', variable: 'LD', type: 'likert' }
   ],
-  CAP: [
-    { code: 'CAP1', text: 'Cơ cấu tổ chức và quy trình phối hợp công việc diễn ra mượt mà, thích ứng nhanh với các yêu cầu mới.', variable: 'CAP', type: 'likert' },
-    { code: 'CAP2', text: 'Đơn vị và cá nhân có khả năng xử lý linh hoạt và nhanh chóng các sự cố phát sinh trong vận hành.', variable: 'CAP', type: 'likert' }
+  DX: [
+    { code: 'DX1', text: 'Các quy trình đã được số hóa, tinh gọn và vận hành đồng bộ trên nền tảng số.', variable: 'DX', type: 'likert' },
+    { code: 'DX2', text: 'Việc ứng dụng công nghệ số giúp nâng cao hiệu quả và năng suất công việc.', variable: 'DX', type: 'likert' }
   ],
-  RES: [
-    { code: 'RES1', text: 'Trang thiết bị, hạ tầng CNTT và đường truyền mạng được đầu tư đầy đủ, hoạt động ổn định.', variable: 'RES', type: 'likert' },
-    { code: 'RES2', text: 'Đội ngũ nhân sự được bồi dưỡng nâng cao năng lực chuyên môn và kỹ năng số thường xuyên.', variable: 'RES', type: 'likert' }
+  RO: [
+    { code: 'RO1', text: 'Nguồn lực tài chính, nhân sự và hạ tầng đáp ứng tốt yêu cầu chuyển đổi.', variable: 'RO', type: 'likert' },
+    { code: 'RO2', text: 'Cơ sở vật chất, trang thiết bị số được đầu tư đầy đủ, ổn định.', variable: 'RO', type: 'likert' }
   ],
-  SER: [
-    { code: 'SER1', text: 'Dịch vụ đào tạo và hành chính được thực hiện nhanh chóng, tiện lợi trên nền tảng số.', variable: 'SER', type: 'likert' },
-    { code: 'SER2', text: 'Chất lượng phục vụ và hỗ trợ người học, giảng viên luôn được duy trì ở mức cao và chuyên nghiệp.', variable: 'SER', type: 'likert' }
+  CS: [
+    { code: 'CS1', text: 'Hệ sinh thái dịch vụ số bảo đảm liên thông, an toàn và trải nghiệm tốt cho người dùng.', variable: 'CS', type: 'likert' },
+    { code: 'CS2', text: 'Bộ phận hỗ trợ kỹ thuật phản hồi kịp thời, hiệu quả mỗi khi có sự cố.', variable: 'CS', type: 'likert' }
   ],
-  REA: [
-    { code: 'REA1', text: 'Toàn hệ thống đạt mức độ sẵn sàng cao trong việc thay đổi thói quen để thích ứng với yêu cầu chuyển đổi.', variable: 'REA', type: 'likert' },
-    { code: 'REA2', text: 'Có niềm tin vững chắc và sự hài lòng cao về uy tín, sự phát triển bền vững của cơ sở giáo dục.', variable: 'REA', type: 'likert' }
+  AT: [
+    { code: 'AT1', text: 'Tổ chức/cá nhân đạt mức độ sẵn sàng cao để thích ứng với các xu hướng mới.', variable: 'AT', type: 'likert' },
+    { code: 'AT2', text: 'Có khả năng nhận diện sớm cơ hội, rủi ro và kịp thời điều chỉnh.', variable: 'AT', type: 'likert' }
   ]
 };
 
@@ -199,7 +200,7 @@ const Surveys = () => {
   const [currentHypotheses, setCurrentHypotheses] = useState([]);
   const [newQuestionText, setNewQuestionText] = useState('');
   const [newQuestionCode, setNewQuestionCode] = useState('');
-  const [newQuestionVar, setNewQuestionVar] = useState('STR');
+  const [newQuestionVar, setNewQuestionVar] = useState('SP');
   const [newQuestionType, setNewQuestionType] = useState('likert');
 
   // Form states cho Tạo mới / Chỉnh sửa
@@ -213,7 +214,7 @@ const Surveys = () => {
     status: 'Active',
     scale: 'Likert 5',
     target: 50,
-    variables: 'STR, LEA, CAP, RES, SER, REA',
+    variables: 'SP, LD, DX, RO, CS, AT',
     questions: [],
     hypotheses: []
   });
@@ -275,7 +276,7 @@ const Surveys = () => {
         audience: 'custom',
         title: prev.title || `Khảo sát chuyên đề — ${inst || 'Trường Đại học'}`,
         subtitle: 'Bảng hỏi khảo sát tự thiết kế tùy biến',
-        variables: 'STR, LEA, CAP, RES, SER, REA',
+        variables: 'SP, LD, DX, RO, CS, AT',
         questions_count: 10,
         questions: [],
         hypotheses: []
@@ -1300,7 +1301,7 @@ const Surveys = () => {
                       Hoặc chèn câu hỏi đo lường theo từng biến nghiên cứu:
                     </div>
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      {['STR', 'LEA', 'CAP', 'RES', 'SER', 'REA'].map(v => (
+                      {['SP', 'LD', 'DX', 'RO', 'CS', 'AT'].map(v => (
                         <button
                           key={v}
                           type="button"
@@ -1326,7 +1327,7 @@ const Surveys = () => {
                         onChange={(e) => setNewQuestionVar(e.target.value)}
                         title="Thuộc biến nghiên cứu"
                       >
-                        {['STR', 'LEA', 'CAP', 'RES', 'SER', 'REA', 'QUALITATIVE', 'KHAC'].map(v => <option key={v} value={v}>{v}</option>)}
+                        {['SP', 'LD', 'DX', 'RO', 'CS', 'AT', 'QUALITATIVE', 'KHAC'].map(v => <option key={v} value={v}>{v}</option>)}
                       </select>
 
                       <select
@@ -1425,45 +1426,45 @@ const Surveys = () => {
                       Các giả thuyết này sẽ được sử dụng trực tiếp trong tab Kiểm định giả thuyết (Phân tích hồi quy &amp; PLS-SEM):
                     </div>
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      <button 
-                        type="button" 
-                        className="btn" 
+                      <button
+                        type="button"
+                        className="btn"
                         style={{ fontSize: '0.75rem', backgroundColor: 'white', color: '#15803D', border: '1px solid #86EFAC' }}
-                        onClick={() => handleAddHypothesis('STR', 'REA')}
+                        onClick={() => handleAddHypothesis('SP', 'AT')}
                       >
-                        + Khai báo H: STR ➔ REA
+                        + Khai báo H: SP ➔ AT
                       </button>
-                      <button 
-                        type="button" 
-                        className="btn" 
+                      <button
+                        type="button"
+                        className="btn"
                         style={{ fontSize: '0.75rem', backgroundColor: 'white', color: '#15803D', border: '1px solid #86EFAC' }}
-                        onClick={() => handleAddHypothesis('LEA', 'REA')}
+                        onClick={() => handleAddHypothesis('LD', 'AT')}
                       >
-                        + Khai báo H: LEA ➔ REA
+                        + Khai báo H: LD ➔ AT
                       </button>
-                      <button 
-                        type="button" 
-                        className="btn" 
+                      <button
+                        type="button"
+                        className="btn"
                         style={{ fontSize: '0.75rem', backgroundColor: 'white', color: '#15803D', border: '1px solid #86EFAC' }}
-                        onClick={() => handleAddHypothesis('CAP', 'SER')}
+                        onClick={() => handleAddHypothesis('DX', 'CS')}
                       >
-                        + Khai báo H: CAP ➔ SER
+                        + Khai báo H: DX ➔ CS
                       </button>
-                      <button 
-                        type="button" 
-                        className="btn" 
+                      <button
+                        type="button"
+                        className="btn"
                         style={{ fontSize: '0.75rem', backgroundColor: 'white', color: '#15803D', border: '1px solid #86EFAC' }}
-                        onClick={() => handleAddHypothesis('RES', 'REA')}
+                        onClick={() => handleAddHypothesis('RO', 'AT')}
                       >
-                        + Khai báo H: RES ➔ REA
+                        + Khai báo H: RO ➔ AT
                       </button>
-                      <button 
-                        type="button" 
-                        className="btn" 
+                      <button
+                        type="button"
+                        className="btn"
                         style={{ fontSize: '0.75rem', backgroundColor: 'white', color: '#15803D', border: '1px solid #86EFAC' }}
-                        onClick={() => handleAddHypothesis('RES', 'SER')}
+                        onClick={() => handleAddHypothesis('RO', 'DX')}
                       >
-                        + Khai báo H: RES ➔ SER
+                        + Khai báo H: RO ➔ DX
                       </button>
                     </div>
                   </div>

@@ -165,7 +165,7 @@ const Analytics = () => {
 
     const hypList = khau4_sem_ml?.hypothesisResults || [];
     const sortedHyp = [...hypList].sort((a, b) => (b.beta || 0) - (a.beta || 0));
-    const topDriver = sortedHyp[0] || { path: 'SER ➔ REA', beta: 0.391, t: 15.63, p: '< .001' };
+    const topDriver = sortedHyp[0] || { path: 'CS ➔ AT', beta: 0.391, t: 15.63, p: '< .001' };
     const isStudentSurvey = surveyInfo?.audience === 'student_alumni' || 
       (!khau5_qualitative.quotesByRole?.leadership?.length && !khau5_qualitative.quotesByRole?.faculty?.length);
 
@@ -716,11 +716,11 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
         const { surveyInfo, khau1_cleaning, khau3_descriptive, khau4_sem_ml } = analysisData;
         const descList = khau3_descriptive?.descriptiveTable || [];
         const sortedDesc = [...descList].sort((a, b) => b.mean - a.mean);
-        const highestPillar = sortedDesc[0] || { code: 'STR', name: 'Đổi mới sáng tạo', mean: 4.14 };
-        const lowestPillar = sortedDesc[sortedDesc.length - 1] || { code: 'RES', name: 'Cơ sở vật chất', mean: 4.06 };
+        const highestPillar = sortedDesc[0] || { code: 'SP', name: 'Lập kế hoạch chiến lược phát triển', mean: 4.14 };
+        const lowestPillar = sortedDesc[sortedDesc.length - 1] || { code: 'RO', name: 'Nguồn lực & cơ sở hạ tầng', mean: 4.06 };
         const hypList = khau4_sem_ml?.hypothesisResults || [];
         const sortedHyp = [...hypList].sort((a, b) => b.beta - a.beta);
-        const topHyp = sortedHyp[0] || { path: 'SER ➔ REA', beta: 0.391, t: 15.63, p: '< .001' };
+        const topHyp = sortedHyp[0] || { path: 'CS ➔ AT', beta: 0.391, t: 15.63, p: '< .001' };
         const driScore = khau3_descriptive?.dri?.average || 82.1;
         const dri10 = (driScore / 10).toFixed(2);
         const institution = surveyInfo?.institution || 'Trường Đại học Lạc Hồng';
@@ -1971,13 +1971,13 @@ ${(khau5_qualitative.quotesByRole?.students || []).slice(0, 2).map(q => `
                 {(() => {
                   const descList = analysisData.khau3_descriptive?.descriptiveTable || [];
                   const sortedDesc = [...descList].sort((a, b) => b.mean - a.mean);
-                  const highest = sortedDesc[0] || { code: 'STR', name: 'Chiến lược & định hướng', mean: 4.14, sd: 0.65 };
-                  const lowest = sortedDesc[sortedDesc.length - 1] || { code: 'RES', name: 'Nguồn lực & CSVC', mean: 4.06, sd: 0.68 };
+                  const highest = sortedDesc[0] || { code: 'SP', name: 'Lập kế hoạch chiến lược phát triển', mean: 4.14, sd: 0.65 };
+                  const lowest = sortedDesc[sortedDesc.length - 1] || { code: 'RO', name: 'Nguồn lực & cơ sở hạ tầng', mean: 4.06, sd: 0.68 };
 
                   const hypList = analysisData.khau4_sem_ml?.hypothesisResults || [];
                   const sortedHyp = [...hypList].sort((a, b) => (b.beta || 0) - (a.beta || 0));
-                  const topDriver = sortedHyp[0] || { path: 'SER ➔ REA', beta: 0.391, t: 15.63, p: '< .001' };
-                  const targetVar = analysisData.khau4_sem_ml?.dependentVar || 'REA';
+                  const topDriver = sortedHyp[0] || { path: 'CS ➔ AT', beta: 0.391, t: 15.63, p: '< .001' };
+                  const targetVar = analysisData.khau4_sem_ml?.dependentVar || 'AT';
                   const instName = analysisData.surveyInfo?.institution || 'Trường Đại học Lạc Hồng';
                   const validN = analysisData.khau1_cleaning?.validResponses || 469;
                   const totalN = analysisData.khau1_cleaning?.totalResponses || 503;

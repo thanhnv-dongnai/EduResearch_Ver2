@@ -800,8 +800,8 @@ function runDescriptivePearsonAndProfiling(cleanResponses, likertQuestions, vari
   });
 
   const sortedDesc = [...descriptiveTable].sort((a, b) => b.mean - a.mean);
-  const highestPillar = sortedDesc[0] || { code: 'STR', name: 'Đổi mới sáng tạo', mean: 4.14 };
-  const lowestPillar = sortedDesc[sortedDesc.length - 1] || { code: 'RES', name: 'Cơ sở vật chất', mean: 4.06 };
+  const highestPillar = sortedDesc[0] || { code: 'SP', name: 'Lập kế hoạch chiến lược phát triển', mean: 4.14 };
+  const lowestPillar = sortedDesc[sortedDesc.length - 1] || { code: 'RO', name: 'Nguồn lực & cơ sở hạ tầng', mean: 4.06 };
 
   const clustersProfiles = [
     {

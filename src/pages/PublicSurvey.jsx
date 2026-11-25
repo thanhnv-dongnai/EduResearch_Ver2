@@ -23,12 +23,12 @@ const LIKERT_7_OPTIONS = [
 ];
 
 const DEFAULT_QUESTIONS = [
-  { code: 'STR1', text: 'Nhà trường đã xây dựng chiến lược phát triển tổng thể, tích hợp rõ ràng các xu hướng số hóa và chuyển đổi giáo dục đại học.', variable: 'STR' },
-  { code: 'LEA1', text: 'Lãnh đạo thể hiện tầm nhìn và năng lực điều hành mạnh mẽ, đồng hành cùng các đơn vị trong đổi mới.', variable: 'LEA' },
-  { code: 'CAP1', text: 'Cơ cấu tổ chức và quy trình phối hợp công việc diễn ra mượt mà, thích ứng nhanh với các yêu cầu mới.', variable: 'CAP' },
-  { code: 'RES1', text: 'Trang thiết bị, hạ tầng CNTT và đường truyền mạng được đầu tư đầy đủ, hoạt động ổn định.', variable: 'RES' },
-  { code: 'SER1', text: 'Chất lượng phục vụ và hỗ trợ người học, giảng viên luôn được duy trì ở mức cao và chuyên nghiệp.', variable: 'SER' },
-  { code: 'REA1', text: 'Toàn hệ thống đạt mức độ sẵn sàng cao trong việc thay đổi thói quen để thích ứng với yêu cầu chuyển đổi.', variable: 'REA' }
+  { code: 'SP1', text: 'Đơn vị/Nhà trường có chiến lược rõ ràng, gắn kết chặt chẽ với chuyển đổi số và năng lực cạnh tranh.', variable: 'SP' },
+  { code: 'LD1', text: 'Lãnh đạo thể hiện năng lực dẫn dắt đổi mới và ra quyết định dựa trên dữ liệu.', variable: 'LD' },
+  { code: 'DX1', text: 'Các quy trình đã được số hóa, tinh gọn và vận hành đồng bộ trên nền tảng số.', variable: 'DX' },
+  { code: 'RO1', text: 'Nguồn lực tài chính, nhân sự và hạ tầng đáp ứng tốt yêu cầu chuyển đổi.', variable: 'RO' },
+  { code: 'CS1', text: 'Hệ sinh thái dịch vụ số bảo đảm liên thông, an toàn và trải nghiệm tốt cho người dùng.', variable: 'CS' },
+  { code: 'AT1', text: 'Tổ chức/cá nhân đạt mức độ sẵn sàng cao để thích ứng với các xu hướng mới.', variable: 'AT' }
 ];
 
 const isDemographic = (q) => q.section === 'demographics' || q.section === 'info';
@@ -86,7 +86,7 @@ const PublicSurvey = () => {
         }
       } catch (err) {
         console.error('Survey not found, using default info', err);
-        setAnswers({ STR1: 4, LEA1: 5, CAP1: 4, RES1: 4, SER1: 5, REA1: 4 });
+        setAnswers({ SP1: 4, LD1: 5, DX1: 4, RO1: 4, CS1: 5, AT1: 4 });
       } finally {
         setFetching(false);
       }
